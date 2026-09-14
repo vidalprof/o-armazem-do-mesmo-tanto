@@ -1,0 +1,5395 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>O Armazém do Mesmo Tanto — 3º ano</title>
+<meta name="description" content="Vinte e cinco folhas interativas de multiplicação para o 3º ano: ver grupos iguais, somar parcelas iguais, escrever a multiplicação, as máquinas do 2, 5, 10, 3 e 4, contar de tanto em tanto, o tapete retangular, a virada e as combinações.">
+<!-- ============================================================
+     O ARMAZÉM DO MESMO TANTO — Matemática, 3º ano (multiplicação)
+     LIVRO DE FOLHAS INTERATIVAS, 25 folhas. Folha viva: NÃO usa o motor.
+
+     ⭐ PEDIDO DO MARCOS (13/set/2026): *"Preciso de uma atividade de
+     multiplicação para o terceiro ano. Objetivo: fazer o aluno entender que
+     multiplicar é o mesmo que somar quantidades iguais. No estilo de folhas
+     didáticas como estamos criando."*
+
+     ⭐ E O GESTO VEM DA FOLHA DE PAPEL (regra dele, 13/set/2026): *"as
+     interatividades têm que vir das atividades que você seleciona na internet,
+     o que as atividades pedem para o aluno fazer"*. Foram colhidas 40 folhas de
+     professor (`_sequencias/folhas_mult/`) e LIDAS UMA A UMA no crivo
+     `_sequencias/POTE-MULT.md`, que registra o comando impresso VERBATIM de
+     cada uma, o verbo que ela manda fazer e por que sete foram recusadas.
+
+     ⚠️ O TETO DA REDE — e ele reprovou metade da colheita. Blumenau manda, no
+     3º ano, *"problemas de multiplicação (por 2, 3, 4, 5 e 10)"*. Os fatores 6,
+     7, 8 e 9 ficam de fora, e METADE das folhas de papel os usa: entrou a
+     mecânica delas, não os números.
+
+     ⚠️ TRÊS FOLHAS NÃO VIERAM DO PAPEL, E ISSO ESTÁ DECLARADO. A combinação de
+     possibilidades (21 e 22) não aparece em NENHUMA das 40 folhas colhidas —
+     nem uma — e o currículo do 3º ano a pede com todas as letras; e a virada
+     (20) é decisão minha, apoiada na disposição retangular da folha 18. A
+     disposição retangular em si veio do papel (d19, d21 e d28), só que em 3
+     folhas de 40: ela ganhou DUAS folhas aqui por reforço de currículo.
+     Dizer que qualquer uma delas veio da colheita seria mentir no lugar mais
+     fácil de mentir.
+
+     A ESCADA: ver os grupos → somar as parcelas iguais → escrever a
+     multiplicação → achar o total → os fatos básicos → contar de tanto em
+     tanto → o retângulo → a virada → a combinação → os problemas → o cartaz.
+
+     ARTE: 22 figuras REAPROVEITADAS do banco (prefixo `mu_`). Nenhuma gerada.
+     ES5 puro, um arquivo (mais o `folhas.js` ao lado), sem biblioteca.
+     ============================================================ -->
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+:root{
+  /* ⚠️ OS TOKENS DE COR DA FOLHA VIVA (set/2026). Estes cadernos nasceram sem
+     eles e o portão `_qa/cor_fixa.py` reprovava nove regras em cada um: cor de
+     texto cravada, sem fundo próprio, que num tema diferente vira letra invisível.
+     O motor já tinha `--texto`; a folha viva não. Agora tem, e a peça segue o
+     tema em vez de apostar num. */
+  --texto:#1e2334;        /* o preto do texto corrido */
+  --texto2:#2c3350;       /* o preto dos rótulos de figura */
+  --texto3:#3b4064;       /* o preto mais claro das letras grandes */
+}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#eef1f7;color:var(--texto);padding-bottom:160px}
+#topo{position:-webkit-sticky;position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid #6d5ae6;
+  box-shadow:0 2px 14px rgba(40,30,90,.13);padding:8px 10px;display:flex;align-items:center;gap:10px;max-width:880px;margin:0 auto}
+#topo .tit{font-weight:800;font-size:15px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog{height:12px;background:#e6e6f4;border-radius:8px;overflow:hidden;flex:1;min-width:60px;max-width:200px}
+.prog i{display:block;height:100%;width:0;background:#6d5ae6;border-radius:8px;-webkit-transition:width .5s;transition:width .5s}
+.pg{font-weight:800;font-size:14px;color:#5b4fc4;white-space:nowrap}
+button{font-family:inherit;cursor:pointer}
+.bt{min-width:48px;min-height:48px;border:0;border-radius:16px;background:#6d5ae6;color:#fff;font-weight:800;font-size:17px;
+  padding:10px 18px;box-shadow:0 4px 0 #4c3cbb;-webkit-transition:transform .08s;transition:transform .08s}
+.bt:active{transform:translateY(3px);box-shadow:0 1px 0 #4c3cbb}
+.bt[disabled]{opacity:.45;cursor:default;box-shadow:none}
+.bt.cinza{background:#e4e6f2;color:#4a4f66;box-shadow:0 4px 0 #c3c7dc}
+.bt.verde{background:#15a34a;box-shadow:0 4px 0 #0d7736}
+.zap{width:42px;height:42px;border-radius:50%;border:0;background:#6d5ae6;box-shadow:0 3px 0 #4c3cbb;
+  display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none}
+.zap svg{width:22px;height:22px;fill:#fff}
+.zap.off{background:#b9bcd0;box-shadow:0 3px 0 #9599b3}
+.zap.ouvir{background:#fff;box-shadow:0 3px 0 #cdd0e4;border:2px solid #6d5ae6}
+.zap.ouvir svg{fill:#6d5ae6}
+.zap.ouvir.tocando{-webkit-animation:pulsa 1s infinite;animation:pulsa 1s infinite}
+/* ⚠️ `aparece` estava ORFA nos cadernos de folha viva desde o primeiro deles:
+   varias pecas escreviam `animation:aparece` e o bloco nunca existiu. Quem
+   achou foi o portao 4c3 (`_qa/css_atregra.py`), na primeira hora de vida dele.
+   O defeito era mudo — o elemento so nao fazia o fade — mas vira INVISIVEL
+   para sempre em quem combina `opacity:0` com `forwards`. */
+@-webkit-keyframes aparece{from{opacity:0}to{opacity:1}}
+@keyframes aparece{from{opacity:0}to{opacity:1}}
+@-webkit-keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+#livro{max-width:880px;margin:12px auto 0;padding:0 10px}
+.pagina{position:relative;background:#fff;border-radius:22px;box-shadow:0 10px 34px rgba(35,25,80,.16);display:none;overflow:hidden;padding:0 0 20px}
+.pagina.viva{display:block;-webkit-animation:entra .35s ease-out;animation:entra .35s ease-out}
+@-webkit-keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.faixa{background:#6d5ae6;color:#fff;padding:15px 18px 13px;display:flex;align-items:center;gap:12px}
+.faixa h2{margin:0;font-size:clamp(17px,4.4vw,25px);letter-spacing:.4px;text-transform:uppercase;flex:1;line-height:1.1}
+.faixa .num{background:#fff;color:#6d5ae6;font-weight:900;border-radius:50%;width:36px;height:36px;display:flex;
+  align-items:center;justify-content:center;font-size:18px;flex:none}
+.pagina.c1 .faixa{background:#e0562f}.pagina.c1 .faixa .num{color:#e0562f}
+.pagina.c2 .faixa{background:#1179bf}.pagina.c2 .faixa .num{color:#1179bf}
+.pagina.c3 .faixa{background:#15a34a}.pagina.c3 .faixa .num{color:#15a34a}
+.pagina.c4 .faixa{background:#b0308f}.pagina.c4 .faixa .num{color:#b0308f}
+.pagina.c5 .faixa{background:#c98a06}.pagina.c5 .faixa .num{color:#c98a06}
+.enun{margin:14px 16px 4px;font-size:clamp(15px,3.9vw,19px);font-weight:700;line-height:1.35}
+.enun b{color:#6d5ae6}
+
+/* =========================================================================
+   AS PEÇAS DO BANDO DAS RIMAS
+   ⚠️ Cada classe daqui nasceu de uma folha impressa. O leiaute copia o que o
+   papel faz — figura-chave grande de um lado, opções do outro — porque é assim
+   que a criança já viu a folha na mão do professor.
+   ⚠️ E TUDO O QUE SE TOCA TEM 44 px NO MÍNIMO (regra do 1º e 2º ano). Dedo de
+   seis anos não acerta alvo pequeno, e alvo pequeno vira erro que não é erro.
+   ========================================================================= */
+
+/* folha 1 — as duas palavras lado a lado, com o "e" no meio */
+.parrima{display:flex;align-items:center;justify-content:center;gap:clamp(8px,4vw,26px);
+  flex-wrap:nowrap;margin:6px 0 12px}
+.parrima .eou{font-weight:800;color:#6d5ae6;font-size:clamp(15px,4vw,20px);flex:none}
+.figsom{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.figsom .fig{height:clamp(70px,17vw,104px)}
+.figsom .rot{font-weight:800;color:var(--texto2);font-size:clamp(13px,3.4vw,16px);letter-spacing:.5px}
+
+/* a chamada da folha: "PASSARINHO rima com:" */
+.chamrima{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:10px}
+.chamrima .figgrande{display:block;width:auto;height:clamp(84px,21vw,128px);max-width:100%;
+  margin:0 auto;object-fit:contain}
+.chamlin{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+/* a palavra escrita só aparece no acerto — ver o comentário no folhas.js (f9).
+   `visibility` e não `display`: o espaço fica guardado e a folha não pula. */
+.segredo{visibility:hidden}
+.segredo.revelado{visibility:visible;-webkit-animation:aparece .35s;animation:aparece .35s}
+.chamlin b{font-size:clamp(15px,4vw,19px);color:var(--texto2);letter-spacing:.5px}
+
+/* as opções COM figura (folhas 2, 4 e 6) */
+.op.figbt{display:flex;flex-direction:column;align-items:center;gap:3px;
+  min-width:96px;min-height:112px;padding:8px 10px}
+.op.figbt .figop{display:block;width:auto;height:clamp(56px,14vw,80px);max-width:100%;object-fit:contain}
+.rotop{font-weight:800;font-size:clamp(11px,2.9vw,13px);color:var(--texto2);letter-spacing:.4px;
+  line-height:1.1;word-break:break-word}
+
+/* as opções em PALAVRA, que a folha 08 imprime — e que se PINTAM */
+.op.pintavel{min-width:132px;min-height:52px;font-size:clamp(14px,3.6vw,17px);font-weight:800;
+  letter-spacing:.6px}
+
+/* folha 5 — a grade que se circula */
+.gradecirc{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  margin:8px 0 4px;touch-action:none}
+@media (max-width:430px){.gradecirc{grid-template-columns:repeat(2,1fr)}}
+.figcirc{display:flex;flex-direction:column;align-items:center;gap:3px;
+  min-height:104px;padding:8px 4px;border:3px solid #e4e7f6;border-radius:16px;background:#fff;
+  cursor:pointer;-webkit-transition:border-color .18s,background .18s;transition:border-color .18s,background .18s}
+.figcirc .figop{display:block;width:auto;height:clamp(50px,13vw,72px);max-width:100%;object-fit:contain}
+.figcirc.marcada{border-color:#f59e0b;background:#fff7e6}
+
+/* folha 6 — o alvo para onde a peça é puxada */
+.alvorima{display:flex;flex-direction:column;align-items:center;gap:5px;margin-bottom:10px;
+  padding:10px;border:3px dashed #c9cdec;border-radius:20px;background:#fff}
+.alvorima.alvo{border-color:#6d5ae6;background:#f2efff}
+.alvorima .figgrande{display:block;width:auto;height:clamp(80px,20vw,120px);max-width:100%;object-fit:contain}
+
+/* folha 8 — a parlenda e a lacuna que se preenche */
+.parlenda{font-size:clamp(16px,4.2vw,21px);font-weight:700;color:var(--texto2);line-height:1.5;
+  text-align:center;margin:4px 6px 8px}
+.lacuna{display:inline-block;min-width:74px;padding:1px 10px;border-bottom:4px solid #6d5ae6;
+  color:#6d5ae6;font-weight:900;text-align:center}
+.lacuna.cheia{border-bottom-color:#1f9d55;color:#1f9d55;background:#eafaf0;border-radius:8px 8px 0 0}
+
+/* folha 9 — a caixa de escrever é LARGA (palavra inteira, não sílaba) */
+.sq.larga{min-width:168px;padding:0 12px}
+
+
+/* ⭐ O botão de terminar a qualquer momento (12/set/2026). Pequeno e de canto:
+   ele existe para o sinal da escola, não para tentar a criança a pular tudo. */
+
+/* ⭐ o aviso de caderno não terminado, no relatório do professor (12/set/2026) */
+.avisoparcial{background:#fff6e5;border:2px solid #e5b93c;border-radius:10px;
+  padding:8px 10px;margin:8px 0;font-size:12.5px;line-height:1.45;color:#6a4b00}
+#relatorio table th:nth-child(4),#relatorio table td:nth-child(4){background:#f3fbf5}
+
+.bt.terminar{background:#eef0f8;color:#5a6080;border:2px solid #d9ddf2;
+  font-size:12px;padding:8px 10px;min-height:44px;font-weight:800;flex:0 0 auto}
+.bt.terminar:active{background:#e2e6f3}
+.barra.naoabriu{opacity:.5}
+.barra.naoabriu b{font-weight:700;font-size:12px;color:#8a8fae}
+
+/* folha 10 — o mural que a criança monta, e que vai para o relatório */
+.mural{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 10px}
+.cartaorima{display:flex;align-items:center;gap:4px;min-height:96px;padding:10px 12px;
+  border:3px solid #d9ddf2;border-radius:20px;background:#fff;cursor:pointer;
+  -webkit-transition:transform .18s,border-color .18s,background .18s;
+  transition:transform .18s,border-color .18s,background .18s}
+.cartaorima .figop{display:block;width:auto;height:clamp(48px,12vw,66px);max-width:100%;object-fit:contain}
+.cartaorima .mais{font-weight:900;color:#6d5ae6;font-size:18px;padding:0 2px}
+.cartaorima.escolhido{border-color:#1f9d55;background:#eafaf0;-webkit-transform:scale(1.03);transform:scale(1.03)}
+.cartaorima:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
+
+
+/* ---- AS PEÇAS DO DESFILE DAS LETRAS ----
+   ⚠️ LETRA GRANDE E EM BASTÃO. Foi o que a professora pediu nos comentários da
+   folha de origem, e vale mais aqui do que em qualquer outro caderno: a criança
+   está aprendendo a FORMA da letra. Letra pequena vira mancha. */
+.ltbox{display:flex;flex-direction:column;align-items:center;gap:4px}
+.ltg{font-size:clamp(38px,11vw,62px);font-weight:900;color:#6d5ae6;line-height:1;
+  letter-spacing:1px;font-family:Arial,Helvetica,sans-serif}
+.ltbox.grandona .ltg{font-size:clamp(46px,13vw,76px)}
+.ltop{font-size:clamp(26px,7vw,40px);font-weight:900;color:var(--texto2);line-height:1.05;
+  letter-spacing:1px;font-family:Arial,Helvetica,sans-serif}
+.ltop.grande{font-size:clamp(30px,8vw,46px);color:#6d5ae6}
+.op.figbt .ltop{margin:2px 0}
+
+/* folha 1 — o desfile: a fila que se percorre com o dedo */
+.desfile{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 4px}
+.ltdesf{min-width:62px;min-height:64px;border:3px solid #d9ddf2;border-radius:16px;background:#fff;
+  cursor:pointer;-webkit-transition:background .2s,border-color .2s,transform .15s;
+  transition:background .2s,border-color .2s,transform .15s}
+.ltdesf.aceso{border-color:#1f9d55;background:#eafaf0}
+.ltdesf.aceso .ltop{color:#1f9d55}
+.ltdesf:active{-webkit-transform:scale(.94);transform:scale(.94)}
+
+/* folhas 4, 5 e 6 — a letra e as vagas dos lados */
+.vizinha{display:flex;align-items:center;justify-content:center;gap:clamp(6px,3vw,16px);
+  flex-wrap:nowrap;margin:4px 0 10px}
+/* ⚠️ A SETA É DESENHADA EM CSS, não é o caractere "→". Regra do Marcos: nada de
+   emoji nem SVG, porque não aparecem em alguns navegadores da escola — e a seta
+   Unicode é exatamente esse caso (vira quadradinho no PC antigo). Aqui ela é uma
+   haste com uma ponta feita de borda: aparece em qualquer navegador. */
+.vizinha .setacss{position:relative;display:inline-block;width:34px;height:4px;flex:none;
+  background:#9aa0c4;border-radius:2px;margin:0 2px}
+.vizinha .setacss:after{content:"";position:absolute;right:-2px;top:-6px;
+  width:0;height:0;border-left:12px solid #9aa0c4;
+  border-top:8px solid transparent;border-bottom:8px solid transparent}
+.vaga{min-width:62px;min-height:64px;display:flex;align-items:center;justify-content:center;
+  border:3px dashed #c9cdec;border-radius:16px;background:#fff;
+  font-size:clamp(26px,7vw,40px);font-weight:900;color:#9aa0c4;
+  font-family:Arial,Helvetica,sans-serif;letter-spacing:1px}
+.vaga.ok{border-style:solid;border-color:#1f9d55;background:#eafaf0;color:#1f9d55}
+
+/* folha 7 — a trilha onde as letras entram em ordem */
+.trilhalt{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:4px 0 10px}
+/* a fila das PALAVRAS em ordem alfabética (folha 11). Alvo alto e largo: a
+   palavra inteira é o botão, e no 1º ano o dedo precisa de espaço. */
+.trilhapal{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.vagapal{min-height:52px;border:3px dashed #b9b3e6;border-radius:14px;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:20px;letter-spacing:1px}
+.vagapal .np{color:#8a83c9;font-size:15px}
+.vagapal.ok{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.palbt{min-height:52px;padding:10px 18px;font-weight:900;font-size:19px;letter-spacing:1px}
+.palbt.usada{opacity:.35}
+.op.figbt.usada{opacity:.35;pointer-events:none}
+
+/* folha 8 — a fila com o intruso: uma linha só, para a ordem ficar visível */
+.gradecirc.filaerr{grid-template-columns:repeat(4,1fr)}
+.figcirc.erro{border-color:#e2574c;background:#fdeceb}
+
+/* folha 10 — o cartão do alfabeto da turma */
+.cartaorima.cartalt{flex-direction:column;gap:2px;min-height:132px;min-width:104px}
+
+/* a capa: as letras desfilando */
+.capa .ltcapa{display:inline-block;font-size:clamp(30px,8vw,52px);font-weight:900;color:#6d5ae6;
+  letter-spacing:2px;font-family:Arial,Helvetica,sans-serif;
+  text-shadow:0 3px 0 #e6e2fb,0 5px 10px rgba(80,60,180,.18);
+  -webkit-animation:entraDupla .55s cubic-bezier(.3,1.4,.5,1) both;
+  animation:entraDupla .55s cubic-bezier(.3,1.4,.5,1) both}
+@media (prefers-reduced-motion:reduce){
+  .capa .ltcapa{-webkit-animation:none!important;animation:none!important;opacity:1!important}
+}
+
+.item{margin:12px 14px;padding:14px;border:2px solid #eceefa;border-radius:20px;background:#fbfbff}
+.item.feito{border-color:#bfe6ce;background:#f3fcf6}
+.item .n{font-weight:900;color:#9aa0bd;font-size:15px;margin-right:8px}
+/* ⚠️ A FIGURA TEM ALTURA FIXA, E ISSO NÃO É ENFEITE (set/2026). Antes era
+   `height:auto`: cada figura entrava no seu tamanho natural — a casa com 230 px
+   e a bola com 90 — e, como `display:block` ignora o `text-align:center` do pai,
+   todas encostavam na ESQUERDA. O item ficava com um buraco branco do lado
+   direito e as folhas, desiguais. Altura igual + `margin:auto` resolve as duas
+   coisas de uma vez: peso visual igual e figura no meio. */
+.fig{display:block;width:auto;height:clamp(76px,19vw,116px);max-width:100%;
+  margin:2px auto 6px;object-fit:contain;image-rendering:auto}
+.figbt{border:0;background:none;padding:4px;border-radius:16px;min-width:48px;min-height:48px}
+/* ⚠️ O ALTO-FALANTE É DESENHADO EM CSS — caixinha + triângulo + duas ondas de
+   borda arredondada. Nada de emoji (vira quadradinho nos PCs da escola) e nada
+   de SVG (ordem do Marcos, set/2026). */
+.som{position:relative;width:46px;height:46px;min-width:46px;border:3px solid #6d5ae6;
+  border-radius:50%;background:#f2efff;padding:0;cursor:pointer;flex:none}
+.som:active{-webkit-transform:scale(.93);transform:scale(.93)}
+.som .cone{position:absolute;left:12px;top:17px;width:7px;height:10px;background:#4b3fb0;
+  border-radius:2px 0 0 2px}
+.som .cone:after{content:"";position:absolute;left:6px;top:-6px;width:0;height:0;
+  border-top:11px solid transparent;border-bottom:11px solid transparent;
+  border-right:11px solid #4b3fb0}
+.som .onda{position:absolute;border:3px solid #4b3fb0;border-left-color:transparent;
+  border-top-color:transparent;border-bottom-color:transparent;border-radius:50%}
+.som .o1{left:26px;top:16px;width:8px;height:12px}
+.som .o2{left:29px;top:11px;width:13px;height:22px;opacity:.65}
+.enunlin{display:flex;align-items:center;gap:10px;margin:0 2px}
+.enunlin .enun{flex:1;min-width:0}
+.palin{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:2px}
+.pal{font-weight:900;letter-spacing:2px;font-size:clamp(22px,6vw,34px);color:var(--texto)}
+
+/* fileira genérica de opções */
+.ops{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+.op{min-width:64px;min-height:56px;border:3px solid #d9ddf2;border-radius:16px;background:#fff;color:var(--texto);
+  font-weight:900;font-size:22px;padding:8px 14px;-webkit-transition:transform .1s;transition:transform .1s}
+.op:active{transform:scale(.94)}
+.op.certa{border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.op.erro{border-color:#e0562f;background:#fdeee9;-webkit-animation:treme .4s;animation:treme .4s}
+@-webkit-keyframes treme{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes treme{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* o estojo de canetinhas da folha 5 */
+.estojo{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0 4px}
+.estojo .rot{font-weight:800;color:#5b4fc4;font-size:14px}
+.lapis{width:44px;height:44px;border:4px solid #fff;border-radius:50%;padding:0;cursor:pointer;
+  box-shadow:0 2px 8px rgba(35,25,80,.22);-webkit-transition:transform .12s;transition:transform .12s}
+.lapis.esc{-webkit-transform:scale(1.18);transform:scale(1.18);box-shadow:0 0 0 4px rgba(60,50,120,.28)}
+.op.pinta{-webkit-transition:background .18s,border-color .18s,color .18s;
+  transition:background .18s,border-color .18s,color .18s}
+.op.fig{padding:6px;min-width:96px}
+.op.fig img{width:88px;height:88px;object-fit:contain;display:block}
+
+/* 1 — a letra escondida */
+.escondida{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:10px 0}
+.escondida .lt{font-weight:900;font-size:clamp(26px,7vw,40px);letter-spacing:2px}
+.escondida .buraco{width:52px;height:56px;border-bottom:5px solid #6d5ae6;display:inline-flex;align-items:center;
+  justify-content:center;background:#f2efff;border-radius:10px 10px 0 0;font-weight:900;font-size:34px;color:#6d5ae6}
+/* a fila do alfabeto usa o mesmo visual da letra escondida */
+.filalfa{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0}
+.filalfa .lt{font-weight:900;font-size:clamp(26px,7vw,40px);letter-spacing:2px;color:var(--texto3)}
+.filalfa .buraco{width:52px;height:56px;border-bottom:5px solid #6d5ae6;display:inline-flex;
+  align-items:center;justify-content:center;background:#f2efff;border-radius:10px 10px 0 0;
+  font-weight:900;font-size:34px;color:#6d5ae6}
+.filalfa .buraco.ok{background:#e7f8ee;border-color:#15a34a;color:#0d7736}
+.filalfa .buraco.indo{color:transparent}
+.filalfa.completa .lt,.filalfa.completa .buraco{-webkit-animation:pulo .42s ease;animation:pulo .42s ease}
+.escondida .buraco.ok{background:#e7f8ee;border-color:#15a34a;color:#0d7736}
+.escondida .buraco.perto,.filalfa .buraco.perto{background:#e7f8ee;border-color:#15a34a;
+  -webkit-transform:scale(1.12);transform:scale(1.12)}
+/* o voo da letra até o buraco (ver voaLetra no folhas.js) */
+.escondida .buraco.indo{color:transparent}
+.voa{position:fixed;z-index:60;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:30px;color:#0d7736;background:#e7f8ee;border:3px solid #15a34a;
+  border-radius:14px;pointer-events:none;-webkit-transition:-webkit-transform .5s cubic-bezier(.2,.9,.25,1);
+  transition:transform .5s cubic-bezier(.2,.9,.25,1);box-shadow:0 8px 20px rgba(21,163,74,.35)}
+@-webkit-keyframes pulo{0%{-webkit-transform:translateY(0)}40%{-webkit-transform:translateY(-9px)}100%{-webkit-transform:translateY(0)}}
+@keyframes pulo{0%{transform:translateY(0)}40%{transform:translateY(-9px)}100%{transform:translateY(0)}}
+.escondida.completa .lt,.escondida.completa .buraco{-webkit-animation:pulo .42s ease;animation:pulo .42s ease}
+.escondida.completa .lt:nth-child(2),.escondida.completa .buraco:nth-child(2){-webkit-animation-delay:.06s;animation-delay:.06s}
+.escondida.completa .lt:nth-child(3),.escondida.completa .buraco:nth-child(3){-webkit-animation-delay:.12s;animation-delay:.12s}
+.escondida.completa .lt:nth-child(4),.escondida.completa .buraco:nth-child(4){-webkit-animation-delay:.18s;animation-delay:.18s}
+.escondida.completa .lt:nth-child(5),.escondida.completa .buraco:nth-child(5){-webkit-animation-delay:.24s;animation-delay:.24s}
+.escondida.completa .lt:nth-child(6),.escondida.completa .buraco:nth-child(6){-webkit-animation-delay:.3s;animation-delay:.3s}
+.escondida.completa .lt:nth-child(7),.escondida.completa .buraco:nth-child(7){-webkit-animation-delay:.36s;animation-delay:.36s}
+@media (prefers-reduced-motion: reduce){
+  .voa{-webkit-transition:none;transition:none}
+  .escondida.completa .lt,.escondida.completa .buraco{-webkit-animation:none;animation:none}
+}
+
+/* 2 — bater a palavra */
+.bater{display:flex;flex-direction:column;align-items:center;gap:10px}
+.icb{width:34px;height:34px;object-fit:contain;vertical-align:middle;margin-right:8px;display:inline-block}
+.icb.pq{width:22px;height:22px;margin-right:6px}
+.palma{min-width:190px;min-height:96px;border:0;border-radius:24px;background:#ffd233;color:#4a3800;font-weight:900;
+  font-size:20px;box-shadow:0 6px 0 #d5a800}
+.palma:active{transform:translateY(4px);box-shadow:0 2px 0 #d5a800}
+.contab{font-weight:900;font-size:20px;color:#5b4fc4}
+.contab b{font-size:30px}
+/* a trilha de sílabas: acende uma a cada palma e a voz diz aquela sílaba */
+.trilhasil{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:2px}
+.silbox{min-width:56px;padding:8px 12px;border:3px dashed #d9ddf2;border-radius:14px;background:#fff;
+  color:#c3c7dd;font-weight:900;font-size:22px;letter-spacing:1px;
+  -webkit-transition:all .18s;transition:all .18s}
+.silbox.acesa{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736;
+  -webkit-transform:scale(1.06);transform:scale(1.06)}
+@media (prefers-reduced-motion: reduce){ .silbox{-webkit-transition:none;transition:none} }
+
+/* 3 — sequência lógica */
+.fila{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:10px 0}
+.fila .q{width:78px;height:78px;border:3px solid #e2e5f5;border-radius:16px;background:#fff;display:flex;
+  align-items:center;justify-content:center}
+.fila .q img{width:66px;height:66px;object-fit:contain}
+.fila .q.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;font-size:34px;color:#6d5ae6;font-weight:900}
+/* o quadro vazio acende quando a figura puxada chega perto */
+.fila .q.vaga.perto{border-color:#15a34a;background:#e7f8ee;color:#0d7736;
+  -webkit-transform:scale(1.08);transform:scale(1.08)}
+.fila .q.vaga.cheia{border-style:solid;border-color:#15a34a;background:#e7f8ee}
+.ajuda{text-align:center;font-size:14px;color:#6b7192;margin:2px 0 6px}
+/* a cópia que segue o dedo/mouse enquanto a criança puxa */
+/* o cinto e o suspensório do `draggable="false"`: navegador antigo não olha o
+   atributo, mas olha esta regra */
+img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:none}
+.fantasma{position:fixed;z-index:70;pointer-events:none;opacity:.92;
+  -webkit-transform:scale(1.1);transform:scale(1.1);
+  -webkit-box-shadow:0 12px 26px rgba(30,35,52,.3);box-shadow:0 12px 26px rgba(30,35,52,.3)}
+.op.puxada{opacity:.35}
+
+/* 4 — circular */
+.grade{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0;position:relative}
+/* a folha de acetato onde a criança risca o círculo (ver riscoDeCircular) */
+.riscocv{position:absolute;left:0;top:0;pointer-events:none;z-index:5}
+.riscocv.ativo{z-index:5}
+.circ{position:relative;border:0;background:none;padding:6px;border-radius:50%;min-width:104px;min-height:104px}
+.circ img{width:92px;height:92px;object-fit:contain;display:block}
+.circ:after{content:"";position:absolute;inset:0;border:5px solid transparent;border-radius:50%}
+.circ.marcada:after{border-color:#e0562f}
+.circ.certa:after{border-color:#15a34a}
+.circ.errada:after{border-color:#e0562f;border-style:dotted}
+.chip{display:inline-flex;align-items:center;justify-content:center;background:#6d5ae6;color:#fff;font-weight:900;
+  font-size:24px;border-radius:14px;padding:6px 16px;letter-spacing:2px}
+
+/* 5 — pintar a sílaba · 7 — marcar X */
+.op.pinta.certa{background:#ffd233;border-color:#d5a800;color:#4a3800}
+.marcax{display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:10px}
+.lx{display:flex;align-items:center;gap:12px;min-height:56px;border:3px solid #d9ddf2;border-radius:16px;
+  background:#fff;padding:6px 16px;font-weight:900;font-size:22px;color:var(--texto);width:100%;max-width:320px}
+.lx .cx{width:34px;height:34px;border:3px solid #9aa0bd;border-radius:8px;display:inline-flex;align-items:center;
+  justify-content:center;font-size:24px;color:#e0562f;flex:none}
+.lx.certa{border-color:#15a34a;background:#e7f8ee}
+.lx.certa .cx{border-color:#15a34a;color:#15a34a}
+.lx.erro{border-color:#e0562f;-webkit-animation:treme .4s;animation:treme .4s}
+
+/* 6 · 10 — ligar e colar */
+/* ⚠️ AS DUAS COLUNAS TÊM QUE TER A MESMA CAIXA (pedido do Marcos, set/2026:
+   *"deixe os retângulos das sílabas iguais ao retângulo que estão os desenhos
+   dentro, para ficar proporcional, igual e não ficar feio"*). Antes a caixa era
+   `min-height`: a da esquerda crescia com a figura de 64px e a da direita ficava
+   no mínimo — duas alturas diferentes lado a lado. Agora a altura é FIXA e igual
+   nas duas, e a largura de cada coluna também.
+   E as colunas ficam mais afastadas, para o traço ter onde desenhar a curva. */
+.ligar{position:relative;display:flex;gap:clamp(30px,10vw,96px);justify-content:space-between;margin:14px 6px}
+.ligar .col{display:flex;flex-direction:column;gap:14px;flex:1 1 0;min-width:0}
+.linhas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+.ponta{border:3px solid #d9ddf2;border-radius:16px;background:#fff;height:86px;display:flex;align-items:center;
+  justify-content:center;font-weight:900;font-size:24px;letter-spacing:1px;padding:6px;
+  -ms-touch-action:none;touch-action:none;-webkit-transition:border-color .15s,box-shadow .15s;
+  transition:border-color .15s,box-shadow .15s}
+.ponta img{width:68px;height:68px;object-fit:contain}
+@media (max-width:420px){ .ponta{height:74px;font-size:21px} .ponta img{width:58px;height:58px} }
+.ponta.marcada{border-color:#6d5ae6;box-shadow:0 0 0 4px rgba(109,90,230,.22)}
+.ponta.feita{border-color:#15a34a;background:#e7f8ee}
+.ponta.mostra{border-color:#ffd233;box-shadow:0 0 0 4px rgba(255,210,51,.4)}
+.ponta.treme{-webkit-animation:treme .4s;animation:treme .4s}
+
+/* 8 — escrever a sílaba que falta */
+.silbox{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:10px 0}
+.sq{min-width:70px;min-height:64px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:26px;letter-spacing:2px;color:var(--texto)}
+.sq.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;color:#6d5ae6}
+.sq.vaga.ativa{background:#fff;box-shadow:0 0 0 4px rgba(109,90,230,.25)}
+.sq.ok{border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.cursor{display:inline-block;width:3px;height:28px;background:#6d5ae6;margin-left:2px;
+  -webkit-animation:pisca .9s steps(2) infinite;animation:pisca .9s steps(2) infinite}
+@-webkit-keyframes pisca{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes pisca{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+/* 9 — ordenar as sílabas */
+.tira{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}
+.sil{min-width:74px;min-height:58px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;font-weight:900;
+  font-size:24px;letter-spacing:2px;color:var(--texto);-ms-touch-action:none;touch-action:none}
+.sil.usada{opacity:.28;pointer-events:none}
+.sil.arrastando{opacity:.5}
+.vagas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.vaga{min-width:74px;min-height:58px;border:3px dashed #6d5ae6;border-radius:14px;background:#f4f2ff;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#6d5ae6}
+.vaga.cheia{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.vaga.perto{border-color:#15a34a;background:#e7f8ee;color:#0d7736;
+  -webkit-transform:scale(1.08);transform:scale(1.08)}
+.sil.puxada{opacity:.35}
+
+/* 10 — recortar e colar */
+.colar{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:10px 0}
+.cel{width:118px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cel img{width:96px;height:96px;object-fit:contain}
+.cel .alvo{width:84px;min-height:58px;border:3px dashed #6d5ae6;border-radius:14px;background:#f4f2ff;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#6d5ae6}
+.cel .alvo.cheia{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.cel .alvo.perto{box-shadow:0 0 0 5px rgba(109,90,230,.28)}
+
+/* carimbo, nav, capa, fim */
+.carimbo{position:absolute;right:14px;top:60px;transform:rotate(-14deg) scale(.4);opacity:0;color:#15a34a;
+  border:5px solid #15a34a;border-radius:14px;padding:6px 14px;font-weight:900;font-size:20px;text-align:center;
+  line-height:1.05;pointer-events:none;-webkit-transition:all .45s;transition:all .45s}
+.pagina.pronta .carimbo{opacity:.92;transform:rotate(-14deg) scale(1)}
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:18;background:#fff;border-top:3px solid #6d5ae6;padding:8px 10px;
+  display:none;align-items:center;gap:10px;box-shadow:0 -3px 14px rgba(40,30,90,.14)}
+#nav .txt{flex:1;text-align:center;font-weight:800;color:#5b4fc4;font-size:14px;min-width:0}
+#barraCapa{position:fixed;left:0;right:0;bottom:0;z-index:19;background:#fff;border-top:3px solid #6d5ae6;padding:10px;display:none}
+#barraCapa.aberta{display:block}
+#barraCapa .lin{display:flex;gap:10px;align-items:center;max-width:640px;margin:0 auto}
+#barraCapa label{font-weight:800;color:#5b4fc4;font-size:15px;white-space:nowrap}
+#nomeIn{flex:1;min-width:0;min-height:50px;border:3px solid #6d5ae6;border-radius:14px;padding:0 12px;
+  font-family:"Comic Sans MS","Chalkboard SE","Segoe Print",cursive;font-weight:700;font-size:22px;color:#1d4ed8;background:#fff}
+#nomeIn:focus{outline:none;border-color:#b0308f;box-shadow:0 0 0 4px rgba(176,48,143,.25)}
+/* ================= A CAPA =================
+   Pedido do Marcos (set/2026): *"essas atividades deveriam ter uma capa bem
+   legal e bonita"*. O tema sai do próprio nome — uma FÁBRICA de palavras:
+   telhado de fábrica, letras que entram uma a uma como se saíssem da linha de
+   montagem, e a esteira embaixo carregando as figuras das folhas.
+   Feita só com CSS e PNG: nada de SVG, nada de emoji (regra dele). */
+.capa{position:relative;text-align:center;padding:18px 16px 24px;overflow:hidden;
+  background:-webkit-linear-gradient(top,#efe9ff 0%,#fdf6ff 58%,#fff 100%);
+  background:linear-gradient(180deg,#efe9ff 0%,#fdf6ff 58%,#fff 100%)}
+.capa .ceu{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
+/* bolhas de luz ao fundo — dão profundidade sem competir com o título.
+   ⚠️ Antes eram três retângulos brancos arredondados que, na tela, pareciam
+   FALHA de desenho. Círculo suave da própria cor da capa lê como fundo. */
+.capa .nv{position:absolute;display:block;border-radius:50%;
+  background:-webkit-radial-gradient(circle,rgba(124,102,255,.20),rgba(124,102,255,0) 70%);
+  background:radial-gradient(circle,rgba(124,102,255,.20),rgba(124,102,255,0) 70%)}
+.capa .n1{width:240px;height:240px;left:-60px;top:-40px}
+.capa .n2{width:300px;height:300px;right:-90px;top:10px}
+.capa .n3{width:180px;height:180px;left:44%;bottom:-70px}
+/* o telhadinho da fábrica com a inicial */
+.capa .chapeu{position:relative;width:66px;height:66px;margin:14px auto 2px;border-radius:16px;
+  background:-webkit-linear-gradient(top left,#7c66ff,#5b4fc4);
+  background:linear-gradient(135deg,#7c66ff,#5b4fc4);color:#fff;font-weight:900;font-size:34px;
+  line-height:66px;box-shadow:0 8px 18px rgba(91,79,196,.36)}
+.capa .chapeu:before{content:"";position:absolute;left:-9px;right:-9px;top:-13px;height:0;
+  border-left:42px solid transparent;border-right:42px solid transparent;border-bottom:16px solid #b0308f}
+.capa h1.titu{margin:10px 0 4px;line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
+.capa .titu .lt{display:inline-block;font-size:clamp(24px,6.4vw,42px);font-weight:900;letter-spacing:0;
+  color:#4b3fb0;text-shadow:0 3px 0 #d9d2ff,0 5px 10px rgba(60,40,140,.18);
+  -webkit-animation:caiLetra .5s both;animation:caiLetra .5s both}
+.capa .titu .esp{display:inline-block;width:14px}
+/* ⚠️ `caiLetra` e não `cai`: o confete JÁ tinha um `keyframes cai` que
+   termina em `opacity:0`, declarado mais abaixo — e ele vencia. As letras
+   do título animavam para invisível e a capa aparecia sem título nenhum.
+   Nome de keyframe é global: conferir antes de criar um. */
+@-webkit-keyframes caiLetra{from{opacity:0;-webkit-transform:translateY(-26px) rotate(-8deg)}to{opacity:1;-webkit-transform:none}}
+@keyframes caiLetra{from{opacity:0;transform:translateY(-26px) rotate(-8deg)}to{opacity:1;transform:none}}
+.capa .sub{font-weight:700;color:#5b4fc4;font-size:clamp(13px,3.6vw,18px);margin:6px 0 4px}
+/* a esteira: as figuras em cima, a cinta rodando embaixo */
+.capa .esteira{max-width:660px;margin:16px auto 4px;position:relative}
+/* ---- as duplas da capa: rima é coisa de DOIS, então os pares entram juntos ----
+   ⚠️ sem `white-space:nowrap` no par, o navegador quebra entre a figura e o
+   sinal de igual e a dupla deixa de se ler como dupla. */
+.capa .dupla{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;
+  -webkit-animation:entraDupla .6s cubic-bezier(.3,1.4,.5,1) both;
+  animation:entraDupla .6s cubic-bezier(.3,1.4,.5,1) both}
+.capa .dupla .fig{height:clamp(54px,13vw,86px)}
+.capa .igual{display:inline-block;width:16px;height:12px;flex:none;
+  border-top:3px solid #6d5ae6;border-bottom:3px solid #6d5ae6}
+@-webkit-keyframes entraDupla{from{opacity:0;-webkit-transform:translateY(-18px) scale(.85)}to{opacity:1;-webkit-transform:none}}
+@keyframes entraDupla{from{opacity:0;transform:translateY(-18px) scale(.85)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.capa .dupla{-webkit-animation:none!important;animation:none!important;opacity:1!important;-webkit-transform:none!important;transform:none!important}}
+.capa .cena{display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap}
+.capa .cena img{width:clamp(54px,14vw,110px);height:clamp(54px,14vw,110px);object-fit:contain;
+  -webkit-animation:sobe 2.6s ease-in-out infinite;animation:sobe 2.6s ease-in-out infinite}
+.capa .cena img:nth-child(2){-webkit-animation-delay:.35s;animation-delay:.35s}
+.capa .cena img:nth-child(3){-webkit-animation-delay:.7s;animation-delay:.7s}
+.capa .cena img:nth-child(4){-webkit-animation-delay:1.05s;animation-delay:1.05s}
+.capa .cena img:nth-child(5){-webkit-animation-delay:1.4s;animation-delay:1.4s}
+@-webkit-keyframes sobe{0%,100%{-webkit-transform:translateY(0)}50%{-webkit-transform:translateY(-7px)}}
+@keyframes sobe{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.capa .cinta{display:flex;gap:6px;justify-content:center;background:#3b3560;border-radius:9px;
+  padding:6px 8px;margin-top:6px;box-shadow:0 6px 14px rgba(35,25,80,.22)}
+.capa .cinta i{display:block;width:26px;height:9px;background:#6d5ae6;border-radius:5px}
+.capa .chamada{margin-top:14px;font-weight:700;color:#4b4f70;font-size:clamp(13px,3.4vw,16px)}
+@media (prefers-reduced-motion: reduce){
+  .capa .titu .lt,.capa .cena img{-webkit-animation:none;animation:none}
+}
+#fim,#retomar{display:none;max-width:880px;margin:12px auto;background:#fff;border-radius:22px;padding:20px 16px;
+  box-shadow:0 10px 34px rgba(35,25,80,.16);text-align:center}
+#fim h2{margin:0 0 6px;color:#6d5ae6;font-size:clamp(21px,5.5vw,30px)}
+.estrelas{font-size:44px;letter-spacing:8px;margin:6px 0}
+.barras{max-width:520px;margin:10px auto;text-align:left}
+.barra{display:flex;align-items:center;gap:8px;margin:6px 0;font-weight:700;font-size:14px}
+.barra span{flex:0 0 42%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.barra .tr{flex:1;height:14px;background:#e6e6f4;border-radius:8px;overflow:hidden}
+.barra .tr i{display:block;height:100%;width:0;background:#15a34a;-webkit-transition:width .8s;transition:width .8s}
+.barra b{flex:none;color:#5b4fc4}
+/* ⚠️ SEM EMOJI E SEM SVG (ordem do Marcos, set/2026: *"evite usar svg e
+   emojis pois não aparecem em alguns navegadores"*). Nos PCs da escola o
+   emoji vira quadradinho vazio e a criança de seis anos não sabe o que é um
+   quadradinho. Aqui: troféu e estrelas são PNG de argila (do banco), as
+   setas são triângulos de CSS puro e o resto é palavra escrita. */
+#medalha{width:132px;height:132px;border-radius:50%;background:radial-gradient(circle at 34% 30%,#ffe680,#e0a800);
+  margin:14px auto;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 22px rgba(180,140,0,.42);cursor:pointer;-ms-touch-action:none;touch-action:none}
+#medalha img{width:92px;height:92px;object-fit:contain;display:block;pointer-events:none}
+/* se a figura do troféu faltar, o disco ainda é um disco de ouro com a
+   palavra — nunca um quadradinho quebrado. */
+#medalha.semfig:after{content:"BOA!";font-weight:900;font-size:26px;color:#7a5600}
+.seta{display:inline-block;width:0;height:0;vertical-align:middle;
+  border-top:8px solid transparent;border-bottom:8px solid transparent}
+.seta.esq{border-right:11px solid currentColor;margin-right:7px}
+.seta.dir{border-left:11px solid currentColor;margin-left:7px}
+#estrelas img{width:52px;height:52px;object-fit:contain;display:inline-block;margin:0 3px;vertical-align:middle}
+
+/* ---- o parecer descritivo e a nota (relatório do PROFESSOR) ----
+   ⚠️ A NOTA GRANDE fica aqui e SÓ aqui. Na tela da criança nunca aparece
+   número: ela vê estrelas e barras. Ver o comentário em `folhas.js`. */
+#relatorio .parecer{margin:10px 0 4px;padding:10px 12px;border-left:5px solid #6d5ae6;
+  background:#fff;border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.55;color:var(--texto2)}
+#relatorio .comonota{margin:8px 0 0;font-size:11.5px;color:#6a7090;line-height:1.45}
+.notao{display:flex;align-items:center;gap:14px;margin:10px 0 2px;padding:10px 14px;
+  border:3px solid #6d5ae6;border-radius:18px;background:#fff}
+.notao .nn{font-size:clamp(30px,9vw,44px);font-weight:900;color:#6d5ae6;line-height:1;
+  font-variant-numeric:tabular-nums}
+.notao .nl{font-size:12.5px;color:#2c3350;line-height:1.45}
+
+/* =========================================================================
+   ANIMAÇÃO DAS FOLHAS (pedido do Marcos, set/2026: *"consegue deixar as
+   páginas mais animadas e atraentes?"*)
+
+   ⚠️ E A REGRA QUE MANDA AQUI É A REGRA 2 DA PESQUISA: NADA ANIMA SEM FUNÇÃO.
+   Movimento por movimento cansa a criança de seis anos e ainda pesa no PC da
+   escola. Cada animação daqui faz um trabalho:
+     · os itens ENTRAM EM CASCATA → a criança vê que a folha tem começo e ordem,
+       e o olho dela é levado ao item 1 em vez de cair no meio da tela;
+     · a faixa do título DESLIZA → marca a troca de folha (transição entre telas,
+       que é justamente o que falta no padrão "empresa grande");
+     · o acerto DÁ UM PULINHO e a opção certa BRILHA → resposta tátil, o gesto
+       que confirma sem precisar de texto;
+     · o erro BALANÇA de leve → diz "de novo" sem dizer "errou".
+   `prefers-reduced-motion` desliga tudo e a folha continua inteira.
+   ========================================================================= */
+.pagina.viva .item{-webkit-animation:entraItem .42s ease-out both;animation:entraItem .42s ease-out both}
+.pagina.viva .item:nth-child(2){-webkit-animation-delay:.05s;animation-delay:.05s}
+.pagina.viva .item:nth-child(3){-webkit-animation-delay:.10s;animation-delay:.10s}
+.pagina.viva .item:nth-child(4){-webkit-animation-delay:.15s;animation-delay:.15s}
+.pagina.viva .item:nth-child(5){-webkit-animation-delay:.20s;animation-delay:.20s}
+.pagina.viva .item:nth-child(6){-webkit-animation-delay:.25s;animation-delay:.25s}
+.pagina.viva .item:nth-child(n+7){-webkit-animation-delay:.30s;animation-delay:.30s}
+@-webkit-keyframes entraItem{from{opacity:0;-webkit-transform:translateY(14px)}to{opacity:1;-webkit-transform:none}}
+@keyframes entraItem{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.pagina.viva .faixa{-webkit-animation:deslizaFaixa .4s cubic-bezier(.2,.9,.3,1) both;
+  animation:deslizaFaixa .4s cubic-bezier(.2,.9,.3,1) both}
+@-webkit-keyframes deslizaFaixa{from{opacity:0;-webkit-transform:translateX(-22px)}to{opacity:1;-webkit-transform:none}}
+@keyframes deslizaFaixa{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:none}}
+
+/* o acerto: um pulinho curto e um brilho que corre pela opção certa */
+.op.certa,.figcirc.marcada,.cartaorima.escolhido{
+  -webkit-animation:pulinho .4s cubic-bezier(.3,1.6,.5,1);animation:pulinho .4s cubic-bezier(.3,1.6,.5,1)}
+@-webkit-keyframes pulinho{0%{-webkit-transform:scale(1)}45%{-webkit-transform:scale(1.09)}100%{-webkit-transform:scale(1)}}
+@keyframes pulinho{0%{transform:scale(1)}45%{transform:scale(1.09)}100%{transform:scale(1)}}
+.op.certa{position:relative;overflow:hidden}
+.op.certa::after{content:"";position:absolute;top:0;bottom:0;left:-40%;width:38%;pointer-events:none;
+  background:-webkit-linear-gradient(left,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.75),rgba(255,255,255,0));
+  -webkit-transform:skewX(-18deg);transform:skewX(-18deg);
+  -webkit-animation:brilhoOp .55s .1s ease-out;animation:brilhoOp .55s .1s ease-out}
+@-webkit-keyframes brilhoOp{from{left:-40%}to{left:112%}}
+@keyframes brilhoOp{from{left:-40%}to{left:112%}}
+
+/* o erro: balança de leve — diz "de novo" sem dizer "errou" */
+.op.erro{-webkit-animation:balanca .34s;animation:balanca .34s}
+@-webkit-keyframes balanca{0%,100%{-webkit-transform:translateX(0)}25%{-webkit-transform:translateX(-6px)}75%{-webkit-transform:translateX(6px)}}
+@keyframes balanca{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* o item que fecha: some o contorno e entra o verde, sem susto */
+.item{-webkit-transition:border-color .4s,background .4s;transition:border-color .4s,background .4s}
+
+/* a figura responde ao toque — regra 1: o alvo reage ao PRESSIONAR */
+.op.figbt:active,.figcirc:active,.cartaorima:active{-webkit-transform:scale(.96);transform:scale(.96)}
+
+@media (prefers-reduced-motion:reduce){
+  .pagina.viva .item,.pagina.viva .faixa,.op.certa,.op.erro,
+  .figcirc.marcada,.cartaorima.escolhido{
+    -webkit-animation:none!important;animation:none!important;opacity:1!important;
+    -webkit-transform:none!important;transform:none!important}
+  .op.certa::after{display:none}
+}
+
+#relatorio{display:none;text-align:left;background:#f6f7fd;border:2px solid #d9ddf2;border-radius:16px;padding:12px;margin-top:12px;font-size:13px}
+#relatorio table{border-collapse:collapse;width:100%;margin-top:8px}
+#relatorio th,#relatorio td{border:1px solid #d9ddf2;padding:5px 7px;text-align:left}
+#relatorio th{background:#eceefa}
+/* a nota grande do professor: porcentagem + conceito em palavras */
+.notao{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid #d9ddf2;
+  border-radius:14px;padding:10px 14px;margin-top:10px}
+.notao .nn{font-size:38px;font-weight:900;color:#15a34a;line-height:1}
+.notao .nl{font-size:13px;color:#3b4064;line-height:1.35}
+#menuProf{display:none;position:fixed;inset:0;z-index:60;background:rgba(20,16,45,.62);align-items:center;justify-content:center;padding:14px}
+#menuProf.aberto{display:flex}
+#menuProf .cx{background:#fff;border:4px solid #6d5ae6;border-radius:20px;padding:16px;max-width:520px;width:100%;
+  max-height:92vh;overflow:auto;box-shadow:0 14px 44px rgba(0,0,0,.4)}
+#menuProf h3{margin:0 0 4px;color:#6d5ae6;font-size:20px}
+#menuProf p{margin:0 0 12px;font-size:13px;color:#4a4f66;line-height:1.4}
+#menuProf .folhas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+#menuProf .folhas button{min-height:46px;border:0;border-radius:12px;background:#eceefa;color:#4a4f66;font-weight:800;
+  font-size:14px;padding:8px 12px;box-shadow:0 3px 0 #d3d7ea;flex:1 1 150px;text-align:left}
+#teclado{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:3px solid #6d5ae6;padding:8px;display:none}
+#teclado.aberto{display:block}
+#teclado .dica{text-align:center;font-weight:800;color:#5b4fc4;font-size:13px;margin-bottom:6px}
+#tk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:560px;margin:0 auto}
+#tk button{min-height:48px;border:0;border-radius:12px;background:#eceefa;color:var(--texto);font-weight:900;font-size:19px;box-shadow:0 3px 0 #d3d7ea}
+#tk button:active{transform:translateY(2px);box-shadow:0 1px 0 #d3d7ea}
+#tk button.ap{background:#fde2da;grid-column:span 3}
+#tk button.ok{background:#d9f2e3;grid-column:span 4}
+#confete{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.cf{position:absolute;width:9px;height:14px;opacity:.95;-webkit-animation:cai 1.5s linear forwards;animation:cai 1.5s linear forwards}
+@-webkit-keyframes cai{to{transform:translateY(105vh) rotate(560deg);opacity:0}}
+@keyframes cai{to{transform:translateY(105vh) rotate(560deg);opacity:0}}
+.oculto{display:none!important}
+/* ============================================================
+   AS PEÇAS DAS CATORZE FOLHAS NOVAS (13/set/2026 — a regra das 25 folhas)
+
+   ⚠️ ESTE BLOCO MORA **ANTES** DO `/* ============================================================
+   AS PEÇAS DAS CATORZE FOLHAS NOVAS (13/set/2026 — a regra das 25 folhas)
+
+   ⚠️ ESTE BLOCO MORA **ANTES** DAS MARCAS DO DOSSIÊ, e isso não é detalhe —
+      são DUAS lições pagas em 13/set/2026, uma em cima da outra:
+
+      1. Eu escrevi estas regras DENTRO do bloco marcado do dossiê, e o
+         `_padrao/dossie_professor.py` — que é o dono dele — reescreveu o bloco
+         inteiro e apagou tudo. Nenhum erro apareceu: a página abriu, só que o
+         teclado da folha 13 ficou sem fundo e as gavetas sem caixa.
+      2. Movi para cá e ESCREVI O NOME DA MARCA neste comentário, para explicar.
+         O injetor apaga de `ini` até `fim` — e a marca citada aqui virou o
+         `ini` mais antigo do arquivo. Ele comeu tudo de novo, pelo mesmo motivo
+         com outra cara.
+
+      A regra que fica: **não se escreve dentro de um bloco marcado, e nem se
+      cita a marca dele em texto livre.** É a mesma família do comentário
+      dentro do JSON do `LUG`: bloco marcado tem dono.
+
+   ⚠️ ALVO MÍNIMO 40 px em tudo que se toca (o `_qa/leiaute_mao.js` mede em 6
+      tamanhos e reprova abaixo disso). No 1º ano o dedo é grande e a mira é
+      curta: alvo pequeno não é "compacto", é injusto.
+   ============================================================ */
+
+/* folha 2 — o poema e a tira do alfabeto inteira */
+.poema{background:#f7f5ff;border:3px solid #e2ddfb;border-radius:18px;
+  padding:12px 14px;margin:6px 0 10px}
+.poema .verso{display:-webkit-box;display:-ms-flexbox;display:flex;
+  align-items:center;gap:8px;justify-content:space-between;padding:3px 0}
+.poema .vt{font-size:clamp(15px,4vw,18px);font-weight:700;color:#2c3350;line-height:1.35}
+.poema .autor{text-align:right;font-size:13px;color:#3b4064;margin-top:4px;font-style:italic}
+.perguntas{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
+  gap:8px;justify-content:center;margin:8px 0}
+.chipq{display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;
+  gap:6px;min-height:48px;padding:4px 10px;border:3px solid #d9ddf2;border-radius:16px;background:#fff}
+.chipq .nq{font-weight:800;color:#3b4064;font-size:14px}
+.chipq .vq{font-weight:900;font-size:24px;color:#9aa0c4;min-width:26px;text-align:center}
+/* ⚠️ a pergunta da vez NÃO se distingue só pela cor (regra 4 da pesquisa: nada
+   de resposta só por cor) — ela ganha borda grossa, sombra e a palavra "agora" */
+.chipq.agora{border-color:#6d5ae6;box-shadow:0 0 0 4px rgba(109,90,230,.18)}
+.chipq.agora:before{content:"agora";font-size:11px;font-weight:900;color:#6d5ae6;
+  letter-spacing:.6px;text-transform:uppercase}
+.chipq.feito{border-color:#15a34a;background:#e7f8ee}
+.chipq.feito .vq{color:#0d7736}
+.tiralfa{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
+  gap:6px;justify-content:center;background:#fff;border:3px solid #e2ddfb;
+  border-radius:18px;padding:10px;margin:6px 0}
+.ltira{min-width:44px;min-height:48px;border:2px solid #d9ddf2;border-radius:12px;
+  background:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;
+  align-items:center;justify-content:center;cursor:pointer}
+.ltira .ltop{font-size:clamp(20px,5vw,26px)}
+.ltira.aceso{border-color:#1f9d55;background:#eafaf0}
+.ltira.aceso .ltop{color:#1f9d55}
+.ltira.erro{border-color:#e05b5b;background:#fdeaea}
+.ltira:active{-webkit-transform:scale(.92);transform:scale(.92)}
+
+/* folhas 5 e 6 — a letra MINÚSCULA. Fonte com serifa: é a forma que ela vai
+   encontrar no livro, e a diferença entre "a" e "A" fica evidente. */
+.peq{text-transform:lowercase;font-family:Georgia,'Times New Roman',serif}
+.filalfa.peq .lt{text-transform:lowercase;font-family:Georgia,'Times New Roman',serif}
+
+/* folhas 8 e 11 — a seta que aponta para TRÁS (quem vem antes) */
+.vizinha .setacss.volta:after{right:auto;left:-2px;
+  border-left:0;border-right:12px solid #9aa0c4}
+.rotlado{text-align:center;font-size:12px;font-weight:900;letter-spacing:.8px;
+  color:var(--texto3);text-transform:uppercase;margin-top:-4px}
+
+/* folha 12 — a grade do alfabeto (o quadro, não a fila) */
+.gradealfa{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 10px}
+@media (min-width:520px){ .gradealfa{grid-template-columns:repeat(6,1fr)} }
+.celalfa{min-height:56px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;
+  display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:clamp(22px,6vw,32px);color:#2c3350}
+.celalfa.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;color:#6d5ae6}
+.celalfa.vaga.ok{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
+.celalfa.vaga.erro{border-color:#e05b5b;background:#fdeaea}
+
+/* folha 13 — o teclado do computador, com as teclas na ordem QWERTY */
+.teclas{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
+  gap:8px;justify-content:center;margin:10px auto 0;max-width:420px;
+  background:#3b3f57;border-radius:16px;padding:12px}
+.tecla{min-width:56px;min-height:56px;border:0;border-radius:10px;background:#f2f3f8;
+  box-shadow:0 4px 0 #b9bcd0;display:-webkit-box;display:-ms-flexbox;display:flex;
+  align-items:center;justify-content:center;cursor:pointer;padding:0}
+.tecla .ltop{font-size:clamp(20px,5vw,28px);color:#3b3f57}
+.tecla:active{-webkit-transform:translateY(3px);transform:translateY(3px);box-shadow:0 1px 0 #b9bcd0}
+.tecla.usada{opacity:.35;box-shadow:none}
+.tecla.erro{background:#fdeaea}
+
+/* folha 19 — as duas palavras do dicionário, lado a lado */
+.dicpar{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
+  gap:10px;justify-content:center;margin:6px 0 4px}
+.dicbt{border:3px solid #d9ddf2;border-radius:16px;background:#fff;color:#1e2334;
+  min-width:42%;cursor:pointer}
+.dicbt.pintada{border-width:4px;font-weight:900}
+.dicbt.pintada:after{content:"1º";display:block;font-size:11px;letter-spacing:.6px;
+  color:#0d7736;font-weight:900}
+.dicbt.erro{border-color:#e05b5b;background:#fdeaea}
+
+/* folha 21 — as gavetas por letra (a ideia do dicionário) */
+.gavetas{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:6px 0 10px}
+@media (min-width:520px){ .gavetas{grid-template-columns:repeat(4,1fr)} }
+.gaveta{min-height:76px;border:3px dashed #b9b3e6;border-radius:16px;background:#f7f5ff;
+  padding:6px;display:-webkit-box;display:-ms-flexbox;display:flex;
+  -webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;
+  flex-direction:column;align-items:center;gap:4px}
+.gaveta .gl{font-weight:900;font-size:clamp(20px,5vw,26px);color:#6d5ae6}
+.gaveta .gdentro{display:-webkit-box;display:-ms-flexbox;display:flex;
+  flex-wrap:wrap;gap:4px;justify-content:center}
+.gaveta .gpeca{font-size:12px;font-weight:800;color:#0d7736;background:#e7f8ee;
+  border-radius:8px;padding:2px 6px}
+.gaveta.erro{border-color:#e05b5b;background:#fdeaea}
+.pecagav{min-height:74px;padding:6px 10px;display:-webkit-box;display:-ms-flexbox;
+  display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;
+  -ms-flex-direction:column;flex-direction:column;align-items:center;gap:2px}
+.pecagav .figop{max-height:44px;width:auto}
+
+/* folha 22 — a fila das FIGURAS em ordem alfabética */
+.trilhafig{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
+  gap:8px;justify-content:center;margin:6px 0 10px}
+.vagafig{min-width:76px;min-height:76px;border:3px dashed #b9b3e6;border-radius:16px;
+  background:#f7f5ff;display:-webkit-box;display:-ms-flexbox;display:flex;
+  align-items:center;justify-content:center}
+.vagafig .np{color:#8a83c9;font-size:15px;font-weight:900}
+.vagafig.ok{border-style:solid;border-color:#15a34a;background:#e7f8ee}
+.vagafig .figop{max-height:60px;width:auto}
+.figlin{display:-webkit-box;display:-ms-flexbox;display:flex;
+  -webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;
+  flex-direction:column;align-items:center;gap:4px}
+.figop2{min-width:76px;min-height:76px;padding:6px}
+.figop2 .figop{max-height:58px;width:auto}
+.figop2.usada{opacity:.35;pointer-events:none}
+
+/* folha 23 — os nomes da chamada, em cor de nome próprio */
+.nomebt{color:#6d5ae6}
+
+/* folha 24 — o quadro de traçar a letra com o dedo */
+.traclin{display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;margin-bottom:4px}
+.tracacx{display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;margin:2px 0 8px}
+.tracacv{width:min(220px,72vw);max-width:100%;height:auto;background:#fff;
+  border:3px solid #d9ddf2;border-radius:18px;cursor:crosshair;touch-action:none}
+
+
+/* ============================================================
+   AS PEÇAS DESTE CADERNO — o armazém, as bandejas, o tapete e a malha.
+
+   ⚠️ ESTE BLOCO FICA FORA do bloco de estilo do dossiê e ANTES dele, e a lição
+      é paga em dobro (13/set/2026): a primeira vez eu escrevi o estilo DENTRO
+      do bloco marcado e o gerador do dossiê o apagou; a segunda vez eu o tirei
+      de lá mas CITEI o nome da marca num comentário, e a citação virou a marca
+      mais antiga do arquivo — apagou de novo. Bloco marcado tem dono, e nem se
+      cita a marca dele em texto livre.
+   ⚠️ E NENHUM `position` de pai muda aqui sem olhar os filhos absolutos (a
+      regressão do pilar verde, set/2026: quatro atividades foram ao ar tortas).
+   ============================================================ */
+.prateleira{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0 10px}
+.grupo{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:3px;
+  min-width:64px;min-height:58px;padding:7px 8px;border-radius:14px;
+  background:#fff8e8;border:3px solid #e0a63a;
+  -webkit-box-shadow:0 2px 0 #d0922c;box-shadow:0 2px 0 #d0922c}
+.grupo.vazio{background:#f6f7fb;border-style:dashed;border-color:#b9bed4}
+.grupo.completo{background:#eafaf0;border-color:#1f9d55;-webkit-box-shadow:0 2px 0 #168043;box-shadow:0 2px 0 #168043}
+.grupo.cheio{background:#fdecec;border-color:#d94a3d}
+.prateleira.peq .grupo{min-width:52px;min-height:46px;padding:5px}
+.figgr{display:block;width:auto;height:26px;max-width:100%;object-fit:contain}
+.prateleira.peq .figgr{height:20px}
+.figmini{display:block;width:auto;height:20px;max-width:100%;object-fit:contain}
+/* ⚠️ A PEÇA DE PUXAR SEM TAMANHO — e este é o defeito que só a FOTO pega.
+   A figura dentro do botão herda o tamanho de `.op.figbt .figop` (56 a 80 px),
+   e a peça daqui NÃO é `figbt`: sem regra própria, a imagem saía no tamanho
+   natural do arquivo, cada peça virava uma faixa da largura da tela inteira e
+   as doze peças empilhadas faziam uma folha de sete mil pixels de altura.
+   Nenhum portão de texto vê isso; o `andar_folha` e o jogador passaram os dois. */
+.op.pecafig{padding:5px;min-width:52px;min-height:52px;width:auto;flex:0 0 auto}
+.op.pecafig .figop{display:block;width:auto;height:34px;max-width:100%;object-fit:contain}
+.op.pecafig.usada{opacity:.28;pointer-events:none}
+.pedido{font-weight:800;font-size:16px;color:var(--texto,#3b4059);margin:4px 0 6px;text-align:center}
+.numop{font-weight:900;font-size:26px;color:#5b4fc4;font-variant-numeric:tabular-nums}
+.contaop,.somaop{font-weight:900;font-size:20px;color:#5b4fc4;white-space:nowrap;
+  font-variant-numeric:tabular-nums}
+.op.contabt{min-height:52px;padding:9px 16px}
+.contalin{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0 4px}
+.conta{font-weight:900;font-size:20px;color:var(--texto,#3b4059);font-variant-numeric:tabular-nums}
+.conta.gr{font-size:24px;color:#5b4fc4}
+.ouvirlin{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 10px}
+.ouvirlin .pedido{margin:0;font-size:15px;color:#6b7190}
+/* a tabela da folha 10 */
+.tabmult{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0 10px}
+.tcel{min-width:120px;padding:8px 12px;border-radius:14px;background:#f2f3fa;
+  border:3px solid #d8dcec;text-align:center}
+.tcel.vaga{background:#fff8e8;border-style:dashed;border-color:#e0a63a}
+.trot{display:block;font-size:11px;font-weight:800;letter-spacing:.6px;
+  text-transform:uppercase;color:#6b7190;margin-bottom:2px}
+.tval{display:block;font-weight:900;font-size:19px;color:var(--texto,#3b4059);font-variant-numeric:tabular-nums}
+/* as cinco máquinas */
+.maq{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 10px;flex-wrap:wrap}
+.mentra,.msai{min-width:58px;min-height:58px;display:flex;align-items:center;justify-content:center;
+  border-radius:16px;font-weight:900;font-size:26px;font-variant-numeric:tabular-nums;
+  background:#f2f3fa;border:3px solid #d8dcec;color:#3b4059}
+.msai{background:#fff8e8;border-style:dashed;border-color:#e0a63a;color:#b07a13}
+.msai.ok{background:#eafaf0;border-style:solid;border-color:#1f9d55;color:#1f9d55}
+.mcorpo{min-width:86px;min-height:58px;display:flex;align-items:center;justify-content:center;
+  border-radius:16px;background:#5b4fc4;color:#fff;font-weight:900;font-size:24px;
+  -webkit-box-shadow:0 3px 0 #443a9c;box-shadow:0 3px 0 #443a9c}
+.op.seqbt{min-width:60px;min-height:56px}
+/* o tapete e a malha */
+.tapete{display:inline-flex;flex-direction:column;gap:4px;padding:8px;border-radius:16px;
+  background:#fff8e8;border:3px solid #e0a63a;margin:8px auto;max-width:100%}
+.girabox{display:flex;justify-content:center}
+.girabox.girou .tapete{border-color:#1f9d55;background:#eafaf0}
+.tapete .fileira{display:flex;gap:4px;justify-content:center}
+.malha{display:inline-flex;flex-direction:column;gap:3px;margin:8px auto;padding:6px;
+  border-radius:14px;background:#f2f3fa;border:3px solid #d8dcec;max-width:100%}
+.mlin{display:flex;gap:3px}
+.mcel{width:44px;height:44px;min-width:44px;min-height:44px;border-radius:8px;
+  border:2px solid #c7ccdf;background:#fff;padding:0;cursor:pointer}
+.mcel.pinta{border-color:#3b4059}
+/* as cestas da combinação */
+.cestas{display:inline-flex;flex-direction:column;gap:5px;margin:8px auto;max-width:100%}
+.clin{display:flex;gap:5px;justify-content:center}
+.ccanto{width:52px;min-width:52px}
+.ccab{width:52px;min-width:52px;height:44px;display:flex;align-items:center;justify-content:center;
+  border-radius:10px;background:#f2f3fa;border:2px solid #d8dcec}
+.ccel{width:64px;min-width:64px;height:52px;min-height:52px;display:flex;align-items:center;
+  justify-content:center;gap:2px;border-radius:12px;padding:0;cursor:pointer;
+  background:#fff;border:3px solid #d8dcec}
+.ccel.vazia{background:#fff8e8;border-style:dashed;border-color:#e0a63a}
+.ccel.nova{background:#eafaf0;border-color:#1f9d55}
+.ccel.treme{-webkit-animation:treme .4s;animation:treme .4s}
+/* os problemas */
+.problin{display:flex;align-items:flex-start;gap:10px;margin:4px 0 8px}
+.prob{margin:0;font-weight:700;font-size:17px;line-height:1.45;color:var(--texto,#3b4059)}
+/* o cartaz */
+.cartazbt{display:flex;align-items:center;gap:10px;min-height:56px}
+.cartazfig{display:flex;align-items:center}
+.item.solto{border:0;background:none;padding:0;margin:0}
+/* a capa */
+/* ⚠️ A REGRA DA CENA DA CAPA GANHA DA MINHA: `.capa .cena img` (tres nomes)
+   vence `.figgr` (um nome), e por isso a maca da bandeja saia com 110 px e a
+   bandeja inteira estourava para fora do quadro — uma bandeja so aparecia, com
+   as macas empilhadas. A regra daqui tem que ter peso maior, nao vir depois. */
+.capa .cena{flex-wrap:wrap;gap:10px}
+.capa .titu .palcapa{white-space:nowrap;display:inline-block}
+.capa .titu .esp{display:inline-block;width:.35em}
+.capa .capagr{display:inline-flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4px;
+  width:74px;min-height:74px;padding:6px;border-radius:14px;background:#fff8e8;
+  border:3px solid #e0a63a;opacity:0;-webkit-animation:aparece .5s forwards;animation:aparece .5s forwards}
+.capa .cena .capagr .figgr{display:block;width:28px;height:28px;min-width:0;object-fit:contain;
+  -webkit-animation:none;animation:none;opacity:1}
+@media (max-width:430px){
+  .mcel{width:40px;height:40px;min-width:40px;min-height:40px}
+  .ccel{width:54px;min-width:54px}
+  .ccab,.ccanto{width:44px;min-width:44px}
+  .tcel{min-width:96px}
+}
+
+#cartazFim{margin:10px auto 4px;max-width:420px}
+#cartazFim h3{margin:0 0 6px;font-size:15px;color:#5b4fc4;letter-spacing:.5px;text-transform:uppercase}
+#cartazFim .quadro{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;
+  border-radius:16px;background:#fff8e8;border:3px solid #e0a63a}
+#cartazFim .cc{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #d9ddf2;
+  border-radius:12px;padding:6px 10px;font-weight:900;color:#5b4fc4;font-variant-numeric:tabular-nums}
+#cartazFim .cc img{display:block;width:auto;height:24px;object-fit:contain}
+#cartazFim .vazio{font-weight:700;color:#6b7190;padding:8px}
+/*<dossie-css>*/
+#dossie{display:none;position:fixed;inset:0;z-index:70;background:rgba(20,16,45,.72);
+  align-items:center;justify-content:center;padding:12px}
+#dossie.aberto{display:-webkit-box;display:-ms-flexbox;display:flex}
+#dossie .cx{background:#fff;border:4px solid #6d5ae6;border-radius:20px;padding:14px;
+  max-width:720px;width:100%;max-height:88vh;display:flex;flex-direction:column}
+#dossie h3{margin:0 0 6px;color:#6d5ae6;font-size:20px}
+#dsCorpo{overflow:auto;text-align:left;font-size:13px;line-height:1.5;color:var(--texto,#1e2334)}
+#dsCorpo table{border-collapse:collapse;width:100%;margin:8px 0}
+#dsCorpo th,#dsCorpo td{border:1px solid #d9ddf2;padding:6px 8px;text-align:left;vertical-align:top}
+#dsCorpo th{background:#eceefa;color:var(--texto2,#2c3350)}
+#dsCorpo .dobj{display:block;margin-top:4px;font-size:11.5px;color:var(--texto3,#3b4064)}
+#dsCorpo .dfonte{margin:0 0 6px}
+#dsCorpo .dsub{margin:12px 0 4px}
+#dsCorpo .dtxt{margin:0}
+#dsCorpo .descada,#dsCorpo .dev{margin:4px 0 0 18px;padding:0}
+#dossie #dsFechar{margin-top:10px;min-height:46px}
+.bdossie{display:block;width:100%;margin-top:10px;min-height:46px}
+/*</dossie-css>*/
+</style></head><body>
+
+<div id="topo">
+  <button class="zap ouvir" id="bOuvir" aria-label="Ouvir de novo"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v1H5v6h2v1a5 5 0 0 0 10 0v-1h2V9h-2V8a5 5 0 0 0-5-5z"/></svg></button>
+  <button class="zap" id="bVoz" aria-label="Ligar ou desligar a narração"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
+  <div class="tit">O Armazém do Mesmo Tanto</div>
+  <div class="prog"><i id="progI"></i></div>
+  <div class="pg" id="pg">Capa</div>
+</div>
+
+<div id="livro"></div>
+
+<div id="fim">
+  <h2 id="fimTit">Caderno completo!</h2>
+  <div class="estrelas" id="estrelas"></div>
+  <div class="barras" id="barras"></div>
+  <p id="resumo" style="font-weight:800;font-size:16px"></p>
+  <!-- ⭐ O CARTAZ QUE A CRIANÇA MONTOU (regra 11 da casa: a tela final mostra
+       o que ela FEZ). A folha 25 promete "ele fica guardado no fim" — sem este
+       quadro, a promessa não se cumpre e a voz do fecho mente. -->
+  <div id="cartazFim"></div>
+  <div id="medalha" role="button" tabindex="0" aria-label="Troféu. Segure dois segundos para abrir o relatório do professor"><img src="img/mu_trofeu.png?v=1" alt="Troféu" draggable="false" onerror="this.style.display='none';this.parentNode.className='semfig'"></div>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="bt verde" id="bVoltar" style="display:none">Voltar para o caderno</button>
+    <button class="bt cinza" id="bRever">Rever o caderno</button>
+    <button class="bt verde" id="bRecomecar">Caderno novo</button>
+  </div>
+  <div id="relatorio"></div>
+</div>
+
+<div id="retomar">
+  <h2 style="color:#6d5ae6;margin:0 0 6px">Você estava aqui!</h2>
+  <p id="retTxt" style="font-weight:700"></p>
+  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="bt verde" id="bContinuar">Continuar de onde parei</button>
+    <button class="bt cinza" id="bZerar">Começar um caderno novo</button>
+  </div>
+</div>
+
+<div id="nav">
+  <button class="bt cinza" id="bAnt"><i class="seta esq"></i>Anterior</button>
+  <div class="txt" id="navTxt"></div>
+  <!-- ⭐ O FECHO A QUALQUER MOMENTO (12/set/2026) — ver o comentário do `fim()`.
+       Discreto de propósito: não pode competir com o "Próxima", mas tem de
+       estar à mão quando o sinal toca. -->
+  <button class="bt terminar" id="bTerminar" aria-label="Terminar agora e ver o meu boletim">Terminar</button>
+  <button class="bt" id="bProx">Próxima<i class="seta dir"></i></button>
+</div>
+
+<div id="barraCapa"><div class="lin"><label for="nomeIn">Seu nome:</label><input id="nomeIn" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="escreva aqui"><button class="bt" id="bComecar">Começar</button></div></div>
+
+<div id="menuProf" role="dialog" aria-label="Menu do professor" aria-modal="true">
+  <div class="cx">
+    <h3>Menu do professor</h3>
+    <p>Chave mestra <b>1275</b>. Abra qualquer folha para conferir; o trabalho da criança não se apaga.</p>
+    <div class="folhas" id="mpFolhas"></div>
+    <!--<dossie-bt>--><button class="bt" id="bDossie">Dossiê pedagógico (currículo da rede)</button><!--</dossie-bt>-->
+<button class="bt cinza" id="mpFechar">Fechar</button>
+  </div>
+</div>
+
+<div id="teclado" aria-label="Teclado de números">
+  <div class="dica" id="tkDica">Escreva o número</div>
+  <div id="tk"></div>
+</div>
+<div id="confete" aria-hidden="true"></div>
+
+<script>
+/* ---------- AS PALAVRAS DE CADA FOLHA (o gerar_falas.py lê este bloco) ---------- */
+/*GESTOS-INI*/
+/* ⚠️ O GESTO DE CADA FOLHA, DECLARADO À MÃO — uma palavra: o que a criança FAZ
+   com o dedo, não o que o código parece. Ele existe porque o portão 0b7
+   (`_qa/leque_folha.py`) tentou ADIVINHAR isto do código e errou feio, e um
+   portão que reprova por causa do próprio erro é pior que portão nenhum.
+   ⚠️ Folha nova = linha nova AQUI, no mesmo commit. Sem isso o portão diz
+      "NAO MEDI" — que não é "passou". */
+var GESTOS = {
+ "f1": "escolher",
+ "f2": "escolher",
+ "f3": "arrastar",
+ "f4": "escolher",
+ "f5": "escolher",
+ "f6": "ligar",
+ "f7": "ouvir e achar",
+ "f8": "digitar",
+ "f9": "digitar",
+ "f10": "completar",
+ "f11": "maquina",
+ "f12": "maquina",
+ "f13": "maquina",
+ "f14": "maquina",
+ "f15": "maquina",
+ "f16": "sequenciar",
+ "f17": "sequenciar",
+ "f18": "escolher",
+ "f19": "pintar",
+ "f20": "prever",
+ "f21": "marcar",
+ "f22": "digitar",
+ "f23": "digitar",
+ "f24": "digitar",
+ "f25": "mural"
+};
+/*GESTOS-FIM*/
+/*ITENS-INI*/
+var ITENS = {
+ "p1": [
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    4
+   ],
+   "q": 2,
+   "w": "maca"
+  },
+  {
+   "n": 3,
+   "op": [
+    2,
+    3,
+    6
+   ],
+   "q": 2,
+   "w": "banana"
+  },
+  {
+   "n": 4,
+   "op": [
+    2,
+    3,
+    4,
+    8
+   ],
+   "q": 2,
+   "w": "laranja"
+  },
+  {
+   "n": 5,
+   "op": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "q": 2,
+   "w": "uva"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    4,
+    6
+   ],
+   "q": 3,
+   "w": "ovo"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    4,
+    9
+   ],
+   "q": 3,
+   "w": "bolacha"
+  },
+  {
+   "n": 4,
+   "op": [
+    3,
+    4,
+    12
+   ],
+   "q": 3,
+   "w": "bolo"
+  },
+  {
+   "n": 5,
+   "op": [
+    3,
+    4,
+    5,
+    15
+   ],
+   "q": 3,
+   "w": "sorvete"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    4,
+    5,
+    8
+   ],
+   "q": 4,
+   "w": "pipoca"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    4,
+    5,
+    12
+   ],
+   "q": 4,
+   "w": "bola"
+  },
+  {
+   "n": 4,
+   "op": [
+    4,
+    5,
+    16
+   ],
+   "q": 4,
+   "w": "caixa"
+  },
+  {
+   "n": 5,
+   "op": [
+    4,
+    5,
+    20
+   ],
+   "q": 4,
+   "w": "estrela"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    5,
+    6,
+    10
+   ],
+   "q": 5,
+   "w": "flor"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    5,
+    6,
+    15
+   ],
+   "q": 5,
+   "w": "peixe"
+  },
+  {
+   "n": 4,
+   "op": [
+    4,
+    5,
+    6,
+    20
+   ],
+   "q": 5,
+   "w": "pato"
+  }
+ ],
+ "p10": [
+  {
+   "falta": 0,
+   "n": 2,
+   "op": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "maca"
+  },
+  {
+   "falta": 1,
+   "n": 3,
+   "op": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "q": 2,
+   "w": "banana"
+  },
+  {
+   "falta": 2,
+   "n": 4,
+   "op": [
+    4,
+    6,
+    8,
+    12
+   ],
+   "q": 2,
+   "w": "laranja"
+  },
+  {
+   "falta": 0,
+   "n": 5,
+   "op": [
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "uva"
+  },
+  {
+   "falta": 1,
+   "n": 2,
+   "op": [
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "q": 3,
+   "w": "ovo"
+  },
+  {
+   "falta": 2,
+   "n": 3,
+   "op": [
+    6,
+    9,
+    12
+   ],
+   "q": 3,
+   "w": "bolacha"
+  },
+  {
+   "falta": 0,
+   "n": 4,
+   "op": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "bolo"
+  },
+  {
+   "falta": 1,
+   "n": 5,
+   "op": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "q": 3,
+   "w": "sorvete"
+  },
+  {
+   "falta": 2,
+   "n": 2,
+   "op": [
+    6,
+    8,
+    10
+   ],
+   "q": 4,
+   "w": "pipoca"
+  },
+  {
+   "falta": 0,
+   "n": 3,
+   "op": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "bola"
+  },
+  {
+   "falta": 1,
+   "n": 4,
+   "op": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "caixa"
+  },
+  {
+   "falta": 2,
+   "n": 5,
+   "op": [
+    9,
+    15,
+    20,
+    25
+   ],
+   "q": 4,
+   "w": "estrela"
+  },
+  {
+   "falta": 0,
+   "n": 2,
+   "op": [
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "q": 5,
+   "w": "flor"
+  },
+  {
+   "falta": 1,
+   "n": 3,
+   "op": [
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "q": 5,
+   "w": "peixe"
+  },
+  {
+   "falta": 2,
+   "n": 4,
+   "op": [
+    9,
+    16,
+    20,
+    24
+   ],
+   "q": 5,
+   "w": "pato"
+  }
+ ],
+ "p11": [
+  {
+   "e": 2,
+   "op": [
+    2,
+    4,
+    6
+   ]
+  },
+  {
+   "e": 3,
+   "op": [
+    4,
+    5,
+    6,
+    8
+   ]
+  },
+  {
+   "e": 4,
+   "op": [
+    6,
+    8,
+    10
+   ]
+  },
+  {
+   "e": 5,
+   "op": [
+    7,
+    8,
+    10,
+    12
+   ]
+  },
+  {
+   "e": 6,
+   "op": [
+    8,
+    10,
+    12,
+    14
+   ]
+  },
+  {
+   "e": 7,
+   "op": [
+    9,
+    12,
+    14,
+    16
+   ]
+  },
+  {
+   "e": 8,
+   "op": [
+    10,
+    14,
+    16,
+    18
+   ]
+  },
+  {
+   "e": 9,
+   "op": [
+    11,
+    16,
+    18,
+    20
+   ]
+  },
+  {
+   "e": 10,
+   "op": [
+    12,
+    18,
+    20,
+    22
+   ]
+  }
+ ],
+ "p12": [
+  {
+   "e": 2,
+   "op": [
+    5,
+    7,
+    10,
+    15
+   ]
+  },
+  {
+   "e": 3,
+   "op": [
+    8,
+    10,
+    15,
+    20
+   ]
+  },
+  {
+   "e": 4,
+   "op": [
+    9,
+    15,
+    20,
+    25
+   ]
+  },
+  {
+   "e": 5,
+   "op": [
+    10,
+    20,
+    25,
+    30
+   ]
+  },
+  {
+   "e": 6,
+   "op": [
+    11,
+    25,
+    30,
+    35
+   ]
+  },
+  {
+   "e": 7,
+   "op": [
+    12,
+    30,
+    35,
+    40
+   ]
+  },
+  {
+   "e": 8,
+   "op": [
+    13,
+    35,
+    40,
+    45
+   ]
+  },
+  {
+   "e": 9,
+   "op": [
+    14,
+    40,
+    45,
+    50
+   ]
+  },
+  {
+   "e": 10,
+   "op": [
+    15,
+    45,
+    50,
+    55
+   ]
+  }
+ ],
+ "p13": [
+  {
+   "e": 2,
+   "op": [
+    10,
+    12,
+    20,
+    30
+   ]
+  },
+  {
+   "e": 3,
+   "op": [
+    13,
+    20,
+    30,
+    40
+   ]
+  },
+  {
+   "e": 4,
+   "op": [
+    14,
+    30,
+    40,
+    50
+   ]
+  },
+  {
+   "e": 5,
+   "op": [
+    15,
+    40,
+    50,
+    60
+   ]
+  },
+  {
+   "e": 6,
+   "op": [
+    16,
+    50,
+    60,
+    70
+   ]
+  },
+  {
+   "e": 7,
+   "op": [
+    17,
+    60,
+    70,
+    80
+   ]
+  },
+  {
+   "e": 8,
+   "op": [
+    18,
+    70,
+    80,
+    90
+   ]
+  },
+  {
+   "e": 9,
+   "op": [
+    19,
+    80,
+    90,
+    100
+   ]
+  },
+  {
+   "e": 10,
+   "op": [
+    20,
+    90,
+    100,
+    110
+   ]
+  }
+ ],
+ "p14": [
+  {
+   "e": 2,
+   "op": [
+    3,
+    5,
+    6,
+    9
+   ]
+  },
+  {
+   "e": 3,
+   "op": [
+    6,
+    9,
+    12
+   ]
+  },
+  {
+   "e": 4,
+   "op": [
+    7,
+    9,
+    12,
+    15
+   ]
+  },
+  {
+   "e": 5,
+   "op": [
+    8,
+    12,
+    15,
+    18
+   ]
+  },
+  {
+   "e": 6,
+   "op": [
+    9,
+    15,
+    18,
+    21
+   ]
+  },
+  {
+   "e": 7,
+   "op": [
+    10,
+    18,
+    21,
+    24
+   ]
+  },
+  {
+   "e": 8,
+   "op": [
+    11,
+    21,
+    24,
+    27
+   ]
+  },
+  {
+   "e": 9,
+   "op": [
+    12,
+    24,
+    27,
+    30
+   ]
+  },
+  {
+   "e": 10,
+   "op": [
+    13,
+    27,
+    30,
+    33
+   ]
+  }
+ ],
+ "p15": [
+  {
+   "e": 2,
+   "op": [
+    4,
+    6,
+    8,
+    12
+   ]
+  },
+  {
+   "e": 3,
+   "op": [
+    7,
+    8,
+    12,
+    16
+   ]
+  },
+  {
+   "e": 4,
+   "op": [
+    8,
+    12,
+    16,
+    20
+   ]
+  },
+  {
+   "e": 5,
+   "op": [
+    9,
+    16,
+    20,
+    24
+   ]
+  },
+  {
+   "e": 6,
+   "op": [
+    10,
+    20,
+    24,
+    28
+   ]
+  },
+  {
+   "e": 7,
+   "op": [
+    11,
+    24,
+    28,
+    32
+   ]
+  },
+  {
+   "e": 8,
+   "op": [
+    12,
+    28,
+    32,
+    36
+   ]
+  },
+  {
+   "e": 9,
+   "op": [
+    13,
+    32,
+    36,
+    40
+   ]
+  },
+  {
+   "e": 10,
+   "op": [
+    14,
+    36,
+    40,
+    44
+   ]
+  }
+ ],
+ "p16": [
+  {
+   "ini": 2,
+   "n": 4,
+   "passo": 2
+  },
+  {
+   "ini": 4,
+   "n": 4,
+   "passo": 2
+  },
+  {
+   "ini": 6,
+   "n": 4,
+   "passo": 2
+  },
+  {
+   "ini": 8,
+   "n": 4,
+   "passo": 2
+  },
+  {
+   "ini": 10,
+   "n": 4,
+   "passo": 2
+  },
+  {
+   "ini": 3,
+   "n": 4,
+   "passo": 3
+  },
+  {
+   "ini": 6,
+   "n": 4,
+   "passo": 3
+  },
+  {
+   "ini": 9,
+   "n": 4,
+   "passo": 3
+  },
+  {
+   "ini": 12,
+   "n": 4,
+   "passo": 3
+  },
+  {
+   "ini": 15,
+   "n": 4,
+   "passo": 3
+  }
+ ],
+ "p17": [
+  {
+   "ini": 5,
+   "n": 4,
+   "passo": 5
+  },
+  {
+   "ini": 10,
+   "n": 4,
+   "passo": 5
+  },
+  {
+   "ini": 15,
+   "n": 4,
+   "passo": 5
+  },
+  {
+   "ini": 20,
+   "n": 4,
+   "passo": 5
+  },
+  {
+   "ini": 25,
+   "n": 4,
+   "passo": 5
+  },
+  {
+   "ini": 10,
+   "n": 4,
+   "passo": 10
+  },
+  {
+   "ini": 20,
+   "n": 4,
+   "passo": 10
+  },
+  {
+   "ini": 30,
+   "n": 4,
+   "passo": 10
+  },
+  {
+   "ini": 40,
+   "n": 4,
+   "passo": 10
+  },
+  {
+   "ini": 50,
+   "n": 4,
+   "passo": 10
+  }
+ ],
+ "p18": [
+  {
+   "co": 2,
+   "li": 2,
+   "op": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "w": "ovo"
+  },
+  {
+   "co": 3,
+   "li": 2,
+   "op": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "w": "bolacha"
+  },
+  {
+   "co": 4,
+   "li": 2,
+   "op": [
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "w": "bolo"
+  },
+  {
+   "co": 5,
+   "li": 2,
+   "op": [
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "w": "sorvete"
+  },
+  {
+   "co": 2,
+   "li": 3,
+   "op": [
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "w": "pipoca"
+  },
+  {
+   "co": 3,
+   "li": 3,
+   "op": [
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "w": "bola"
+  },
+  {
+   "co": 4,
+   "li": 3,
+   "op": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "w": "caixa"
+  },
+  {
+   "co": 5,
+   "li": 3,
+   "op": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "w": "estrela"
+  },
+  {
+   "co": 2,
+   "li": 4,
+   "op": [
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "w": "flor"
+  },
+  {
+   "co": 3,
+   "li": 4,
+   "op": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "w": "peixe"
+  },
+  {
+   "co": 4,
+   "li": 4,
+   "op": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "w": "pato"
+  },
+  {
+   "co": 5,
+   "li": 4,
+   "op": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "w": "carro"
+  },
+  {
+   "co": 2,
+   "li": 5,
+   "op": [
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "w": "cadeira"
+  },
+  {
+   "co": 3,
+   "li": 5,
+   "op": [
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "w": "abelha"
+  },
+  {
+   "co": 4,
+   "li": 5,
+   "op": [
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "w": "borboleta"
+  }
+ ],
+ "p19": [
+  {
+   "co": 2,
+   "li": 2
+  },
+  {
+   "co": 3,
+   "li": 2
+  },
+  {
+   "co": 4,
+   "li": 2
+  },
+  {
+   "co": 5,
+   "li": 2
+  },
+  {
+   "co": 6,
+   "li": 2
+  },
+  {
+   "co": 2,
+   "li": 3
+  },
+  {
+   "co": 3,
+   "li": 3
+  },
+  {
+   "co": 4,
+   "li": 3
+  },
+  {
+   "co": 5,
+   "li": 3
+  },
+  {
+   "co": 6,
+   "li": 3
+  },
+  {
+   "co": 2,
+   "li": 4
+  },
+  {
+   "co": 3,
+   "li": 4
+  },
+  {
+   "co": 4,
+   "li": 4
+  },
+  {
+   "co": 5,
+   "li": 4
+  },
+  {
+   "co": 2,
+   "li": 5
+  },
+  {
+   "co": 3,
+   "li": 5
+  },
+  {
+   "co": 4,
+   "li": 5
+  }
+ ],
+ "p2": [
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    4
+   ],
+   "q": 2,
+   "w": "uva"
+  },
+  {
+   "n": 3,
+   "op": [
+    2,
+    3,
+    4,
+    6
+   ],
+   "q": 2,
+   "w": "ovo"
+  },
+  {
+   "n": 4,
+   "op": [
+    2,
+    4,
+    5,
+    8
+   ],
+   "q": 2,
+   "w": "bolacha"
+  },
+  {
+   "n": 5,
+   "op": [
+    2,
+    5,
+    6,
+    10
+   ],
+   "q": 2,
+   "w": "bolo"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    6
+   ],
+   "q": 3,
+   "w": "sorvete"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    4,
+    9
+   ],
+   "q": 3,
+   "w": "pipoca"
+  },
+  {
+   "n": 4,
+   "op": [
+    3,
+    4,
+    5,
+    12
+   ],
+   "q": 3,
+   "w": "bola"
+  },
+  {
+   "n": 5,
+   "op": [
+    3,
+    5,
+    6,
+    15
+   ],
+   "q": 3,
+   "w": "caixa"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    4,
+    8
+   ],
+   "q": 4,
+   "w": "estrela"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    4,
+    12
+   ],
+   "q": 4,
+   "w": "flor"
+  },
+  {
+   "n": 4,
+   "op": [
+    4,
+    5,
+    16
+   ],
+   "q": 4,
+   "w": "peixe"
+  },
+  {
+   "n": 5,
+   "op": [
+    4,
+    5,
+    6,
+    20
+   ],
+   "q": 4,
+   "w": "pato"
+  },
+  {
+   "n": 2,
+   "op": [
+    2,
+    3,
+    5,
+    10
+   ],
+   "q": 5,
+   "w": "carro"
+  },
+  {
+   "n": 3,
+   "op": [
+    3,
+    4,
+    5,
+    15
+   ],
+   "q": 5,
+   "w": "cadeira"
+  },
+  {
+   "n": 4,
+   "op": [
+    4,
+    5,
+    20
+   ],
+   "q": 5,
+   "w": "abelha"
+  }
+ ],
+ "p20": [
+  {
+   "co": 3,
+   "li": 2,
+   "w": "bolo"
+  },
+  {
+   "co": 4,
+   "li": 2,
+   "w": "sorvete"
+  },
+  {
+   "co": 5,
+   "li": 2,
+   "w": "pipoca"
+  },
+  {
+   "co": 2,
+   "li": 3,
+   "w": "bola"
+  },
+  {
+   "co": 4,
+   "li": 3,
+   "w": "caixa"
+  },
+  {
+   "co": 2,
+   "li": 4,
+   "w": "estrela"
+  },
+  {
+   "co": 3,
+   "li": 4,
+   "w": "flor"
+  }
+ ],
+ "p21": [
+  {
+   "dc": [
+    "bolo",
+    "sorvete"
+   ],
+   "di": 1,
+   "fi": 0,
+   "fr": [
+    "maca",
+    "banana"
+   ]
+  },
+  {
+   "dc": [
+    "sorvete",
+    "bolacha"
+   ],
+   "di": 0,
+   "fi": 1,
+   "fr": [
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha"
+   ],
+   "di": 2,
+   "fi": 0,
+   "fr": [
+    "maca",
+    "banana"
+   ]
+  },
+  {
+   "dc": [
+    "sorvete",
+    "bolacha",
+    "pipoca"
+   ],
+   "di": 1,
+   "fi": 1,
+   "fr": [
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "dc": [
+    "bolo",
+    "sorvete"
+   ],
+   "di": 1,
+   "fi": 0,
+   "fr": [
+    "maca",
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "dc": [
+    "sorvete",
+    "bolacha"
+   ],
+   "di": 0,
+   "fi": 1,
+   "fr": [
+    "banana",
+    "laranja",
+    "uva"
+   ]
+  },
+  {
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha"
+   ],
+   "di": 2,
+   "fi": 0,
+   "fr": [
+    "maca",
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "dc": [
+    "sorvete",
+    "bolacha",
+    "pipoca"
+   ],
+   "di": 1,
+   "fi": 1,
+   "fr": [
+    "banana",
+    "laranja",
+    "uva"
+   ]
+  }
+ ],
+ "p22": [
+  {
+   "a": 2,
+   "b": 2,
+   "dc": [
+    "bolo",
+    "sorvete"
+   ],
+   "fr": [
+    "maca",
+    "banana"
+   ]
+  },
+  {
+   "a": 2,
+   "b": 3,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha"
+   ],
+   "fr": [
+    "maca",
+    "banana"
+   ]
+  },
+  {
+   "a": 2,
+   "b": 4,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha",
+    "pipoca"
+   ],
+   "fr": [
+    "maca",
+    "banana"
+   ]
+  },
+  {
+   "a": 3,
+   "b": 2,
+   "dc": [
+    "bolo",
+    "sorvete"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "a": 3,
+   "b": 3,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "a": 3,
+   "b": 4,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha",
+    "pipoca"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja"
+   ]
+  },
+  {
+   "a": 4,
+   "b": 2,
+   "dc": [
+    "bolo",
+    "sorvete"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja",
+    "uva"
+   ]
+  },
+  {
+   "a": 4,
+   "b": 3,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja",
+    "uva"
+   ]
+  },
+  {
+   "a": 4,
+   "b": 4,
+   "dc": [
+    "bolo",
+    "sorvete",
+    "bolacha",
+    "pipoca"
+   ],
+   "fr": [
+    "maca",
+    "banana",
+    "laranja",
+    "uva"
+   ]
+  }
+ ],
+ "p23": [
+  {
+   "n": 5,
+   "q": 4,
+   "t": "O seu Antônio guardou 4 caixas de ovos. Em cada caixa cabem 5 ovos. Quantos ovos ele guardou?",
+   "w": "ovo"
+  },
+  {
+   "n": 4,
+   "q": 3,
+   "t": "Na prateleira há 3 bandejas. Cada bandeja tem 4 bolos. Quantos bolos há na prateleira?",
+   "w": "bolo"
+  },
+  {
+   "n": 10,
+   "q": 5,
+   "t": "A dona Rita fez 5 pacotes de bolachas. Em cada pacote pôs 10 bolachas. Quantas bolachas ela fez?",
+   "w": "bolacha"
+  },
+  {
+   "n": 10,
+   "q": 2,
+   "t": "O armazém recebeu 2 engradados de laranjas. Cada engradado tem 10 laranjas. Quantas laranjas chegaram?",
+   "w": "laranja"
+  },
+  {
+   "n": 3,
+   "q": 5,
+   "t": "São 5 cestas de maçãs, com 3 maçãs em cada cesta. Quantas maçãs são ao todo?",
+   "w": "maca"
+  },
+  {
+   "n": 4,
+   "q": 4,
+   "t": "Cada saquinho leva 4 bolachas. O Beto encheu 4 saquinhos. Quantas bolachas ele usou?",
+   "w": "bolacha"
+  },
+  {
+   "n": 10,
+   "q": 3,
+   "t": "Há 3 caixas de sorvete e cada caixa tem 10 sorvetes. Quantos sorvetes há no freezer?",
+   "w": "sorvete"
+  },
+  {
+   "n": 5,
+   "q": 2,
+   "t": "O armazém arrumou 2 fileiras de bolas, com 5 bolas em cada fileira. Quantas bolas arrumou?",
+   "w": "bola"
+  }
+ ],
+ "p24": [
+  {
+   "n": 3,
+   "q": 4,
+   "t": "No pátio do armazém as cadeiras estão em 4 fileiras, com 3 cadeiras em cada fileira. Quantas cadeiras há?",
+   "w": "cadeira"
+  },
+  {
+   "n": 4,
+   "q": 5,
+   "t": "O piso da entrada tem 5 fileiras de 4 quadradinhos. Quantos quadradinhos tem o piso?",
+   "w": null
+  },
+  {
+   "n": 5,
+   "q": 3,
+   "t": "A vitrine tem 3 prateleiras e cada uma cabe 5 potes de pipoca. Quantos potes cabem na vitrine?",
+   "w": "pipoca"
+  },
+  {
+   "n": 4,
+   "q": 3,
+   "t": "A cesta do armazém leva 1 fruta e 1 doce. Há 3 frutas e 4 doces. Quantas cestas diferentes dá para montar?",
+   "w": null
+  },
+  {
+   "n": 5,
+   "q": 2,
+   "t": "O lanche tem 2 sucos e 5 salgados para escolher. Quantos lanches diferentes dá para montar, com 1 suco e 1 salgado?",
+   "w": null
+  },
+  {
+   "n": 5,
+   "q": 4,
+   "t": "As caixas do depósito estão empilhadas em 4 fileiras de 5 caixas. Quantas caixas há no depósito?",
+   "w": null
+  },
+  {
+   "n": 3,
+   "q": 4,
+   "t": "A festa terá 1 bolo e 1 suco por mesa. Há 4 sabores de bolo e 3 sabores de suco. Quantas combinações diferentes há?",
+   "w": null
+  },
+  {
+   "n": 10,
+   "q": 2,
+   "t": "O mural tem 2 fileiras com 10 desenhos em cada fileira. Quantos desenhos há no mural?",
+   "w": null
+  }
+ ],
+ "p25": [
+  {
+   "n": 3,
+   "q": 2,
+   "w": "maca"
+  },
+  {
+   "n": 5,
+   "q": 2,
+   "w": "banana"
+  },
+  {
+   "n": 3,
+   "q": 3,
+   "w": "laranja"
+  },
+  {
+   "n": 4,
+   "q": 3,
+   "w": "uva"
+  },
+  {
+   "n": 10,
+   "q": 3,
+   "w": "ovo"
+  },
+  {
+   "n": 2,
+   "q": 4,
+   "w": "bolacha"
+  },
+  {
+   "n": 5,
+   "q": 4,
+   "w": "bolo"
+  },
+  {
+   "n": 2,
+   "q": 5,
+   "w": "sorvete"
+  },
+  {
+   "n": 4,
+   "q": 5,
+   "w": "pipoca"
+  },
+  {
+   "n": 10,
+   "q": 5,
+   "w": "bola"
+  },
+  {
+   "n": 2,
+   "q": 10,
+   "w": "caixa"
+  },
+  {
+   "n": 3,
+   "q": 10,
+   "w": "estrela"
+  },
+  {
+   "n": 10,
+   "q": 2,
+   "w": "flor"
+  },
+  {
+   "n": 4,
+   "q": 4,
+   "w": "peixe"
+  }
+ ],
+ "p3": [
+  {
+   "n": 2,
+   "ordem": "0 1 2 3",
+   "q": 2,
+   "rot": "sorvetes",
+   "w": "sorvete"
+  },
+  {
+   "n": 3,
+   "ordem": "0 1 2 3 4 5",
+   "q": 2,
+   "rot": "pipocas",
+   "w": "pipoca"
+  },
+  {
+   "n": 4,
+   "ordem": "0 1 2 3 4 5 6 7",
+   "q": 2,
+   "rot": "bolas",
+   "w": "bola"
+  },
+  {
+   "n": 5,
+   "ordem": "0 1 2 3 4 5 6 7 8 9",
+   "q": 2,
+   "rot": "caixas",
+   "w": "caixa"
+  },
+  {
+   "n": 2,
+   "ordem": "0 1 2 3 4 5",
+   "q": 3,
+   "rot": "estrelas",
+   "w": "estrela"
+  },
+  {
+   "n": 3,
+   "ordem": "0 1 2 3 4 5 6 7 8",
+   "q": 3,
+   "rot": "flores",
+   "w": "flor"
+  },
+  {
+   "n": 4,
+   "ordem": "0 1 2 3 4 5 6 7 8 9 10 11",
+   "q": 3,
+   "rot": "peixes",
+   "w": "peixe"
+  },
+  {
+   "n": 2,
+   "ordem": "0 1 2 3 4 5 6 7",
+   "q": 4,
+   "rot": "patos",
+   "w": "pato"
+  },
+  {
+   "n": 3,
+   "ordem": "0 1 2 3 4 5 6 7 8 9 10 11",
+   "q": 4,
+   "rot": "carrinhos",
+   "w": "carro"
+  }
+ ],
+ "p4": [
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "estrela"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "flor"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "peixe"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     2
+    ]
+   ],
+   "q": 2,
+   "w": "pato"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "carro"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "cadeira"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "abelha"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     5,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "borboleta"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     4
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "maca"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "banana"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "laranja"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     5,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "uva"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "q": 5,
+   "w": "ovo"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "q": 5,
+   "w": "bolacha"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "q": 5,
+   "w": "bolo"
+  }
+ ],
+ "p5": [
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "q": 2,
+   "w": "laranja"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "q": 2,
+   "w": "uva"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "q": 2,
+   "w": "ovo"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "q": 2,
+   "w": "bolacha"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "q": 3,
+   "w": "bolo"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "q": 3,
+   "w": "sorvete"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "q": 3,
+   "w": "pipoca"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "q": 3,
+   "w": "bola"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "q": 4,
+   "w": "caixa"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "q": 4,
+   "w": "estrela"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ]
+   ],
+   "q": 4,
+   "w": "flor"
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "q": 4,
+   "w": "peixe"
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     6,
+     3
+    ]
+   ],
+   "q": 5,
+   "w": "pato"
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "q": 5,
+   "w": "carro"
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     6,
+     5
+    ]
+   ],
+   "q": 5,
+   "w": "cadeira"
+  }
+ ],
+ "p6": [
+  {
+   "g": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ]
+   ]
+  },
+  {
+   "g": [
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ]
+  },
+  {
+   "g": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     2
+    ]
+   ]
+  },
+  {
+   "g": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ]
+  },
+  {
+   "g": [
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ]
+   ]
+  }
+ ],
+ "p7": [
+  {
+   "n": 2,
+   "op": [
+    [
+     2,
+     2
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "q": 2
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "q": 2
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "q": 2
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "q": 2
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     3,
+     2
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "q": 3
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "q": 3
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "q": 3
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     3
+    ]
+   ],
+   "q": 3
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     4,
+     2
+    ],
+    [
+     4,
+     3
+    ],
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "q": 4
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     4,
+     3
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "q": 4
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     4,
+     4
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "q": 4
+  },
+  {
+   "n": 5,
+   "op": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     5,
+     4
+    ]
+   ],
+   "q": 4
+  },
+  {
+   "n": 2,
+   "op": [
+    [
+     5,
+     2
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     2
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "q": 5
+  },
+  {
+   "n": 3,
+   "op": [
+    [
+     5,
+     3
+    ],
+    [
+     5,
+     4
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "q": 5
+  },
+  {
+   "n": 4,
+   "op": [
+    [
+     5,
+     4
+    ],
+    [
+     5,
+     5
+    ],
+    [
+     6,
+     4
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "q": 5
+  }
+ ],
+ "p8": [
+  {
+   "n": 2,
+   "q": 2,
+   "w": "bolacha"
+  },
+  {
+   "n": 3,
+   "q": 2,
+   "w": "bolo"
+  },
+  {
+   "n": 4,
+   "q": 2,
+   "w": "sorvete"
+  },
+  {
+   "n": 5,
+   "q": 2,
+   "w": "pipoca"
+  },
+  {
+   "n": 2,
+   "q": 3,
+   "w": "bola"
+  },
+  {
+   "n": 3,
+   "q": 3,
+   "w": "caixa"
+  },
+  {
+   "n": 4,
+   "q": 3,
+   "w": "estrela"
+  },
+  {
+   "n": 5,
+   "q": 3,
+   "w": "flor"
+  },
+  {
+   "n": 2,
+   "q": 4,
+   "w": "peixe"
+  },
+  {
+   "n": 3,
+   "q": 4,
+   "w": "pato"
+  },
+  {
+   "n": 4,
+   "q": 4,
+   "w": "carro"
+  },
+  {
+   "n": 5,
+   "q": 4,
+   "w": "cadeira"
+  },
+  {
+   "n": 2,
+   "q": 5,
+   "w": "abelha"
+  },
+  {
+   "n": 3,
+   "q": 5,
+   "w": "borboleta"
+  },
+  {
+   "n": 4,
+   "q": 5,
+   "w": "maca"
+  }
+ ],
+ "p9": [
+  {
+   "n": 2,
+   "q": 2,
+   "w": "bola"
+  },
+  {
+   "n": 3,
+   "q": 2,
+   "w": "caixa"
+  },
+  {
+   "n": 4,
+   "q": 2,
+   "w": "estrela"
+  },
+  {
+   "n": 5,
+   "q": 2,
+   "w": "flor"
+  },
+  {
+   "n": 2,
+   "q": 3,
+   "w": "peixe"
+  },
+  {
+   "n": 3,
+   "q": 3,
+   "w": "pato"
+  },
+  {
+   "n": 4,
+   "q": 3,
+   "w": "carro"
+  },
+  {
+   "n": 5,
+   "q": 3,
+   "w": "cadeira"
+  },
+  {
+   "n": 2,
+   "q": 4,
+   "w": "abelha"
+  },
+  {
+   "n": 3,
+   "q": 4,
+   "w": "borboleta"
+  },
+  {
+   "n": 4,
+   "q": 4,
+   "w": "maca"
+  },
+  {
+   "n": 5,
+   "q": 4,
+   "w": "banana"
+  },
+  {
+   "n": 2,
+   "q": 5,
+   "w": "laranja"
+  },
+  {
+   "n": 3,
+   "q": 5,
+   "w": "uva"
+  },
+  {
+   "n": 4,
+   "q": 5,
+   "w": "ovo"
+  }
+ ]
+};
+/*ITENS-FIM*/
+/*FALAS-INI*/
+var FALAS = {
+ "capa": "O Armazém do Mesmo Tanto. Vinte e cinco folhas para descobrir que multiplicar é somar quantidades iguais. Escreva o seu nome ali embaixo e toque em Começar.",
+ "certo10_2x2": "A linha ficou pronta: o dois repetido duas vezes, dois vezes dois, total quatro.",
+ "certo10_2x3": "A linha ficou pronta: o três repetido duas vezes, dois vezes três, total seis.",
+ "certo10_2x4": "A linha ficou pronta: o quatro repetido duas vezes, dois vezes quatro, total oito.",
+ "certo10_2x5": "A linha ficou pronta: o cinco repetido duas vezes, dois vezes cinco, total dez.",
+ "certo10_3x2": "A linha ficou pronta: o dois repetido três vezes, três vezes dois, total seis.",
+ "certo10_3x3": "A linha ficou pronta: o três repetido três vezes, três vezes três, total nove.",
+ "certo10_3x4": "A linha ficou pronta: o quatro repetido três vezes, três vezes quatro, total doze.",
+ "certo10_3x5": "A linha ficou pronta: o cinco repetido três vezes, três vezes cinco, total quinze.",
+ "certo10_4x2": "A linha ficou pronta: o dois repetido quatro vezes, quatro vezes dois, total oito.",
+ "certo10_4x3": "A linha ficou pronta: o três repetido quatro vezes, quatro vezes três, total doze.",
+ "certo10_4x4": "A linha ficou pronta: o quatro repetido quatro vezes, quatro vezes quatro, total dezesseis.",
+ "certo10_4x5": "A linha ficou pronta: o cinco repetido quatro vezes, quatro vezes cinco, total vinte.",
+ "certo10_5x2": "A linha ficou pronta: o dois repetido cinco vezes, cinco vezes dois, total dez.",
+ "certo10_5x3": "A linha ficou pronta: o três repetido cinco vezes, cinco vezes três, total quinze.",
+ "certo10_5x4": "A linha ficou pronta: o quatro repetido cinco vezes, cinco vezes quatro, total vinte.",
+ "certo18_2x2": "Isso! São duas fileiras com dois em cada uma, ou seja, dois vezes dois, igual a quatro.",
+ "certo18_2x3": "Isso! São duas fileiras com três em cada uma, ou seja, dois vezes três, igual a seis.",
+ "certo18_2x4": "Isso! São duas fileiras com quatro em cada uma, ou seja, dois vezes quatro, igual a oito.",
+ "certo18_2x5": "Isso! São duas fileiras com cinco em cada uma, ou seja, dois vezes cinco, igual a dez.",
+ "certo18_3x2": "Isso! São três fileiras com dois em cada uma, ou seja, três vezes dois, igual a seis.",
+ "certo18_3x3": "Isso! São três fileiras com três em cada uma, ou seja, três vezes três, igual a nove.",
+ "certo18_3x4": "Isso! São três fileiras com quatro em cada uma, ou seja, três vezes quatro, igual a doze.",
+ "certo18_3x5": "Isso! São três fileiras com cinco em cada uma, ou seja, três vezes cinco, igual a quinze.",
+ "certo18_4x2": "Isso! São quatro fileiras com dois em cada uma, ou seja, quatro vezes dois, igual a oito.",
+ "certo18_4x3": "Isso! São quatro fileiras com três em cada uma, ou seja, quatro vezes três, igual a doze.",
+ "certo18_4x4": "Isso! São quatro fileiras com quatro em cada uma, ou seja, quatro vezes quatro, igual a dezesseis.",
+ "certo18_4x5": "Isso! São quatro fileiras com cinco em cada uma, ou seja, quatro vezes cinco, igual a vinte.",
+ "certo18_5x2": "Isso! São cinco fileiras com dois em cada uma, ou seja, cinco vezes dois, igual a dez.",
+ "certo18_5x3": "Isso! São cinco fileiras com três em cada uma, ou seja, cinco vezes três, igual a quinze.",
+ "certo18_5x4": "Isso! São cinco fileiras com quatro em cada uma, ou seja, cinco vezes quatro, igual a vinte.",
+ "certo19_2x2": "Que tapete bonito! São duas fileiras de dois, e isso dá quatro quadradinhos.",
+ "certo19_2x3": "Que tapete bonito! São duas fileiras de três, e isso dá seis quadradinhos.",
+ "certo19_2x4": "Que tapete bonito! São duas fileiras de quatro, e isso dá oito quadradinhos.",
+ "certo19_2x5": "Que tapete bonito! São duas fileiras de cinco, e isso dá dez quadradinhos.",
+ "certo19_2x6": "Que tapete bonito! São duas fileiras de seis, e isso dá doze quadradinhos.",
+ "certo19_3x2": "Que tapete bonito! São três fileiras de dois, e isso dá seis quadradinhos.",
+ "certo19_3x3": "Que tapete bonito! São três fileiras de três, e isso dá nove quadradinhos.",
+ "certo19_3x4": "Que tapete bonito! São três fileiras de quatro, e isso dá doze quadradinhos.",
+ "certo19_3x5": "Que tapete bonito! São três fileiras de cinco, e isso dá quinze quadradinhos.",
+ "certo19_3x6": "Que tapete bonito! São três fileiras de seis, e isso dá dezoito quadradinhos.",
+ "certo19_4x2": "Que tapete bonito! São quatro fileiras de dois, e isso dá oito quadradinhos.",
+ "certo19_4x3": "Que tapete bonito! São quatro fileiras de três, e isso dá doze quadradinhos.",
+ "certo19_4x4": "Que tapete bonito! São quatro fileiras de quatro, e isso dá dezesseis quadradinhos.",
+ "certo19_4x5": "Que tapete bonito! São quatro fileiras de cinco, e isso dá vinte quadradinhos.",
+ "certo19_5x2": "Que tapete bonito! São cinco fileiras de dois, e isso dá dez quadradinhos.",
+ "certo19_5x3": "Que tapete bonito! São cinco fileiras de três, e isso dá quinze quadradinhos.",
+ "certo19_5x4": "Que tapete bonito! São cinco fileiras de quatro, e isso dá vinte quadradinhos.",
+ "certo1_banana_2x3": "Isso! São dois grupos, e em cada um há três bananas.",
+ "certo1_bola_4x3": "Isso! São quatro grupos, e em cada um há três bolas.",
+ "certo1_bolacha_3x3": "Isso! São três grupos, e em cada um há três bolachas.",
+ "certo1_bolo_3x4": "Isso! São três grupos, e em cada um há quatro bolos.",
+ "certo1_caixa_4x4": "Isso! São quatro grupos, e em cada um há quatro caixas.",
+ "certo1_estrela_4x5": "Isso! São quatro grupos, e em cada um há cinco estrelas.",
+ "certo1_flor_5x2": "Isso! São cinco grupos, e em cada um há duas flores.",
+ "certo1_laranja_2x4": "Isso! São dois grupos, e em cada um há quatro laranjas.",
+ "certo1_maca_2x2": "Isso! São dois grupos, e em cada um há duas maçãs.",
+ "certo1_ovo_3x2": "Isso! São três grupos, e em cada um há dois ovos.",
+ "certo1_pato_5x4": "Isso! São cinco grupos, e em cada um há quatro patos.",
+ "certo1_peixe_5x3": "Isso! São cinco grupos, e em cada um há três peixes.",
+ "certo1_pipoca_4x2": "Isso! São quatro grupos, e em cada um há duas pipocas.",
+ "certo1_sorvete_3x5": "Isso! São três grupos, e em cada um há cinco sorvetes.",
+ "certo1_uva_2x5": "Isso! São dois grupos, e em cada um há cinco uvas.",
+ "certo20_2x3": "Você acertou a aposta! Olhe: dois vezes três e três vezes dois dão os mesmos seis. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_2x4": "Você acertou a aposta! Olhe: dois vezes quatro e quatro vezes dois dão os mesmos oito. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_2x5": "Você acertou a aposta! Olhe: dois vezes cinco e cinco vezes dois dão os mesmos dez. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_3x2": "Você acertou a aposta! Olhe: três vezes dois e dois vezes três dão os mesmos seis. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_3x4": "Você acertou a aposta! Olhe: três vezes quatro e quatro vezes três dão os mesmos doze. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_4x2": "Você acertou a aposta! Olhe: quatro vezes dois e dois vezes quatro dão os mesmos oito. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo20_4x3": "Você acertou a aposta! Olhe: quatro vezes três e três vezes quatro dão os mesmos doze. Girar o tapete não tira nem põe figura nenhuma.",
+ "certo21_2x2": "Achou! Agora cada fruta está com cada doce: são quatro cestas diferentes.",
+ "certo21_2x3": "Achou! Agora cada fruta está com cada doce: são seis cestas diferentes.",
+ "certo21_3x2": "Achou! Agora cada fruta está com cada doce: são seis cestas diferentes.",
+ "certo21_3x3": "Achou! Agora cada fruta está com cada doce: são nove cestas diferentes.",
+ "certo22_2x2": "Isso! Cada uma das duas frutas pode ir com qualquer um dos dois doces: dois vezes dois, igual a quatro cestas.",
+ "certo22_2x3": "Isso! Cada uma das duas frutas pode ir com qualquer um dos três doces: dois vezes três, igual a seis cestas.",
+ "certo22_2x4": "Isso! Cada uma das duas frutas pode ir com qualquer um dos quatro doces: dois vezes quatro, igual a oito cestas.",
+ "certo22_3x2": "Isso! Cada uma das três frutas pode ir com qualquer um dos dois doces: três vezes dois, igual a seis cestas.",
+ "certo22_3x3": "Isso! Cada uma das três frutas pode ir com qualquer um dos três doces: três vezes três, igual a nove cestas.",
+ "certo22_3x4": "Isso! Cada uma das três frutas pode ir com qualquer um dos quatro doces: três vezes quatro, igual a doze cestas.",
+ "certo22_4x2": "Isso! Cada uma das quatro frutas pode ir com qualquer um dos dois doces: quatro vezes dois, igual a oito cestas.",
+ "certo22_4x3": "Isso! Cada uma das quatro frutas pode ir com qualquer um dos três doces: quatro vezes três, igual a doze cestas.",
+ "certo22_4x4": "Isso! Cada uma das quatro frutas pode ir com qualquer um dos quatro doces: quatro vezes quatro, igual a dezesseis cestas.",
+ "certo25_10x2": "A conta dez vezes dois, igual a vinte, foi para o seu cartaz!",
+ "certo25_10x3": "A conta dez vezes três, igual a trinta, foi para o seu cartaz!",
+ "certo25_2x10": "A conta dois vezes dez, igual a vinte, foi para o seu cartaz!",
+ "certo25_2x3": "A conta dois vezes três, igual a seis, foi para o seu cartaz!",
+ "certo25_2x5": "A conta dois vezes cinco, igual a dez, foi para o seu cartaz!",
+ "certo25_3x10": "A conta três vezes dez, igual a trinta, foi para o seu cartaz!",
+ "certo25_3x3": "A conta três vezes três, igual a nove, foi para o seu cartaz!",
+ "certo25_3x4": "A conta três vezes quatro, igual a doze, foi para o seu cartaz!",
+ "certo25_4x2": "A conta quatro vezes dois, igual a oito, foi para o seu cartaz!",
+ "certo25_4x4": "A conta quatro vezes quatro, igual a dezesseis, foi para o seu cartaz!",
+ "certo25_4x5": "A conta quatro vezes cinco, igual a vinte, foi para o seu cartaz!",
+ "certo25_5x10": "A conta cinco vezes dez, igual a cinquenta, foi para o seu cartaz!",
+ "certo25_5x2": "A conta cinco vezes dois, igual a dez, foi para o seu cartaz!",
+ "certo25_5x4": "A conta cinco vezes quatro, igual a vinte, foi para o seu cartaz!",
+ "certo2_abelha_5x4": "Muito bem! Em cada grupo há quatro abelhas, e todos têm o mesmo tanto.",
+ "certo2_bola_3x4": "Muito bem! Em cada grupo há quatro bolas, e todos têm o mesmo tanto.",
+ "certo2_bolacha_2x4": "Muito bem! Em cada grupo há quatro bolachas, e todos têm o mesmo tanto.",
+ "certo2_bolo_2x5": "Muito bem! Em cada grupo há cinco bolos, e todos têm o mesmo tanto.",
+ "certo2_cadeira_5x3": "Muito bem! Em cada grupo há três cadeiras, e todos têm o mesmo tanto.",
+ "certo2_caixa_3x5": "Muito bem! Em cada grupo há cinco caixas, e todos têm o mesmo tanto.",
+ "certo2_carro_5x2": "Muito bem! Em cada grupo há dois carrinhos, e todos têm o mesmo tanto.",
+ "certo2_estrela_4x2": "Muito bem! Em cada grupo há duas estrelas, e todos têm o mesmo tanto.",
+ "certo2_flor_4x3": "Muito bem! Em cada grupo há três flores, e todos têm o mesmo tanto.",
+ "certo2_ovo_2x3": "Muito bem! Em cada grupo há três ovos, e todos têm o mesmo tanto.",
+ "certo2_pato_4x5": "Muito bem! Em cada grupo há cinco patos, e todos têm o mesmo tanto.",
+ "certo2_peixe_4x4": "Muito bem! Em cada grupo há quatro peixes, e todos têm o mesmo tanto.",
+ "certo2_pipoca_3x3": "Muito bem! Em cada grupo há três pipocas, e todos têm o mesmo tanto.",
+ "certo2_sorvete_3x2": "Muito bem! Em cada grupo há dois sorvetes, e todos têm o mesmo tanto.",
+ "certo2_uva_2x2": "Muito bem! Em cada grupo há duas uvas, e todos têm o mesmo tanto.",
+ "certo3_2x2": "Pronto! São duas bandejas com dois em cada uma, e isso dá quatro no total.",
+ "certo3_2x3": "Pronto! São duas bandejas com três em cada uma, e isso dá seis no total.",
+ "certo3_2x4": "Pronto! São duas bandejas com quatro em cada uma, e isso dá oito no total.",
+ "certo3_2x5": "Pronto! São duas bandejas com cinco em cada uma, e isso dá dez no total.",
+ "certo3_3x2": "Pronto! São três bandejas com dois em cada uma, e isso dá seis no total.",
+ "certo3_3x3": "Pronto! São três bandejas com três em cada uma, e isso dá nove no total.",
+ "certo3_3x4": "Pronto! São três bandejas com quatro em cada uma, e isso dá doze no total.",
+ "certo3_4x2": "Pronto! São quatro bandejas com dois em cada uma, e isso dá oito no total.",
+ "certo3_4x3": "Pronto! São quatro bandejas com três em cada uma, e isso dá doze no total.",
+ "certo4_2x2": "Isso! São dois grupos de dois. Então o número dois entra na soma uma vez para cada grupo, e o total dá quatro.",
+ "certo4_2x3": "Isso! São dois grupos de três. Então o número três entra na soma uma vez para cada grupo, e o total dá seis.",
+ "certo4_2x4": "Isso! São dois grupos de quatro. Então o número quatro entra na soma uma vez para cada grupo, e o total dá oito.",
+ "certo4_2x5": "Isso! São dois grupos de cinco. Então o número cinco entra na soma uma vez para cada grupo, e o total dá dez.",
+ "certo4_3x2": "Isso! São três grupos de dois. Então o número dois entra na soma uma vez para cada grupo, e o total dá seis.",
+ "certo4_3x3": "Isso! São três grupos de três. Então o número três entra na soma uma vez para cada grupo, e o total dá nove.",
+ "certo4_3x4": "Isso! São três grupos de quatro. Então o número quatro entra na soma uma vez para cada grupo, e o total dá doze.",
+ "certo4_3x5": "Isso! São três grupos de cinco. Então o número cinco entra na soma uma vez para cada grupo, e o total dá quinze.",
+ "certo4_4x2": "Isso! São quatro grupos de dois. Então o número dois entra na soma uma vez para cada grupo, e o total dá oito.",
+ "certo4_4x3": "Isso! São quatro grupos de três. Então o número três entra na soma uma vez para cada grupo, e o total dá doze.",
+ "certo4_4x4": "Isso! São quatro grupos de quatro. Então o número quatro entra na soma uma vez para cada grupo, e o total dá dezesseis.",
+ "certo4_4x5": "Isso! São quatro grupos de cinco. Então o número cinco entra na soma uma vez para cada grupo, e o total dá vinte.",
+ "certo4_5x2": "Isso! São cinco grupos de dois. Então o número dois entra na soma uma vez para cada grupo, e o total dá dez.",
+ "certo4_5x3": "Isso! São cinco grupos de três. Então o número três entra na soma uma vez para cada grupo, e o total dá quinze.",
+ "certo4_5x4": "Isso! São cinco grupos de quatro. Então o número quatro entra na soma uma vez para cada grupo, e o total dá vinte.",
+ "certo5_2x2": "Muito bem! Quando são dois grupos de dois, escreve-se dois vezes dois.",
+ "certo5_2x3": "Muito bem! Quando são dois grupos de três, escreve-se dois vezes três.",
+ "certo5_2x4": "Muito bem! Quando são dois grupos de quatro, escreve-se dois vezes quatro.",
+ "certo5_2x5": "Muito bem! Quando são dois grupos de cinco, escreve-se dois vezes cinco.",
+ "certo5_3x2": "Muito bem! Quando são três grupos de dois, escreve-se três vezes dois.",
+ "certo5_3x3": "Muito bem! Quando são três grupos de três, escreve-se três vezes três.",
+ "certo5_3x4": "Muito bem! Quando são três grupos de quatro, escreve-se três vezes quatro.",
+ "certo5_3x5": "Muito bem! Quando são três grupos de cinco, escreve-se três vezes cinco.",
+ "certo5_4x2": "Muito bem! Quando são quatro grupos de dois, escreve-se quatro vezes dois.",
+ "certo5_4x3": "Muito bem! Quando são quatro grupos de três, escreve-se quatro vezes três.",
+ "certo5_4x4": "Muito bem! Quando são quatro grupos de quatro, escreve-se quatro vezes quatro.",
+ "certo5_4x5": "Muito bem! Quando são quatro grupos de cinco, escreve-se quatro vezes cinco.",
+ "certo5_5x2": "Muito bem! Quando são cinco grupos de dois, escreve-se cinco vezes dois.",
+ "certo5_5x3": "Muito bem! Quando são cinco grupos de três, escreve-se cinco vezes três.",
+ "certo5_5x4": "Muito bem! Quando são cinco grupos de quatro, escreve-se cinco vezes quatro.",
+ "certo6_2x2": "Isso! O dois repetido duas vezes é o mesmo que dois vezes dois.",
+ "certo6_2x3": "Isso! O três repetido duas vezes é o mesmo que dois vezes três.",
+ "certo6_2x4": "Isso! O quatro repetido duas vezes é o mesmo que dois vezes quatro.",
+ "certo6_2x5": "Isso! O cinco repetido duas vezes é o mesmo que dois vezes cinco.",
+ "certo6_3x2": "Isso! O dois repetido três vezes é o mesmo que três vezes dois.",
+ "certo6_3x3": "Isso! O três repetido três vezes é o mesmo que três vezes três.",
+ "certo6_3x4": "Isso! O quatro repetido três vezes é o mesmo que três vezes quatro.",
+ "certo6_3x5": "Isso! O cinco repetido três vezes é o mesmo que três vezes cinco.",
+ "certo6_4x2": "Isso! O dois repetido quatro vezes é o mesmo que quatro vezes dois.",
+ "certo6_4x3": "Isso! O três repetido quatro vezes é o mesmo que quatro vezes três.",
+ "certo6_4x4": "Isso! O quatro repetido quatro vezes é o mesmo que quatro vezes quatro.",
+ "certo6_4x5": "Isso! O cinco repetido quatro vezes é o mesmo que quatro vezes cinco.",
+ "certo6_5x2": "Isso! O dois repetido cinco vezes é o mesmo que cinco vezes dois.",
+ "certo6_5x3": "Isso! O três repetido cinco vezes é o mesmo que cinco vezes três.",
+ "certo6_5x4": "Isso! O quatro repetido cinco vezes é o mesmo que cinco vezes quatro.",
+ "certo7_2x2": "Isso! A voz leu dois vezes dois. É assim que se lê o sinal de vezes.",
+ "certo7_2x3": "Isso! A voz leu dois vezes três. É assim que se lê o sinal de vezes.",
+ "certo7_2x4": "Isso! A voz leu dois vezes quatro. É assim que se lê o sinal de vezes.",
+ "certo7_2x5": "Isso! A voz leu dois vezes cinco. É assim que se lê o sinal de vezes.",
+ "certo7_3x2": "Isso! A voz leu três vezes dois. É assim que se lê o sinal de vezes.",
+ "certo7_3x3": "Isso! A voz leu três vezes três. É assim que se lê o sinal de vezes.",
+ "certo7_3x4": "Isso! A voz leu três vezes quatro. É assim que se lê o sinal de vezes.",
+ "certo7_3x5": "Isso! A voz leu três vezes cinco. É assim que se lê o sinal de vezes.",
+ "certo7_4x2": "Isso! A voz leu quatro vezes dois. É assim que se lê o sinal de vezes.",
+ "certo7_4x3": "Isso! A voz leu quatro vezes três. É assim que se lê o sinal de vezes.",
+ "certo7_4x4": "Isso! A voz leu quatro vezes quatro. É assim que se lê o sinal de vezes.",
+ "certo7_4x5": "Isso! A voz leu quatro vezes cinco. É assim que se lê o sinal de vezes.",
+ "certo7_5x2": "Isso! A voz leu cinco vezes dois. É assim que se lê o sinal de vezes.",
+ "certo7_5x3": "Isso! A voz leu cinco vezes três. É assim que se lê o sinal de vezes.",
+ "certo7_5x4": "Isso! A voz leu cinco vezes quatro. É assim que se lê o sinal de vezes.",
+ "certo8_2x2": "Você escreveu certo! O dois repetido duas vezes dá quatro.",
+ "certo8_2x3": "Você escreveu certo! O três repetido duas vezes dá seis.",
+ "certo8_2x4": "Você escreveu certo! O quatro repetido duas vezes dá oito.",
+ "certo8_2x5": "Você escreveu certo! O cinco repetido duas vezes dá dez.",
+ "certo8_3x2": "Você escreveu certo! O dois repetido três vezes dá seis.",
+ "certo8_3x3": "Você escreveu certo! O três repetido três vezes dá nove.",
+ "certo8_3x4": "Você escreveu certo! O quatro repetido três vezes dá doze.",
+ "certo8_3x5": "Você escreveu certo! O cinco repetido três vezes dá quinze.",
+ "certo8_4x2": "Você escreveu certo! O dois repetido quatro vezes dá oito.",
+ "certo8_4x3": "Você escreveu certo! O três repetido quatro vezes dá doze.",
+ "certo8_4x4": "Você escreveu certo! O quatro repetido quatro vezes dá dezesseis.",
+ "certo8_4x5": "Você escreveu certo! O cinco repetido quatro vezes dá vinte.",
+ "certo8_5x2": "Você escreveu certo! O dois repetido cinco vezes dá dez.",
+ "certo8_5x3": "Você escreveu certo! O três repetido cinco vezes dá quinze.",
+ "certo8_5x4": "Você escreveu certo! O quatro repetido cinco vezes dá vinte.",
+ "certo9_2x2": "Isso! A conta dois vezes dois é igual a quatro, o mesmo resultado da soma.",
+ "certo9_2x3": "Isso! A conta dois vezes três é igual a seis, o mesmo resultado da soma.",
+ "certo9_2x4": "Isso! A conta dois vezes quatro é igual a oito, o mesmo resultado da soma.",
+ "certo9_2x5": "Isso! A conta dois vezes cinco é igual a dez, o mesmo resultado da soma.",
+ "certo9_3x2": "Isso! A conta três vezes dois é igual a seis, o mesmo resultado da soma.",
+ "certo9_3x3": "Isso! A conta três vezes três é igual a nove, o mesmo resultado da soma.",
+ "certo9_3x4": "Isso! A conta três vezes quatro é igual a doze, o mesmo resultado da soma.",
+ "certo9_3x5": "Isso! A conta três vezes cinco é igual a quinze, o mesmo resultado da soma.",
+ "certo9_4x2": "Isso! A conta quatro vezes dois é igual a oito, o mesmo resultado da soma.",
+ "certo9_4x3": "Isso! A conta quatro vezes três é igual a doze, o mesmo resultado da soma.",
+ "certo9_4x4": "Isso! A conta quatro vezes quatro é igual a dezesseis, o mesmo resultado da soma.",
+ "certo9_4x5": "Isso! A conta quatro vezes cinco é igual a vinte, o mesmo resultado da soma.",
+ "certo9_5x2": "Isso! A conta cinco vezes dois é igual a dez, o mesmo resultado da soma.",
+ "certo9_5x3": "Isso! A conta cinco vezes três é igual a quinze, o mesmo resultado da soma.",
+ "certo9_5x4": "Isso! A conta cinco vezes quatro é igual a vinte, o mesmo resultado da soma.",
+ "certomaq_10x10": "Certo! A conta dez vezes dez é igual a cem.",
+ "certomaq_10x2": "Certo! A conta dez vezes dois é igual a vinte.",
+ "certomaq_10x3": "Certo! A conta dez vezes três é igual a trinta.",
+ "certomaq_10x4": "Certo! A conta dez vezes quatro é igual a quarenta.",
+ "certomaq_10x5": "Certo! A conta dez vezes cinco é igual a cinquenta.",
+ "certomaq_10x6": "Certo! A conta dez vezes seis é igual a sessenta.",
+ "certomaq_10x7": "Certo! A conta dez vezes sete é igual a setenta.",
+ "certomaq_10x8": "Certo! A conta dez vezes oito é igual a oitenta.",
+ "certomaq_10x9": "Certo! A conta dez vezes nove é igual a noventa.",
+ "certomaq_2x10": "Certo! A conta dois vezes dez é igual a vinte.",
+ "certomaq_2x2": "Certo! A conta dois vezes dois é igual a quatro.",
+ "certomaq_2x3": "Certo! A conta dois vezes três é igual a seis.",
+ "certomaq_2x4": "Certo! A conta dois vezes quatro é igual a oito.",
+ "certomaq_2x5": "Certo! A conta dois vezes cinco é igual a dez.",
+ "certomaq_2x6": "Certo! A conta dois vezes seis é igual a doze.",
+ "certomaq_2x7": "Certo! A conta dois vezes sete é igual a catorze.",
+ "certomaq_2x8": "Certo! A conta dois vezes oito é igual a dezesseis.",
+ "certomaq_2x9": "Certo! A conta dois vezes nove é igual a dezoito.",
+ "certomaq_3x10": "Certo! A conta três vezes dez é igual a trinta.",
+ "certomaq_3x2": "Certo! A conta três vezes dois é igual a seis.",
+ "certomaq_3x3": "Certo! A conta três vezes três é igual a nove.",
+ "certomaq_3x4": "Certo! A conta três vezes quatro é igual a doze.",
+ "certomaq_3x5": "Certo! A conta três vezes cinco é igual a quinze.",
+ "certomaq_3x6": "Certo! A conta três vezes seis é igual a dezoito.",
+ "certomaq_3x7": "Certo! A conta três vezes sete é igual a vinte e um.",
+ "certomaq_3x8": "Certo! A conta três vezes oito é igual a vinte e quatro.",
+ "certomaq_3x9": "Certo! A conta três vezes nove é igual a vinte e sete.",
+ "certomaq_4x10": "Certo! A conta quatro vezes dez é igual a quarenta.",
+ "certomaq_4x2": "Certo! A conta quatro vezes dois é igual a oito.",
+ "certomaq_4x3": "Certo! A conta quatro vezes três é igual a doze.",
+ "certomaq_4x4": "Certo! A conta quatro vezes quatro é igual a dezesseis.",
+ "certomaq_4x5": "Certo! A conta quatro vezes cinco é igual a vinte.",
+ "certomaq_4x6": "Certo! A conta quatro vezes seis é igual a vinte e quatro.",
+ "certomaq_4x7": "Certo! A conta quatro vezes sete é igual a vinte e oito.",
+ "certomaq_4x8": "Certo! A conta quatro vezes oito é igual a trinta e dois.",
+ "certomaq_4x9": "Certo! A conta quatro vezes nove é igual a trinta e seis.",
+ "certomaq_5x10": "Certo! A conta cinco vezes dez é igual a cinquenta.",
+ "certomaq_5x2": "Certo! A conta cinco vezes dois é igual a dez.",
+ "certomaq_5x3": "Certo! A conta cinco vezes três é igual a quinze.",
+ "certomaq_5x4": "Certo! A conta cinco vezes quatro é igual a vinte.",
+ "certomaq_5x5": "Certo! A conta cinco vezes cinco é igual a vinte e cinco.",
+ "certomaq_5x6": "Certo! A conta cinco vezes seis é igual a trinta.",
+ "certomaq_5x7": "Certo! A conta cinco vezes sete é igual a trinta e cinco.",
+ "certomaq_5x8": "Certo! A conta cinco vezes oito é igual a quarenta.",
+ "certomaq_5x9": "Certo! A conta cinco vezes nove é igual a quarenta e cinco.",
+ "certoprob_2x10": "Resposta certa! A conta dois vezes dez é igual a vinte.",
+ "certoprob_2x5": "Resposta certa! A conta dois vezes cinco é igual a dez.",
+ "certoprob_3x10": "Resposta certa! A conta três vezes dez é igual a trinta.",
+ "certoprob_3x4": "Resposta certa! A conta três vezes quatro é igual a doze.",
+ "certoprob_3x5": "Resposta certa! A conta três vezes cinco é igual a quinze.",
+ "certoprob_4x3": "Resposta certa! A conta quatro vezes três é igual a doze.",
+ "certoprob_4x4": "Resposta certa! A conta quatro vezes quatro é igual a dezesseis.",
+ "certoprob_4x5": "Resposta certa! A conta quatro vezes cinco é igual a vinte.",
+ "certoprob_5x10": "Resposta certa! A conta cinco vezes dez é igual a cinquenta.",
+ "certoprob_5x3": "Resposta certa! A conta cinco vezes três é igual a quinze.",
+ "certoprob_5x4": "Resposta certa! A conta cinco vezes quatro é igual a vinte.",
+ "certoseq_10_10": "Muito bem! A fila é assim: dez, vinte, trinta, quarenta. De dez em dez.",
+ "certoseq_10_20": "Muito bem! A fila é assim: vinte, trinta, quarenta, cinquenta. De dez em dez.",
+ "certoseq_10_30": "Muito bem! A fila é assim: trinta, quarenta, cinquenta, sessenta. De dez em dez.",
+ "certoseq_10_40": "Muito bem! A fila é assim: quarenta, cinquenta, sessenta, setenta. De dez em dez.",
+ "certoseq_10_50": "Muito bem! A fila é assim: cinquenta, sessenta, setenta, oitenta. De dez em dez.",
+ "certoseq_2_10": "Muito bem! A fila é assim: dez, doze, catorze, dezesseis. De dois em dois.",
+ "certoseq_2_2": "Muito bem! A fila é assim: dois, quatro, seis, oito. De dois em dois.",
+ "certoseq_2_4": "Muito bem! A fila é assim: quatro, seis, oito, dez. De dois em dois.",
+ "certoseq_2_6": "Muito bem! A fila é assim: seis, oito, dez, doze. De dois em dois.",
+ "certoseq_2_8": "Muito bem! A fila é assim: oito, dez, doze, catorze. De dois em dois.",
+ "certoseq_3_12": "Muito bem! A fila é assim: doze, quinze, dezoito, vinte e um. De três em três.",
+ "certoseq_3_15": "Muito bem! A fila é assim: quinze, dezoito, vinte e um, vinte e quatro. De três em três.",
+ "certoseq_3_3": "Muito bem! A fila é assim: três, seis, nove, doze. De três em três.",
+ "certoseq_3_6": "Muito bem! A fila é assim: seis, nove, doze, quinze. De três em três.",
+ "certoseq_3_9": "Muito bem! A fila é assim: nove, doze, quinze, dezoito. De três em três.",
+ "certoseq_5_10": "Muito bem! A fila é assim: dez, quinze, vinte, vinte e cinco. De cinco em cinco.",
+ "certoseq_5_15": "Muito bem! A fila é assim: quinze, vinte, vinte e cinco, trinta. De cinco em cinco.",
+ "certoseq_5_20": "Muito bem! A fila é assim: vinte, vinte e cinco, trinta, trinta e cinco. De cinco em cinco.",
+ "certoseq_5_25": "Muito bem! A fila é assim: vinte e cinco, trinta, trinta e cinco, quarenta. De cinco em cinco.",
+ "certoseq_5_5": "Muito bem! A fila é assim: cinco, dez, quinze, vinte. De cinco em cinco.",
+ "conta_2x2": "dois vezes dois.",
+ "conta_2x3": "dois vezes três.",
+ "conta_2x4": "dois vezes quatro.",
+ "conta_2x5": "dois vezes cinco.",
+ "conta_2x6": "dois vezes seis.",
+ "conta_3x2": "três vezes dois.",
+ "conta_3x3": "três vezes três.",
+ "conta_3x4": "três vezes quatro.",
+ "conta_3x5": "três vezes cinco.",
+ "conta_3x6": "três vezes seis.",
+ "conta_4x2": "quatro vezes dois.",
+ "conta_4x3": "quatro vezes três.",
+ "conta_4x4": "quatro vezes quatro.",
+ "conta_4x5": "quatro vezes cinco.",
+ "conta_4x6": "quatro vezes seis.",
+ "conta_5x2": "cinco vezes dois.",
+ "conta_5x3": "cinco vezes três.",
+ "conta_5x4": "cinco vezes quatro.",
+ "conta_5x5": "cinco vezes cinco.",
+ "conta_5x6": "cinco vezes seis.",
+ "conta_6x2": "seis vezes dois.",
+ "conta_6x3": "seis vezes três.",
+ "conta_6x4": "seis vezes quatro.",
+ "conta_6x5": "seis vezes cinco.",
+ "conta_7x3": "sete vezes três.",
+ "dica10_0": "Olhe a conta de vezes da linha: ela diz quantas parcelas a soma tem.",
+ "dica10_1": "Conte quantas parcelas a soma tem. Esse é o primeiro número da conta.",
+ "dica10_2": "Some as parcelas da linha, uma de cada vez, e veja onde você chega.",
+ "dica18_2x2": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_2x3": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_2x4": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_2x5": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_3x2": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_3x3": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_3x4": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_3x5": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_4x2": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_4x3": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_4x4": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_4x5": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_5x2": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_5x3": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica18_5x4": "Conte primeiro quantas fileiras há, de cima para baixo. Depois conte uma fileira só, da esquerda para a direita.",
+ "dica19_2x2": "Desça duas fileiras e ande dois quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_2x3": "Desça duas fileiras e ande três quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_2x4": "Desça duas fileiras e ande quatro quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_2x5": "Desça duas fileiras e ande cinco quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_2x6": "Desça duas fileiras e ande seis quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_3x2": "Desça três fileiras e ande dois quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_3x3": "Desça três fileiras e ande três quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_3x4": "Desça três fileiras e ande quatro quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_3x5": "Desça três fileiras e ande cinco quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_3x6": "Desça três fileiras e ande seis quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_4x2": "Desça quatro fileiras e ande dois quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_4x3": "Desça quatro fileiras e ande três quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_4x4": "Desça quatro fileiras e ande quatro quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_4x5": "Desça quatro fileiras e ande cinco quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_5x2": "Desça cinco fileiras e ande dois quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_5x3": "Desça cinco fileiras e ande três quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica19_5x4": "Desça cinco fileiras e ande quatro quadradinhos para o lado. Toque no quadradinho do cantinho de baixo.",
+ "dica1_2": "Conte as bandejas, não as figuras. Uma bandeja é um grupo.",
+ "dica1_3": "Conte as bandejas, não as figuras. Uma bandeja é um grupo.",
+ "dica1_4": "Conte as bandejas, não as figuras. Uma bandeja é um grupo.",
+ "dica1_5": "Conte as bandejas, não as figuras. Uma bandeja é um grupo.",
+ "dica20": "Pense assim: girar o tapete não tira nem põe nenhuma figura. Então o total pode mudar?",
+ "dica21": "Essa cesta já está pronta. Procure o quadrado que ainda está vazio: é a fruta que ainda não encontrou aquele doce.",
+ "dica22_2x2": "Pense numa fruta só: ela pode ir com dois doces. E há duas frutas.",
+ "dica22_2x3": "Pense numa fruta só: ela pode ir com três doces. E há duas frutas.",
+ "dica22_2x4": "Pense numa fruta só: ela pode ir com quatro doces. E há duas frutas.",
+ "dica22_3x2": "Pense numa fruta só: ela pode ir com dois doces. E há três frutas.",
+ "dica22_3x3": "Pense numa fruta só: ela pode ir com três doces. E há três frutas.",
+ "dica22_3x4": "Pense numa fruta só: ela pode ir com quatro doces. E há três frutas.",
+ "dica22_4x2": "Pense numa fruta só: ela pode ir com dois doces. E há quatro frutas.",
+ "dica22_4x3": "Pense numa fruta só: ela pode ir com três doces. E há quatro frutas.",
+ "dica22_4x4": "Pense numa fruta só: ela pode ir com quatro doces. E há quatro frutas.",
+ "dica2_2": "Escolha uma bandeja só e conte o que está dentro dela. As outras têm o mesmo tanto.",
+ "dica2_3": "Escolha uma bandeja só e conte o que está dentro dela. As outras têm o mesmo tanto.",
+ "dica2_4": "Escolha uma bandeja só e conte o que está dentro dela. As outras têm o mesmo tanto.",
+ "dica2_5": "Escolha uma bandeja só e conte o que está dentro dela. As outras têm o mesmo tanto.",
+ "dica3_2": "Essa bandeja já está cheia. Cada uma leva dois, nem mais nem menos — é isso que quer dizer mesmo tanto.",
+ "dica3_3": "Essa bandeja já está cheia. Cada uma leva três, nem mais nem menos — é isso que quer dizer mesmo tanto.",
+ "dica3_4": "Essa bandeja já está cheia. Cada uma leva quatro, nem mais nem menos — é isso que quer dizer mesmo tanto.",
+ "dica3_5": "Essa bandeja já está cheia. Cada uma leva cinco, nem mais nem menos — é isso que quer dizer mesmo tanto.",
+ "dica4_2x2": "Olhe quantas bandejas há: duas. Então o número dois tem que aparecer duas vezes na soma.",
+ "dica4_2x3": "Olhe quantas bandejas há: duas. Então o número três tem que aparecer duas vezes na soma.",
+ "dica4_2x4": "Olhe quantas bandejas há: duas. Então o número quatro tem que aparecer duas vezes na soma.",
+ "dica4_2x5": "Olhe quantas bandejas há: duas. Então o número cinco tem que aparecer duas vezes na soma.",
+ "dica4_3x2": "Olhe quantas bandejas há: três. Então o número dois tem que aparecer três vezes na soma.",
+ "dica4_3x3": "Olhe quantas bandejas há: três. Então o número três tem que aparecer três vezes na soma.",
+ "dica4_3x4": "Olhe quantas bandejas há: três. Então o número quatro tem que aparecer três vezes na soma.",
+ "dica4_3x5": "Olhe quantas bandejas há: três. Então o número cinco tem que aparecer três vezes na soma.",
+ "dica4_4x2": "Olhe quantas bandejas há: quatro. Então o número dois tem que aparecer quatro vezes na soma.",
+ "dica4_4x3": "Olhe quantas bandejas há: quatro. Então o número três tem que aparecer quatro vezes na soma.",
+ "dica4_4x4": "Olhe quantas bandejas há: quatro. Então o número quatro tem que aparecer quatro vezes na soma.",
+ "dica4_4x5": "Olhe quantas bandejas há: quatro. Então o número cinco tem que aparecer quatro vezes na soma.",
+ "dica4_5x2": "Olhe quantas bandejas há: cinco. Então o número dois tem que aparecer cinco vezes na soma.",
+ "dica4_5x3": "Olhe quantas bandejas há: cinco. Então o número três tem que aparecer cinco vezes na soma.",
+ "dica4_5x4": "Olhe quantas bandejas há: cinco. Então o número quatro tem que aparecer cinco vezes na soma.",
+ "dica5_2x2": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_2x3": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_2x4": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_2x5": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_3x2": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_3x3": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_3x4": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_3x5": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_4x2": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_4x3": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_4x4": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_4x5": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_5x2": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_5x3": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica5_5x4": "O primeiro número é quantos grupos há. O segundo é quanto tem em cada um.",
+ "dica6_2x2": "Conte quantas parcelas a soma tem: são duas. Esse é o primeiro número da conta de vezes.",
+ "dica6_2x3": "Conte quantas parcelas a soma tem: são duas. Esse é o primeiro número da conta de vezes.",
+ "dica6_2x4": "Conte quantas parcelas a soma tem: são duas. Esse é o primeiro número da conta de vezes.",
+ "dica6_2x5": "Conte quantas parcelas a soma tem: são duas. Esse é o primeiro número da conta de vezes.",
+ "dica6_3x2": "Conte quantas parcelas a soma tem: são três. Esse é o primeiro número da conta de vezes.",
+ "dica6_3x3": "Conte quantas parcelas a soma tem: são três. Esse é o primeiro número da conta de vezes.",
+ "dica6_3x4": "Conte quantas parcelas a soma tem: são três. Esse é o primeiro número da conta de vezes.",
+ "dica6_3x5": "Conte quantas parcelas a soma tem: são três. Esse é o primeiro número da conta de vezes.",
+ "dica6_4x2": "Conte quantas parcelas a soma tem: são quatro. Esse é o primeiro número da conta de vezes.",
+ "dica6_4x3": "Conte quantas parcelas a soma tem: são quatro. Esse é o primeiro número da conta de vezes.",
+ "dica6_4x4": "Conte quantas parcelas a soma tem: são quatro. Esse é o primeiro número da conta de vezes.",
+ "dica6_4x5": "Conte quantas parcelas a soma tem: são quatro. Esse é o primeiro número da conta de vezes.",
+ "dica6_5x2": "Conte quantas parcelas a soma tem: são cinco. Esse é o primeiro número da conta de vezes.",
+ "dica6_5x3": "Conte quantas parcelas a soma tem: são cinco. Esse é o primeiro número da conta de vezes.",
+ "dica6_5x4": "Conte quantas parcelas a soma tem: são cinco. Esse é o primeiro número da conta de vezes.",
+ "dica7_2x2": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_2x3": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_2x4": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_2x5": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_3x2": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_3x3": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_3x4": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_3x5": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_4x2": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_4x3": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_4x4": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_4x5": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_5x2": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_5x3": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica7_5x4": "Toque no alto-falante e escute de novo. O primeiro número que a voz diz é o primeiro da conta.",
+ "dica8_2x2": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_2x3": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_2x4": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_2x5": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_3x2": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_3x3": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_3x4": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_3x5": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_4x2": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_4x3": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_4x4": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_4x5": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_5x2": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_5x3": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica8_5x4": "Some devagar, um grupo de cada vez, e vá guardando o total na cabeça.",
+ "dica9_2x2": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_2x3": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_2x4": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_2x5": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_3x2": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_3x3": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_3x4": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_3x5": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_4x2": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_4x3": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_4x4": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_4x5": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_5x2": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_5x3": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dica9_5x4": "É a mesma cena da folha de antes. Se a soma deu um número, a conta de vezes dá o mesmo número.",
+ "dicamaq_10x10": "Se ficar difícil, some: o dez repetido dez vezes.",
+ "dicamaq_10x2": "Se ficar difícil, some: o dez repetido duas vezes.",
+ "dicamaq_10x3": "Se ficar difícil, some: o dez repetido três vezes.",
+ "dicamaq_10x4": "Se ficar difícil, some: o dez repetido quatro vezes.",
+ "dicamaq_10x5": "Se ficar difícil, some: o dez repetido cinco vezes.",
+ "dicamaq_10x6": "Se ficar difícil, some: o dez repetido seis vezes.",
+ "dicamaq_10x7": "Se ficar difícil, some: o dez repetido sete vezes.",
+ "dicamaq_10x8": "Se ficar difícil, some: o dez repetido oito vezes.",
+ "dicamaq_10x9": "Se ficar difícil, some: o dez repetido nove vezes.",
+ "dicamaq_2x10": "Se ficar difícil, some: o dois repetido dez vezes.",
+ "dicamaq_2x2": "Se ficar difícil, some: o dois repetido duas vezes.",
+ "dicamaq_2x3": "Se ficar difícil, some: o dois repetido três vezes.",
+ "dicamaq_2x4": "Se ficar difícil, some: o dois repetido quatro vezes.",
+ "dicamaq_2x5": "Se ficar difícil, some: o dois repetido cinco vezes.",
+ "dicamaq_2x6": "Se ficar difícil, some: o dois repetido seis vezes.",
+ "dicamaq_2x7": "Se ficar difícil, some: o dois repetido sete vezes.",
+ "dicamaq_2x8": "Se ficar difícil, some: o dois repetido oito vezes.",
+ "dicamaq_2x9": "Se ficar difícil, some: o dois repetido nove vezes.",
+ "dicamaq_3x10": "Se ficar difícil, some: o três repetido dez vezes.",
+ "dicamaq_3x2": "Se ficar difícil, some: o três repetido duas vezes.",
+ "dicamaq_3x3": "Se ficar difícil, some: o três repetido três vezes.",
+ "dicamaq_3x4": "Se ficar difícil, some: o três repetido quatro vezes.",
+ "dicamaq_3x5": "Se ficar difícil, some: o três repetido cinco vezes.",
+ "dicamaq_3x6": "Se ficar difícil, some: o três repetido seis vezes.",
+ "dicamaq_3x7": "Se ficar difícil, some: o três repetido sete vezes.",
+ "dicamaq_3x8": "Se ficar difícil, some: o três repetido oito vezes.",
+ "dicamaq_3x9": "Se ficar difícil, some: o três repetido nove vezes.",
+ "dicamaq_4x10": "Se ficar difícil, some: o quatro repetido dez vezes.",
+ "dicamaq_4x2": "Se ficar difícil, some: o quatro repetido duas vezes.",
+ "dicamaq_4x3": "Se ficar difícil, some: o quatro repetido três vezes.",
+ "dicamaq_4x4": "Se ficar difícil, some: o quatro repetido quatro vezes.",
+ "dicamaq_4x5": "Se ficar difícil, some: o quatro repetido cinco vezes.",
+ "dicamaq_4x6": "Se ficar difícil, some: o quatro repetido seis vezes.",
+ "dicamaq_4x7": "Se ficar difícil, some: o quatro repetido sete vezes.",
+ "dicamaq_4x8": "Se ficar difícil, some: o quatro repetido oito vezes.",
+ "dicamaq_4x9": "Se ficar difícil, some: o quatro repetido nove vezes.",
+ "dicamaq_5x10": "Se ficar difícil, some: o cinco repetido dez vezes.",
+ "dicamaq_5x2": "Se ficar difícil, some: o cinco repetido duas vezes.",
+ "dicamaq_5x3": "Se ficar difícil, some: o cinco repetido três vezes.",
+ "dicamaq_5x4": "Se ficar difícil, some: o cinco repetido quatro vezes.",
+ "dicamaq_5x5": "Se ficar difícil, some: o cinco repetido cinco vezes.",
+ "dicamaq_5x6": "Se ficar difícil, some: o cinco repetido seis vezes.",
+ "dicamaq_5x7": "Se ficar difícil, some: o cinco repetido sete vezes.",
+ "dicamaq_5x8": "Se ficar difícil, some: o cinco repetido oito vezes.",
+ "dicamaq_5x9": "Se ficar difícil, some: o cinco repetido nove vezes.",
+ "dicaprob_2x10": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_2x5": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_3x10": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_3x4": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_3x5": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_4x3": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_4x4": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_4x5": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_5x10": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_5x3": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaprob_5x4": "Procure no problema os dois números: quantos grupos e quanto tem em cada um. Depois multiplique os dois.",
+ "dicaseq_10": "Comece pelo menor e vá somando dez a cada passo.",
+ "dicaseq_2": "Comece pelo menor e vá somando dois a cada passo.",
+ "dicaseq_3": "Comece pelo menor e vá somando três a cada passo.",
+ "dicaseq_5": "Comece pelo menor e vá somando cinco a cada passo.",
+ "escreva": "Escreva o número.",
+ "fim": "Você chegou ao fim do Armazém do Mesmo Tanto! Agora você sabe que toda multiplicação é uma soma de parcelas iguais. Olhe o seu cartaz ali embaixo.",
+ "folhaPronta": "Folha pronta! Pode virar a página.",
+ "leitura_2x2": "dois vezes dois é igual a quatro.",
+ "leitura_2x3": "dois vezes três é igual a seis.",
+ "leitura_2x4": "dois vezes quatro é igual a oito.",
+ "leitura_2x5": "dois vezes cinco é igual a dez.",
+ "leitura_2x6": "dois vezes seis é igual a doze.",
+ "leitura_3x2": "três vezes dois é igual a seis.",
+ "leitura_3x3": "três vezes três é igual a nove.",
+ "leitura_3x4": "três vezes quatro é igual a doze.",
+ "leitura_3x5": "três vezes cinco é igual a quinze.",
+ "leitura_3x6": "três vezes seis é igual a dezoito.",
+ "leitura_4x2": "quatro vezes dois é igual a oito.",
+ "leitura_4x3": "quatro vezes três é igual a doze.",
+ "leitura_4x4": "quatro vezes quatro é igual a dezesseis.",
+ "leitura_4x5": "quatro vezes cinco é igual a vinte.",
+ "leitura_4x6": "quatro vezes seis é igual a vinte e quatro.",
+ "leitura_5x2": "cinco vezes dois é igual a dez.",
+ "leitura_5x3": "cinco vezes três é igual a quinze.",
+ "leitura_5x4": "cinco vezes quatro é igual a vinte.",
+ "leitura_5x5": "cinco vezes cinco é igual a vinte e cinco.",
+ "leitura_5x6": "cinco vezes seis é igual a trinta.",
+ "leitura_6x2": "seis vezes dois é igual a doze.",
+ "leitura_6x3": "seis vezes três é igual a dezoito.",
+ "leitura_6x4": "seis vezes quatro é igual a vinte e quatro.",
+ "leitura_6x5": "seis vezes cinco é igual a trinta.",
+ "leitura_7x3": "sete vezes três é igual a vinte e um.",
+ "ligue": "Agora toque na conta de vezes que diz a mesma coisa.",
+ "novoCaderno": "Caderno novo! As contas mudaram.",
+ "num_10": "dez.",
+ "num_100": "cem.",
+ "num_11": "onze.",
+ "num_110": "110.",
+ "num_12": "doze.",
+ "num_13": "treze.",
+ "num_14": "catorze.",
+ "num_15": "quinze.",
+ "num_16": "dezesseis.",
+ "num_17": "dezessete.",
+ "num_18": "dezoito.",
+ "num_19": "dezenove.",
+ "num_2": "dois.",
+ "num_20": "vinte.",
+ "num_21": "vinte e um.",
+ "num_22": "vinte e dois.",
+ "num_24": "vinte e quatro.",
+ "num_25": "vinte e cinco.",
+ "num_27": "vinte e sete.",
+ "num_28": "vinte e oito.",
+ "num_3": "três.",
+ "num_30": "trinta.",
+ "num_32": "trinta e dois.",
+ "num_33": "trinta e três.",
+ "num_35": "trinta e cinco.",
+ "num_36": "trinta e seis.",
+ "num_4": "quatro.",
+ "num_40": "quarenta.",
+ "num_44": "quarenta e quatro.",
+ "num_45": "quarenta e cinco.",
+ "num_5": "cinco.",
+ "num_50": "cinquenta.",
+ "num_55": "cinquenta e cinco.",
+ "num_6": "seis.",
+ "num_60": "sessenta.",
+ "num_7": "sete.",
+ "num_70": "setenta.",
+ "num_8": "oito.",
+ "num_80": "oitenta.",
+ "num_9": "nove.",
+ "num_90": "noventa.",
+ "op_mais": "Fica com mais.",
+ "op_menos": "Fica com menos.",
+ "op_mesmo": "Fica o mesmo tanto.",
+ "p10enun": "Preencha a tabela. Uma casinha de cada linha está vazia.",
+ "p11enun": "A máquina multiplica por dois. O que sai?",
+ "p12enun": "A máquina multiplica por cinco. O que sai?",
+ "p13enun": "A máquina multiplica por dez. O que sai?",
+ "p14enun": "A máquina multiplica por três. O que sai?",
+ "p15enun": "A máquina multiplica por quatro. O que sai?",
+ "p16enun": "Toque nos números na ordem, do menor para o maior.",
+ "p17enun": "Toque nos números na ordem, do menor para o maior.",
+ "p18enun": "Conte as fileiras e quantos tem em cada uma. Qual é a conta?",
+ "p19enun": "Pinte na malha o tapete que o pedido manda. Toque num quadradinho.",
+ "p1enun": "Olhe a prateleira. Quantos grupos você vê?",
+ "p20enun": "Se eu girar o tapete, o total vai mudar? Aposte primeiro!",
+ "p21enun": "Cada cesta leva uma fruta e um doce. Ache a cesta que falta.",
+ "p22enun": "Quantas cestas diferentes dá para montar? Escreva.",
+ "p23enun": "Leia, ou ouça, o problema e escreva a resposta.",
+ "p24enun": "Leia, ou ouça, o problema e escreva a resposta.",
+ "p25enun": "Toque nas contas que você quer no seu cartaz. Ele fica guardado no fim.",
+ "p2enun": "Agora olhe dentro de um grupo. Quantos tem em cada um?",
+ "p3enun": "Ponha o mesmo tanto em cada bandeja. Puxe as figuras.",
+ "p4enun": "Qual soma conta o que está na prateleira?",
+ "p5enun": "A mesma prateleira, agora em conta de vezes. Qual é?",
+ "p6enun": "Ligue cada soma à conta de vezes que diz a mesma coisa.",
+ "p7enun": "Ouça e ache a conta que a voz leu.",
+ "p8enun": "Some as parcelas iguais e escreva o total.",
+ "p9enun": "A mesma cena. Agora escreva o total da conta de vezes.",
+ "prob23_0_4x5": "O seu Antônio guardou 4 caixas de ovos. Em cada caixa cabem 5 ovos. Quantos ovos ele guardou?",
+ "prob23_1_3x4": "Na prateleira há 3 bandejas. Cada bandeja tem 4 bolos. Quantos bolos há na prateleira?",
+ "prob23_2_5x10": "A dona Rita fez 5 pacotes de bolachas. Em cada pacote pôs 10 bolachas. Quantas bolachas ela fez?",
+ "prob23_3_2x10": "O armazém recebeu 2 engradados de laranjas. Cada engradado tem 10 laranjas. Quantas laranjas chegaram?",
+ "prob23_4_5x3": "São 5 cestas de maçãs, com 3 maçãs em cada cesta. Quantas maçãs são ao todo?",
+ "prob23_5_4x4": "Cada saquinho leva 4 bolachas. O Beto encheu 4 saquinhos. Quantas bolachas ele usou?",
+ "prob23_6_3x10": "Há 3 caixas de sorvete e cada caixa tem 10 sorvetes. Quantos sorvetes há no freezer?",
+ "prob23_7_2x5": "O armazém arrumou 2 fileiras de bolas, com 5 bolas em cada fileira. Quantas bolas arrumou?",
+ "prob24_0_4x3": "No pátio do armazém as cadeiras estão em 4 fileiras, com 3 cadeiras em cada fileira. Quantas cadeiras há?",
+ "prob24_1_5x4": "O piso da entrada tem 5 fileiras de 4 quadradinhos. Quantos quadradinhos tem o piso?",
+ "prob24_2_3x5": "A vitrine tem 3 prateleiras e cada uma cabe 5 potes de pipoca. Quantos potes cabem na vitrine?",
+ "prob24_3_3x4": "A cesta do armazém leva 1 fruta e 1 doce. Há 3 frutas e 4 doces. Quantas cestas diferentes dá para montar?",
+ "prob24_4_2x5": "O lanche tem 2 sucos e 5 salgados para escolher. Quantos lanches diferentes dá para montar, com 1 suco e 1 salgado?",
+ "prob24_5_4x5": "As caixas do depósito estão empilhadas em 4 fileiras de 5 caixas. Quantas caixas há no depósito?",
+ "prob24_6_4x3": "A festa terá 1 bolo e 1 suco por mesa. Há 4 sabores de bolo e 3 sabores de suco. Quantas combinações diferentes há?",
+ "prob24_7_2x10": "O mural tem 2 fileiras com 10 desenhos em cada fileira. Quantos desenhos há no mural?",
+ "quase": "Quase! Olhe de novo e tente outra vez.",
+ "soma_2x2": "dois, mais dois.",
+ "soma_2x3": "dois, mais dois, mais dois.",
+ "soma_2x4": "dois, mais dois, mais dois, mais dois.",
+ "soma_2x5": "dois, mais dois, mais dois, mais dois, mais dois.",
+ "soma_2x6": "dois, mais dois, mais dois, mais dois, mais dois, mais dois.",
+ "soma_3x2": "três, mais três.",
+ "soma_3x3": "três, mais três, mais três.",
+ "soma_3x4": "três, mais três, mais três, mais três.",
+ "soma_3x5": "três, mais três, mais três, mais três, mais três.",
+ "soma_3x6": "três, mais três, mais três, mais três, mais três, mais três.",
+ "soma_4x2": "quatro, mais quatro.",
+ "soma_4x3": "quatro, mais quatro, mais quatro.",
+ "soma_4x4": "quatro, mais quatro, mais quatro, mais quatro.",
+ "soma_4x5": "quatro, mais quatro, mais quatro, mais quatro, mais quatro.",
+ "soma_4x6": "quatro, mais quatro, mais quatro, mais quatro, mais quatro, mais quatro.",
+ "soma_5x2": "cinco, mais cinco.",
+ "soma_5x3": "cinco, mais cinco, mais cinco.",
+ "soma_5x4": "cinco, mais cinco, mais cinco, mais cinco.",
+ "soma_5x5": "cinco, mais cinco, mais cinco, mais cinco, mais cinco.",
+ "soma_6x2": "seis, mais seis.",
+ "soma_6x3": "seis, mais seis, mais seis.",
+ "soma_6x4": "seis, mais seis, mais seis, mais seis.",
+ "vozOn": "Narração ligada!"
+};
+/*FALAS-FIM*/
+/*SILMAP-INI*/var SILMAP = {};/*SILMAP-FIM*/
+/*VOZOK-INI*/var VOZOK = {"f74wk3": 1, "dv43qt": 1, "1toe06t": 1, "1p13kec": 1, "172wr0i": 1, "1olw5gn": 1, "3dwfsp": 1, "u1s0yn": 1, "uf6tcn": 1, "mc6smu": 1, "rx3b0f": 1, "v9o3ca": 1, "p4iegb": 1, "10ey66o": 1, "vgl4gn": 1, "94vgzv": 1, "1sph7yu": 1, "5ue9na": 1, "1sw4p3": 1, "egopz5": 1, "1e734g4": 1, "wfc8d6": 1, "1dvo7do": 1, "1l8gf1w": 1, "1843bcl": 1, "9wis70": 1, "1dzibc9": 1, "19rq888": 1, "12yppw3": 1, "gtfodw": 1, "1xc2154": 1, "1usfbij": 1, "py1yzp": 1, "10bqfbb": 1, "hfirph": 1, "9rbz3i": 1, "rnz9tj": 1, "zpvcnb": 1, "x6v9hu": 1, "yaai8u": 1, "tlaygw": 1, "4fq839": 1, "1whxiq": 1, "njbsgk": 1, "12ellg1": 1, "1qeaa1j": 1, "4fmz32": 1, "1swi3wx": 1, "10k932u": 1, "age6ug": 1, "1fn67f5": 1, "semxl2": 1, "10jmvux": 1, "82ov8n": 1, "1f1zkoy": 1, "130ljb1": 1, "1gjoqap": 1, "s4p99f": 1, "1d0qk5x": 1, "1ptdyvh": 1, "1lcg31s": 1, "1ifty00": 1, "1bi0fvk": 1, "2vvwlw": 1, "3i04o5": 1, "r5xd6r": 1, "1xg4qms": 1, "1gfea3w": 1, "zac739": 1, "3emacs": 1, "1fmrj4k": 1, "mizg5w": 1, "14vdu16": 1, "2oq2k0": 1, "p6l3ao": 1, "i40069": 1, "1tc3twi": 1, "ym6nr0": 1, "l02eoq": 1, "agybgz": 1, "kuaou2": 1, "qlcle7": 1, "14i5c1": 1, "1oecg57": 1, "1yp748x": 1, "1bdo3t": 1, "pkwfex": 1, "1gxxh8b": 1, "kh3ad5": 1, "ubsbvw": 1, "mhn72j": 1, "1vknl6y": 1, "1he8zpr": 1, "15j5pdy": 1, "b4mw9": 1, "s77mgf": 1, "formps": 1, "mi4337": 1, "eg1l2h": 1, "ann67d": 1, "rjb9nt": 1, "ugdatx": 1, "10ol8ws": 1, "1xtypn8": 1, "tkjabm": 1, "mplukm": 1, "1wlykx9": 1, "187qn6q": 1, "u6ql1w": 1, "1ofuxea": 1, "3rj1ta": 1, "1o64w49": 1, "buovzr": 1, "ou12s5": 1, "d3jqmv": 1, "oqu21x": 1, "1tnwl79": 1, "qccf5s": 1, "15vj7r": 1, "iabeww": 1, "1pkkh4": 1, "1jbvwtk": 1, "oi84rd": 1, "1s98e8v": 1, "13awakm": 1, "1s84uw": 1, "br8rge": 1, "1k6q1ue": 1, "1vkrzd0": 1, "1r27kb1": 1, "19u0us8": 1, "1fn8cah": 1, "1vnmxom": 1, "13kvr41": 1, "8eaxr1": 1, "1l2v0jl": 1, "1qxtatd": 1, "gjbxtt": 1, "sn1p4x": 1, "1tqvcld": 1, "11xl5s1": 1, "6uxt1d": 1, "1ju1qo1": 1, "1e1nk75": 1, "9mq85d": 1, "cbefk1": 1, "ft123l": 1, "16tx8zl": 1, "v02h6p": 1, "19ebmht": 1, "12me323": 1, "cxeewr": 1, "1hrc98b": 1, "dw4tmj": 1, "1kdu6sp": 1, "pk42jt": 1, "1a9qr6x": 1, "dzwj3d": 1, "1pots5l": 1, "16fpr9l": 1, "1k2ar0p": 1, "1v5tnnt": 1, "9l6621": 1, "1e9erhl": 1, "ogwui1": 1, "v4euae": 1, "1dssa60": 1, "4rc0i3": 1, "l60pkf": 1, "5oit4o": 1, "glagwm": 1, "aiuht1": 1, "och94x": 1, "5gz60b": 1, "aq6z9h": 1, "fncza": 1, "m7bilu": 1, "1k7egpb": 1, "6okkf5": 1, "1lwybwy": 1, "1l3c1n2": 1, "aqcqu8": 1, "1f2kide": 1, "19lykm8": 1, "1twqagi": 1, "1ajopqa": 1, "t7wsfr": 1, "1u2ckrf": 1, "15y3dg0": 1, "1d4j853": 1, "1w1vyxd": 1, "lw7b04": 1, "1o9g8wi": 1, "1vpmsxn": 1, "skpdys": 1, "1dj1az": 1, "18s6f05": 1, "klmenr": 1, "1yhp5kl": 1, "2llh4l": 1, "e2x18l": 1, "82lr5c": 1, "1a5hlek": 1, "17lxw7r": 1, "z02mj4": 1, "1o5hz7a": 1, "fug0sz": 1, "1x4w8gl": 1, "4f5tks": 1, "eol9gz": 1, "1f3aft": 1, "xrkcmw": 1, "g9xote": 1, "1acvyq4": 1, "ncnu0v": 1, "lmou25": 1, "1ybsowi": 1, "3j2lzs": 1, "1feqd6a": 1, "1ucvph4": 1, "xhbdz2": 1, "v2vw0g": 1, "1p4jys2": 1, "dv4ea8": 1, "tln9p7": 1, "i1nmc0": 1, "vvnxbz": 1, "po9huf": 1, "zgjici": 1, "1dh4x5c": 1, "b1vnxc": 1, "73l16d": 1, "1vn967t": 1, "uo4cdj": 1, "5wcal3": 1, "z5k4e1": 1, "1wkaqhp": 1, "hi8w3w": 1, "rjbjhu": 1, "194dj4l": 1, "1mbcssz": 1, "1hci33q": 1, "c2ddkr": 1, "1re0mtd": 1, "g401kz": 1, "1ikvgr5": 1, "bkkvlr": 1, "zcw33k": 1, "7jc6qh": 1, "1yi91sm": 1, "13221zz": 1, "1d4gyq": 1, "qi6fc4": 1, "80ptym": 1, "104osvg": 1, "dmv9mz": 1, "1nc7yeb": 1, "ozjesx": 1, "8mexom": 1, "14gs622": 1, "gkak2u": 1, "zitam8": 1, "187bv9h": 1, "1my5pm4": 1, "1ucqzpm": 1, "865xlx": 1, "ofqfoy": 1, "1i4jsqf": 1, "l48apr": 1, "725q7r": 1, "1p2t236": 1, "vovfpq": 1, "1y0cp14": 1, "1j77a4y": 1, "1942jwq": 1, "1xik5ci": 1, "171a4uf": 1, "f4zn6i": 1, "6f6rmp": 1, "1gkda76": 1, "176s7xk": 1, "1byyqm": 1, "1ln1ki9": 1, "owlcok": 1, "gyg8cd": 1, "iw8t23": 1, "nzhm5w": 1, "oalasa": 1, "1ayel2h": 1, "4kfygd": 1, "o4w3e1": 1, "1scnr2y": 1, "1sn9fhw": 1, "16wlvd3": 1, "1ymi877": 1, "1sv99tz": 1, "h9c689": 1, "gy2s6f": 1, "1fb7yok": 1, "4ffdf4": 1, "h173o4": 1, "tqjitp": 1, "tfm9pf": 1, "1idn26o": 1, "1k10oms": 1, "td3ff4": 1, "1qff0cp": 1, "1q45mav": 1, "frz68k": 1, "3cnu0g": 1, "unxwp8": 1, "13mdqd0": 1, "jqo2un": 1, "1r5c8jm": 1, "qew674": 1, "f7w0a3": 1, "14onlol": 1, "12kfura": 1, "1sx0iqa": 1, "q34jg6": 1, "1jkeaf": 1, "18wb56h": 1, "1xonlca": 1, "1o927se": 1, "jdchxm": 1, "1g0gutg": 1, "1jk0fvu": 1, "mtg1i1": 1, "w97al9": 1, "1thaav4": 1, "1am2wvi": 1, "af7cil": 1, "mc8b4x": 1, "c9jh7s": 1, "wh47js": 1, "8yuva2": 1, "k41dis": 1, "j7a1xj": 1, "12hc8km": 1, "91kibs": 1, "1p0694r": 1, "l1lg8l": 1, "rhj1wb": 1, "6utr54": 1, "1vltjzg": 1, "12duwtl": 1, "mn9xtz": 1, "whyqr8": 1, "1jj9plc": 1, "1ynb0jn": 1, "59poj1": 1, "7unxwe": 1, "lbwfve": 1, "ut1byb": 1, "18c5mb1": 1, "p9djvi": 1, "1bno1wa": 1, "15yovhf": 1, "y3o7il": 1, "ylqzwe": 1, "hvtqsa": 1, "fcprj7": 1, "1b9h8b1": 1, "7n2rdq": 1, "1g4cvbj": 1, "1plywwn": 1, "wzbsdn": 1, "op7qzc": 1, "1mpv3w": 1, "jv14j": 1, "bgegyv": 1, "pde9m2": 1, "xd2vl0": 1, "185ucik": 1, "18lyg80": 1, "1sgav0z": 1, "1tpkmyf": 1, "r06ys3": 1, "1p8xcns": 1, "8xoxdu": 1, "12mdv0t": 1, "1c9tpke": 1, "cubweu": 1, "ak5uei": 1, "cffiqh": 1, "11z7kal": 1, "1yj2zyx": 1, "1lshb6a": 1, "lsjaiw": 1, "qp30p3": 1, "oicr28": 1, "u4ptk": 1, "iioxac": 1, "og04tz": 1, "5r92oj": 1, "tdwq5z": 1, "r8z1a4": 1, "1cwego6": 1, "1u7cox5": 1, "dmea37": 1, "wpg897": 1, "1co85iv": 1, "9jfklg": 1, "1s2gpts": 1, "1ugx538": 1, "1g4gw9b": 1, "186csk5": 1, "1wvwsii": 1, "1kl9pef": 1, "s3n11r": 1, "8zd3jn": 1, "1oubxog": 1, "yncu10": 1, "td4wu8": 1, "xa9aq3": 1, "he09g1": 1, "1kacv2": 1, "1yn1s8y": 1, "19jpx6o": 1, "10sug3u": 1, "vriuec": 1, "1ijabg3": 1, "zninxs": 1, "17wihhs": 1, "16gbegx": 1, "fvpt1i": 1, "1ium3ag": 1, "22he0a": 1, "1b7tvvs": 1, "twez37": 1, "1bhb31k": 1, "1haono8": 1, "uueost": 1, "1jf7ltt": 1, "1032wrj": 1, "1bft0lm": 1, "cwym3x": 1, "125itij": 1, "roikum": 1, "1shah4z": 1, "13gs6tk": 1, "zaonc1": 1, "mm3esu": 1, "sxho9z": 1, "bagihm": 1, "1vg24w3": 1, "3ihg1r": 1, "1mrglkz": 1, "nszinu": 1, "1by623z": 1, "1wb5p8a": 1, "ql8gbb": 1, "yiruog": 1, "yizxz4": 1, "2zvhrp": 1, "yhvph7": 1, "2pujmn": 1, "sg62mv": 1, "1vklm8v": 1, "1c0chp3": 1, "1i3gyju": 1, "1i3gpup": 1, "xrz9al": 1, "1lt4i4n": 1, "2puaqi": 1, "wrtkbv": 1, "3etfiu": 1, "l6d4sf": 1, "ajsf4y": 1, "1o61tvq": 1, "li8cyx": 1, "lf6703": 1, "30fz5g": 1, "fhc5tr": 1, "1s2biy3": 1, "1rr7u85": 1, "1nurj6a": 1, "1rwx1py": 1, "1bv29l3": 1, "1mmiwle": 1, "qtch7": 1, "gilfov": 1, "pkns3n": 1, "7ow2gl": 1, "p1ceoo": 1, "38fthj": 1, "evr7s3": 1, "38fiq4": 1, "ku2mhj": 1, "2zw63a": 1, "lui1mv": 1, "2z80nt": 1, "1qickrm": 1, "11esbyp": 1, "qyefh9": 1, "1yenr5c": 1, "1yyvws9": 1, "1ihqejw": 1, "jzoo5x": 1, "drxheu": 1, "1fcjvgi": 1, "qz9swh": 1, "b1g6p2": 1, "e0rm8w": 1, "e2s2ez": 1, "9ujwjd": 1, "19lgu3b": 1, "1cf0t0w": 1, "hu90o6": 1, "19rkeyt": 1, "w16c6t": 1, "vjbgo": 1, "vqdwk4": 1, "1vcq7lj": 1, "zyipck": 1, "xjq40g": 1, "1kpy5is": 1, "19wdxsb": 1, "1mc739w": 1, "18z3gmn": 1, "1fgags6": 1, "1pr2r6b": 1, "z4w7ry": 1, "tttq22": 1, "1typx1q": 1, "iyzm59": 1, "l7nasz": 1, "9jxyog": 1, "u2whh0": 1, "psuarm": 1, "xu6c6e": 1, "1bo5z0v": 1, "zd0kte": 1, "cvky0l": 1, "2k8v2a": 1, "vt4kup": 1, "a0yrn5": 1, "fbet8a": 1, "ri9tjl": 1, "o1g8pm": 1, "1jua181": 1, "or14vl": 1, "1tyuo9g": 1, "r91gep": 1, "11tsbxw": 1, "7483ht": 1, "1k20k41": 1, "2ckg93": 1, "1mlp0cx": 1, "1eg0dqf": 1, "1t2m2q9": 1, "1f6jmdt": 1, "1tdp5s3": 1, "da82vl": 1, "3n2vib": 1, "19ib8b5": 1, "128hjrb": 1, "1iqp15d": 1, "swkns7": 1};/*VOZOK-FIM*/
+
+/* ---------- o nome de cada figura, para o texto alternativo ----------
+   ⚠️ Aqui NAO ha sílabas: este caderno é de multiplicação, e a lista de
+   sílabas que veio no clone era conteúdo da atividade de origem (uma das
+   armadilhas do `_padrao/CLONAR-MOTOR.md`: o pedaço não dá erro nenhum, só
+   fica mentindo dentro do arquivo). */
+var NOMEFIG = {
+ maca: "maçã", banana: "banana", laranja: "laranja", uva: "uva", ovo: "ovo",
+ bolacha: "bolacha", bolo: "bolo", sorvete: "sorvete",
+ pipoca: "pipoca", bola: "bola", estrela: "estrela",
+ flor: "flor", peixe: "peixe", pato: "pato", carro: "carrinho",
+ cadeira: "cadeira", abelha: "abelha", borboleta: "borboleta",
+ bandeja: "bandeja", caixa: "caixa", trofeu: "troféu"
+};
+function esc(w){ return NOMEFIG[w] || String(w); }
+/* ⚠️ A MARCA DE VERSÃO NA FIGURA (set/2026, defeito que chegou ao Marcos).
+   Quando eu troco uma figura, o NOME do arquivo continua o mesmo — e o navegador
+   dele serve a cópia velha do cache. Ele viu preto na alça da xícara numa figura
+   que no repositório já estava limpa. Não adianta consertar o desenho se a
+   criança continua recebendo o antigo: subir o VIMG obriga o navegador a buscar
+   tudo de novo. REGRA: mexeu em figura, sobe o VIMG no mesmo commit. */
+var VIMG = 2;
+/* ⚠️⚠️ `draggable="false"` NÃO É DETALHE (set/2026, três horas de caça).
+   Toda imagem é arrastável de fábrica no navegador. Quando a criança apertava
+   a figura e puxava, o Chrome começava o SEU arrasto nativo do `<img>` e
+   disparava um `pointercancel` — o nosso arrasto morria no primeiro milímetro,
+   sem erro nenhum na tela. Com isto desligado, o gesto é nosso. */
+function img(w, cls){ return '<img class="' + (cls || "fig") + '" draggable="false" src="img/mu_' + w + '.png?v=' + VIMG + '" alt="' + esc(w) + '">'; }
+
+/* ---------- estado ---------- */
+var ST = {pag: 0, nome: "", folha: null, resp: {}, lig: {}, tent: {}, prontas: {}, inicio: 0};
+var vozLigada = true, _narr = null, vozPtBR = null, ATIVA = null;
+var CHAVE_LS = "armazem_mesmo_tanto_3ano";
+/* ⚠️ AS 25 FOLHAS, NA ORDEM — e a ordem É a escada.
+   Cada uma veio do COMANDO IMPRESSO de uma folha de papel (as 40 lidas em
+   `_sequencias/POTE-MULT.md`), menos as quatro que o currículo pede e a
+   colheita não tinha: a disposição retangular (18 e 19), a virada (20) e a
+   combinação de possibilidades (21 e 22). Essas quatro entram DECLARADAS como
+   vindas do currículo, e não do pote.
+   ⚠️ E elas vêm em BLOCOS (mecânica que repete vem colada, nunca espalhada —
+   regra do Marcos, ago/2026: *"as crianças me dizem 'isso eu já fiz'"*):
+   escolher em 1-2 e 4-5, digitar em 8-9, máquina em 11 a 15, sequenciar em
+   16-17, tapete em 18-19, cesta em 21-22, problema em 23-24. */
+var NOMES = [
+  /*  1 */ "Quantos grupos?",
+  /*  2 */ "Quantos em cada grupo?",
+  /*  3 */ "Monte a bandeja",
+  /*  4 */ "A soma das parcelas iguais",
+  /*  5 */ "A conta de vezes",
+  /*  6 */ "A soma e a multiplicação",
+  /*  7 */ "Como se lê a conta",
+  /*  8 */ "Escreva o total da soma",
+  /*  9 */ "Escreva o total da multiplicação",
+  /* 10 */ "A tabela do armazém",
+  /* 11 */ "A máquina do 2",
+  /* 12 */ "A máquina do 5",
+  /* 13 */ "A máquina do 10",
+  /* 14 */ "A máquina do 3",
+  /* 15 */ "A máquina do 4",
+  /* 16 */ "De 2 em 2, de 3 em 3",
+  /* 17 */ "De 5 em 5, de 10 em 10",
+  /* 18 */ "O tapete do armazém",
+  /* 19 */ "Pinte o tapete na malha",
+  /* 20 */ "A virada do tapete",
+  /* 21 */ "A cesta que falta",
+  /* 22 */ "Quantas cestas diferentes?",
+  /* 23 */ "Os problemas do armazém",
+  /* 24 */ "Fileiras, cestas e combinações",
+  /* 25 */ "O cartaz do armazém"];
+/*<dossie-dados>*/
+var CURRICULO = {
+ "ano": 3,
+ "componente": "Matemática",
+ "rede": "Currículo da Educação Básica do Sistema Municipal de Ensino de Blumenau",
+ "documento": "_curriculo/blumenau.txt",
+ "degrau": 1,
+ "evidencia": [
+  "Jogado do começo ao fim no navegador, item por item, antes de publicar.",
+  "Um jogador automático resolve cada item pela resposta declarada e confere se a folha fecha.",
+  "Leiaute medido em 6 tamanhos de tela: nenhuma figura cortada e nenhum alvo de toque menor que 40 px.",
+  "Toda tela é narrada com voz real, e o texto de cada fala é conferido contra o que está escrito na tela.",
+  "Contraste do texto medido no pixel real do fundo, não na folha de estilo.",
+  "Os fatores das contas ficam dentro do teto da rede para o 3º ano: 2, 3, 4, 5 e 10.",
+  "As habilidades citadas neste dossiê são conferidas, palavra por palavra, contra o currículo da rede."
+ ],
+ "objetivos": [
+  {
+   "objetivo": "Ver a cena como grupos iguais",
+   "folhas": [
+    1,
+    2,
+    3
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Somar parcelas iguais e escrever a multiplicação",
+   "folhas": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Achar o total de parcelas iguais",
+   "folhas": [
+    8,
+    9,
+    10
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Os fatos básicos do 2, 5, 10, 3 e 4",
+   "folhas": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "Contar de tanto em tanto",
+   "folhas": [
+    16,
+    17
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "A disposição retangular (fileiras e colunas)",
+   "folhas": [
+    18,
+    19
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "A ordem dos fatores não muda o total",
+   "folhas": [
+    20
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "Combinação de possibilidades",
+   "folhas": [
+    21,
+    22
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Resolver problemas de multiplicação",
+   "folhas": [
+    23,
+    24
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Registrar o que aprendeu",
+   "folhas": [
+    25
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  }
+ ]
+};
+/*</dossie-dados>*/
+var CORES = ["c1", "c2", "c3", "c4", "c5", "c1", "c2", "c3", "c4", "c5",
+             "c1", "c2", "c3", "c4", "c5", "c1", "c2", "c3", "c4", "c5",
+             "c1", "c2", "c3", "c4", "c5"];
+
+/* ---------- som ---------- */
+var AC = null;
+function ac(){ try{ if(!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if(AC.state === "suspended") AC.resume(); }catch(e){} return AC; }
+function bip(f, dur, tipo, vol){
+  var a = ac(); if(!a) return;
+  try{
+    var o = a.createOscillator(), g = a.createGain();
+    o.type = tipo || "sine"; o.frequency.value = f;
+    g.gain.setValueAtTime(vol || .13, a.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, a.currentTime + dur);
+    o.connect(g); g.connect(a.destination); o.start(); o.stop(a.currentTime + dur);
+  }catch(e){}
+}
+function sPasso(){ bip(560, .07, "triangle", .08); }
+function sTecla(){ bip(760, .05, "square", .05); }
+function sCerto(){ bip(680, .1, "sine", .12); setTimeout(function(){ bip(920, .14, "sine", .12); }, 95); }
+function sErro(){ bip(190, .17, "sawtooth", .07); }
+function sFesta(){ [523, 659, 784, 1047].forEach(function(f, i){ setTimeout(function(){ bip(f, .16, "sine", .12); }, i * 110); }); }
+function sPalma(){ bip(1200, .04, "square", .07); setTimeout(function(){ bip(420, .06, "sawtooth", .05); }, 18); }
+
+/* ---------- voz ---------- */
+function chaveVoz(t){
+  t = (t || "").replace(/\s+/g, " ").trim().toLowerCase();
+  var h = 5381, i;
+  for(i = 0; i < t.length; i++) h = ((h * 33) ^ t.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+function achaVoz(){
+  try{
+    var vs = window.speechSynthesis.getVoices();
+    for(var i = 0; i < vs.length; i++) if((vs[i].lang || "").toLowerCase().indexOf("pt-br") === 0) return vs[i];
+    for(i = 0; i < vs.length; i++) if((vs[i].lang || "").toLowerCase().indexOf("pt") === 0) return vs[i];
+  }catch(e){}
+  return null;
+}
+if(window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function(){ vozPtBR = achaVoz(); };
+function calar(){
+  try{ if(_narr){ _narr.pause(); _narr.currentTime = 0; } }catch(e){}
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  var b = document.getElementById("bOuvir"); if(b) b.className = "zap ouvir";
+}
+function falarNavegador(t){
+  if(!window.speechSynthesis) return;
+  try{
+    var u = new SpeechSynthesisUtterance(t);
+    u.lang = "pt-BR"; u.rate = .92; if(!vozPtBR) vozPtBR = achaVoz(); if(vozPtBR) u.voice = vozPtBR;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+var ultimaFala = null;
+function falar(k){
+  var t = FALAS[k]; if(!t) return;
+  ultimaFala = k;
+  if(!vozLigada) return;
+  calar();
+  var b = document.getElementById("bOuvir"); if(b) b.className = "zap ouvir tocando";
+  function fim(){ var x = document.getElementById("bOuvir"); if(x) x.className = "zap ouvir"; }
+  var key = chaveVoz(t);
+  if(VOZOK[key]){
+    if(!_narr){ _narr = new Audio(); _narr.preload = "auto"; }
+    _narr.onended = fim; _narr.onerror = function(){ falarNavegador(t); setTimeout(fim, 2500); };
+    _narr.src = "audio/mu_" + key + ".mp3";
+    try{ _narr.currentTime = 0; }catch(e){}
+    var p = _narr.play(); if(p && p["catch"]) p["catch"](function(){ fim(); });
+    return;
+  }
+  falarNavegador(t); setTimeout(fim, Math.min(12000, 400 + t.length * 62));
+}
+function falarDepois(k, ms){ setTimeout(function(){ falar(k); }, ms || 0); }
+
+/* ---------- utilidades ---------- */
+function el(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.innerHTML = html; return e; }
+function salvar(){ try{ ST.quando = Date.now(); localStorage.setItem(CHAVE_LS, JSON.stringify(ST)); }catch(e){} }
+function carregar(){ try{ var s = localStorage.getItem(CHAVE_LS); if(!s) return null; var o = JSON.parse(s); if(!o || !o.quando || Date.now() - o.quando > 55 * 60 * 1000 || !o.folha) return null; return o; }catch(e){ return null; } }
+function tentativa(id, ok){ if(!ST.tent[id]) ST.tent[id] = {erros: 0, ok: false}; if(ok) ST.tent[id].ok = true; else ST.tent[id].erros++; salvar(); }
+function rnd(n){ return Math.floor(Math.random() * n); }
+function baralha(a){ var b = a.slice(), i, j, t; for(i = b.length - 1; i > 0; i--){ j = rnd(i + 1); t = b[i]; b[i] = b[j]; b[j] = t; } return b; }
+function pega(pool, qtd){ return baralha(pool).slice(0, Math.min(qtd, pool.length)); }
+function confete(n){
+  var c = document.getElementById("confete"), cores = ["#6d5ae6", "#ffd233", "#15a34a", "#e0562f", "#1179bf"], i;
+  for(i = 0; i < n; i++){
+    (function(i){
+      var d = el("div", "cf");
+      d.style.left = rnd(100) + "%"; d.style.top = "-20px";
+      d.style.background = cores[rnd(cores.length)];
+      d.style.animationDelay = (i * 26) + "ms";
+      c.appendChild(d); setTimeout(function(){ if(d.parentNode) c.removeChild(d); }, 1900 + i * 26);
+    })(i);
+  }
+}
+
+/* ---------- registro das respostas (o boletim e o relatório leem daqui) ---------- */
+var RESP = {};   /* id -> {certo, pag} */
+function registra(id, pag, certo){ RESP[id] = {certo: certo, pag: pag}; }
+function acertou(id, fala){
+  if(ST.resp[id]) return;
+  tentativa(id, true); ST.resp[id] = 1; salvar(); sCerto();
+  var segs = document.querySelectorAll('[data-nome="' + id + '"]'), sg;
+  for(sg = 0; sg < segs.length; sg++)
+    segs[sg].className = segs[sg].className.replace(/ ?revelado/, "") + " revelado";
+  if(fala) falar(fala);
+  setTimeout(function(){ confereFolha(RESP[id].pag); }, 850);
+}
+function errou(id, dica){
+  tentativa(id, false); sErro();
+  falar(ST.tent[id].erros >= 2 && dica ? dica : "quase");
+}
+
+/* ---------- sorteio da folha ---------- */
+/* ⚠️ O POTE ERA UM TERÇO DO ALFABETO (consertado em 13/set/2026). Cada folha
+   guardava só 10 das 26 letras, e o caderno terminava em 22 a 37 minutos — o
+   portão `_qa/duracao.py` reprova abaixo de 40, porque a aula do laboratório tem
+   55 e turma ociosa foi a cobrança que deu origem a ele. O conserto não foi
+   inventar folha nova: foi pôr no pote **o alfabeto inteiro**, que é o assunto
+   deste caderno. Agora cada folha sorteia 11 ou 12 de 21 a 26 — e duas crianças
+   da mesma turma não fazem a mesma folha. */
+/* ⚠️ O SAQUE DE CADA FOLHA — e ele ENCOLHEU quando o caderno foi para 25.
+   Com onze folhas cada uma sacava 10 a 12 itens; com 25, o mesmo saque daria
+   ~290 itens e três aulas de trabalho. O que enche a aula é o número de
+   FOLHAS (a criança sente que andou), não o tamanho de cada lista — lista
+   comprida da mesma coisa é exatamente o "isso eu já fiz" que o Marcos ouve.
+   ⚠️ Folha nova = linha nova AQUI **e** em `idsDaPagina`. Sem a segunda, o
+      app estoura em `F.pN.length` — já aconteceu hoje. */
+function novaFolha(){
+  return {
+    p1:  pega(ITENS.p1,  5), p2:  pega(ITENS.p2,  5), p3:  pega(ITENS.p3,  3),
+    p4:  pega(ITENS.p4,  5), p5:  pega(ITENS.p5,  5), p6:  pega(ITENS.p6,  2),
+    p7:  pega(ITENS.p7,  6), p8:  pega(ITENS.p8,  4), p9:  pega(ITENS.p9,  4),
+    p10: pega(ITENS.p10, 5), p11: pega(ITENS.p11, 5), p12: pega(ITENS.p12, 5),
+    p13: pega(ITENS.p13, 5), p14: pega(ITENS.p14, 5), p15: pega(ITENS.p15, 5),
+    p16: pega(ITENS.p16, 4), p17: pega(ITENS.p17, 4), p18: pega(ITENS.p18, 5),
+    p19: pega(ITENS.p19, 4), p20: pega(ITENS.p20, 4), p21: pega(ITENS.p21, 4),
+    p22: pega(ITENS.p22, 4), p23: pega(ITENS.p23, 3), p24: pega(ITENS.p24, 3),
+    p25: pega(ITENS.p25, 8)
+  };
+}
+</script>
+<!--<dossie-html>-->
+<div id="dossie" role="dialog" aria-label="Dossiê pedagógico" aria-modal="true">
+  <div class="cx">
+    <h3>Dossiê pedagógico</h3>
+    <div id="dsCorpo"></div>
+    <button class="bt cinza" id="dsFechar">Fechar</button>
+  </div>
+</div>
+<!--</dossie-html>-->
+<script src="folhas.js"></script>
+</body></html>

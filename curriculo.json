@@ -1,0 +1,123 @@
+{
+ "ano": 3,
+ "componente": "Matemática",
+ "rede": "Currículo da Educação Básica do Sistema Municipal de Ensino de Blumenau",
+ "documento": "_curriculo/blumenau.txt",
+ "degrau": 1,
+ "evidencia": [
+  "Jogado do começo ao fim no navegador, item por item, antes de publicar.",
+  "Um jogador automático resolve cada item pela resposta declarada e confere se a folha fecha.",
+  "Leiaute medido em 6 tamanhos de tela: nenhuma figura cortada e nenhum alvo de toque menor que 40 px.",
+  "Toda tela é narrada com voz real, e o texto de cada fala é conferido contra o que está escrito na tela.",
+  "Contraste do texto medido no pixel real do fundo, não na folha de estilo.",
+  "Os fatores das contas ficam dentro do teto da rede para o 3º ano: 2, 3, 4, 5 e 10.",
+  "As habilidades citadas neste dossiê são conferidas, palavra por palavra, contra o currículo da rede."
+ ],
+ "objetivos": [
+  {
+   "objetivo": "Ver a cena como grupos iguais",
+   "folhas": [
+    1,
+    2,
+    3
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Somar parcelas iguais e escrever a multiplicação",
+   "folhas": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Achar o total de parcelas iguais",
+   "folhas": [
+    8,
+    9,
+    10
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Os fatos básicos do 2, 5, 10, 3 e 4",
+   "folhas": [
+    11,
+    12,
+    13,
+    14,
+    15
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "Contar de tanto em tanto",
+   "folhas": [
+    16,
+    17
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "A disposição retangular (fileiras e colunas)",
+   "folhas": [
+    18,
+    19
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "A ordem dos fatores não muda o total",
+   "folhas": [
+    20
+   ],
+   "pratica": "Números",
+   "objeto": "Construção de fatos fundamentais da adição, subtração (inclusive com reagrupamento) e multiplicação",
+   "habilidade": "HABILIDADE: \"Construir e utilizar fatos básicos da adição, da subtração e da multiplicação para o cálculo mental ou escrito.\""
+  },
+  {
+   "objetivo": "Combinação de possibilidades",
+   "folhas": [
+    21,
+    22
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Resolver problemas de multiplicação",
+   "folhas": [
+    23,
+    24
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  },
+  {
+   "objetivo": "Registrar o que aprendeu",
+   "folhas": [
+    25
+   ],
+   "pratica": "Números",
+   "objeto": "Problemas envolvendo diferentes significados da multiplicação e da divisão: adição de parcelas iguais, configuração retangular, combinação de possibilidades, repartição em partes iguais e medida",
+   "habilidade": "HABILIDADE: \"Resolver e elaborar problemas de multiplicação (por 2, 3, 4, 5 e 10) com os significados de adição de parcelas iguais, elementos apresentados em disposição retangular e combinação de possibilidades, utilizando diferentes estratégias de cálculo e registros.\""
+  }
+ ]
+}
