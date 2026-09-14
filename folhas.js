@@ -974,7 +974,16 @@ document.getElementById("bZerar").onclick = function(){ document.getElementById(
   if(velho && velho.folha){
     ST = velho;
     if(!ST.resp) ST.resp = {}; if(!ST.lig) ST.lig = {}; if(!ST.tent) ST.tent = {}; if(!ST.prontas) ST.prontas = {};
-    monta();
+    /* ⚠️ TRAVA 2 — A REDE DE SEGURANÇA. Se montar a partir da memória estourar
+       por qualquer motivo que eu não previ, o caderno joga a memória fora e
+       abre LIMPO. Perder o "continuar de onde parou" é ruim; ficar com uma tela
+       morta a aula toda é muito pior. */
+    try{ monta(); }
+    catch(erroMemoria){
+      try{ localStorage.removeItem(CHAVE_LS); }catch(e3){}
+      ST = {pag: 0, nome: ST.nome, folha: novaFolha(), resp: {}, lig: {}, tent: {}, prontas: {}, inicio: 0};
+      monta(); vaiPara(0); return;
+    }
     document.getElementById("retomar").style.display = "block";
     document.getElementById("retTxt").textContent =
       (ST.nome ? ST.nome + ", você" : "Você") + " parou na folha " + (ST.pag || 1) + ": " + NOMES[(ST.pag || 1) - 1] + ".";
