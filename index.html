@@ -696,6 +696,20 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
   #tk{gap:4px}
   #tk button{min-height:44px;font-size:17px}
 }
+/* ⚠️⚠️ O TECLADO TAPAVA A ATIVIDADE — o Marcos viu no celular (15/set/2026):
+   "ele preenche a tela e não dá para ver a atividade". Medido: na cruzadinha de
+   360x640 o teclado ocupava 368 px de 640 (58% da tela) e a grade ficava
+   INTEIRA por baixo dele. Duas coisas consertam isso, e são independentes:
+   1. aqui, o teclado encolhe na tela BAIXA (celular deitado, monitor velho da
+      escola) — a tecla continua com 40 px de lado, que é o piso da casa;
+   2. no `abreCruz` do folhas.js, a palavra que está sendo escrita ROLA para a
+      faixa que sobra ACIMA do teclado. Sem a 2, encolher só adia o problema. */
+@media(max-height:760px){
+  #teclado .dica{margin-bottom:3px;font-size:12px}
+  #tk button{min-height:40px;font-size:16px}
+}
+/* enquanto o teclado está aberto, a página ganha chão para poder rolar */
+body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 #confete{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
 .cf{position:absolute;width:9px;height:14px;opacity:.95;-webkit-animation:cai 1.5s linear forwards;animation:cai 1.5s linear forwards}
 @-webkit-keyframes cai{to{transform:translateY(105vh) rotate(560deg);opacity:0}}
@@ -1008,7 +1022,7 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
        o que ela FEZ). A folha 25 promete "ele fica guardado no fim" — sem este
        quadro, a promessa não se cumpre e a voz do fecho mente. -->
   <div id="cartazFim"></div>
-  <div id="medalha" role="button" tabindex="0" aria-label="Troféu. Segure dois segundos para abrir o relatório do professor"><img src="img/mu_trofeu.png?v=1" alt="Troféu" draggable="false" onerror="this.style.display='none';this.parentNode.className='semfig'"></div>
+  <div id="medalha" class="medal" role="button" tabindex="0" aria-label="Troféu. Segure dois segundos para abrir o relatório do professor"><img src="img/mu_trofeu.png?v=1" alt="Troféu" draggable="false" onerror="this.style.display='none';this.parentNode.className='semfig'"></div>
   <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
     <button class="bt verde" id="bVoltar" style="display:none">Voltar para o caderno</button>
     <button class="bt cinza" id="bRever">Rever o caderno</button>
@@ -5414,5 +5428,5 @@ function novaFolha(){
   </div>
 </div>
 <!--</dossie-html>-->
-<script src="folhas.js?v=87d034ec22"></script>
+<script src="folhas.js?v=30ef9208d9"></script>
 </body></html>
