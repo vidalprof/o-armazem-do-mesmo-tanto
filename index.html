@@ -686,6 +686,16 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
 #tk button:active{transform:translateY(2px);box-shadow:0 1px 0 #d3d7ea}
 #tk button.ap{background:#fde2da;grid-column:span 3}
 #tk button.ok{background:#d9f2e3;grid-column:span 4}
+/* ⚠️ O TECLADO FICOU MAIOR (15/set/2026): eram 29 teclas e passaram a ser 39,
+   porque faltavam K, W, Y e os acentos — sem eles a criança não conseguia
+   escrever PÊSSEGO e a folha nunca fechava. Com 39 teclas em 7 colunas, num
+   celular de 320 px a tecla caía para 38 px de lado, abaixo do piso de 40 px
+   da casa (medido, não suposto). Aqui a folga aperta e o alvo volta a 40. */
+@media(max-width:380px){
+  #teclado{padding:6px}
+  #tk{gap:4px}
+  #tk button{min-height:44px;font-size:17px}
+}
 #confete{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
 .cf{position:absolute;width:9px;height:14px;opacity:.95;-webkit-animation:cai 1.5s linear forwards;animation:cai 1.5s linear forwards}
 @-webkit-keyframes cai{to{transform:translateY(105vh) rotate(560deg);opacity:0}}
