@@ -55,25 +55,25 @@ html,body{margin:0;min-height:100%}
   --texto3:#3b4064;       /* o preto mais claro das letras grandes */
 }
 body{font-family:"Segoe UI",Arial,sans-serif;background:#eef1f7;color:var(--texto);padding-bottom:160px}
-#topo{position:-webkit-sticky;position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid #6d5ae6;
+#topo{position:-webkit-sticky;position:sticky;top:0;z-index:20;background:#fff;border-bottom:3px solid #b23a48;
   box-shadow:0 2px 14px rgba(40,30,90,.13);padding:8px 10px;display:flex;align-items:center;gap:10px;max-width:880px;margin:0 auto}
 #topo .tit{font-weight:800;font-size:15px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prog{height:12px;background:#e6e6f4;border-radius:8px;overflow:hidden;flex:1;min-width:60px;max-width:200px}
-.prog i{display:block;height:100%;width:0;background:#6d5ae6;border-radius:8px;-webkit-transition:width .5s;transition:width .5s}
-.pg{font-weight:800;font-size:14px;color:#5b4fc4;white-space:nowrap}
+.prog i{display:block;height:100%;width:0;background:#b23a48;border-radius:8px;-webkit-transition:width .5s;transition:width .5s}
+.pg{font-weight:800;font-size:14px;color:#802a34;white-space:nowrap}
 button{font-family:inherit;cursor:pointer}
-.bt{min-width:48px;min-height:48px;border:0;border-radius:16px;background:#6d5ae6;color:#fff;font-weight:800;font-size:17px;
-  padding:10px 18px;box-shadow:0 4px 0 #4c3cbb;-webkit-transition:transform .08s;transition:transform .08s}
-.bt:active{transform:translateY(3px);box-shadow:0 1px 0 #4c3cbb}
+.bt{min-width:48px;min-height:48px;border:0;border-radius:16px;background:#b23a48;color:#fff;font-weight:800;font-size:17px;
+  padding:10px 18px;box-shadow:0 4px 0 #802a34;-webkit-transition:transform .08s;transition:transform .08s}
+.bt:active{transform:translateY(3px);box-shadow:0 1px 0 #802a34}
 .bt[disabled]{opacity:.45;cursor:default;box-shadow:none}
 .bt.cinza{background:#e4e6f2;color:#4a4f66;box-shadow:0 4px 0 #c3c7dc}
 .bt.verde{background:#15a34a;box-shadow:0 4px 0 #0d7736}
-.zap{width:42px;height:42px;border-radius:50%;border:0;background:#6d5ae6;box-shadow:0 3px 0 #4c3cbb;
+.zap{width:42px;height:42px;border-radius:50%;border:0;background:#b23a48;box-shadow:0 3px 0 #802a34;
   display:inline-flex;align-items:center;justify-content:center;padding:0;flex:none}
 .zap svg{width:22px;height:22px;fill:#fff}
 .zap.off{background:#b9bcd0;box-shadow:0 3px 0 #9599b3}
-.zap.ouvir{background:#fff;box-shadow:0 3px 0 #cdd0e4;border:2px solid #6d5ae6}
-.zap.ouvir svg{fill:#6d5ae6}
+.zap.ouvir{background:#fff;box-shadow:0 3px 0 #cdd0e4;border:2px solid #b23a48}
+.zap.ouvir svg{fill:#b23a48}
 .zap.ouvir.tocando{-webkit-animation:pulsa 1s infinite;animation:pulsa 1s infinite}
 /* ⚠️ `aparece` estava ORFA nos cadernos de folha viva desde o primeiro deles:
    varias pecas escreviam `animation:aparece` e o bloco nunca existiu. Quem
@@ -90,9 +90,9 @@ button{font-family:inherit;cursor:pointer}
 .pagina.viva{display:block;-webkit-animation:entra .35s ease-out;animation:entra .35s ease-out}
 @-webkit-keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.faixa{background:#6d5ae6;color:#fff;padding:15px 18px 13px;display:flex;align-items:center;gap:12px}
+.faixa{background:#b23a48;color:#fff;padding:15px 18px 13px;display:flex;align-items:center;gap:12px}
 .faixa h2{margin:0;font-size:clamp(17px,4.4vw,25px);letter-spacing:.4px;text-transform:uppercase;flex:1;line-height:1.1}
-.faixa .num{background:#fff;color:#6d5ae6;font-weight:900;border-radius:50%;width:36px;height:36px;display:flex;
+.faixa .num{background:#fff;color:#b23a48;font-weight:900;border-radius:50%;width:36px;height:36px;display:flex;
   align-items:center;justify-content:center;font-size:18px;flex:none}
 .pagina.c1 .faixa{background:#e0562f}.pagina.c1 .faixa .num{color:#e0562f}
 .pagina.c2 .faixa{background:#1179bf}.pagina.c2 .faixa .num{color:#1179bf}
@@ -100,7 +100,7 @@ button{font-family:inherit;cursor:pointer}
 .pagina.c4 .faixa{background:#b0308f}.pagina.c4 .faixa .num{color:#b0308f}
 .pagina.c5 .faixa{background:#c98a06}.pagina.c5 .faixa .num{color:#c98a06}
 .enun{margin:14px 16px 4px;font-size:clamp(15px,3.9vw,19px);font-weight:700;line-height:1.35}
-.enun b{color:#6d5ae6}
+.enun b{color:#b23a48}
 
 /* =========================================================================
    AS PEÇAS DO BANDO DAS RIMAS
@@ -114,7 +114,7 @@ button{font-family:inherit;cursor:pointer}
 /* folha 1 — as duas palavras lado a lado, com o "e" no meio */
 .parrima{display:flex;align-items:center;justify-content:center;gap:clamp(8px,4vw,26px);
   flex-wrap:nowrap;margin:6px 0 12px}
-.parrima .eou{font-weight:800;color:#6d5ae6;font-size:clamp(15px,4vw,20px);flex:none}
+.parrima .eou{font-weight:800;color:#b23a48;font-size:clamp(15px,4vw,20px);flex:none}
 .figsom{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
 .figsom .fig{height:clamp(70px,17vw,104px)}
 .figsom .rot{font-weight:800;color:var(--texto2);font-size:clamp(13px,3.4vw,16px);letter-spacing:.5px}
@@ -154,14 +154,14 @@ button{font-family:inherit;cursor:pointer}
 /* folha 6 — o alvo para onde a peça é puxada */
 .alvorima{display:flex;flex-direction:column;align-items:center;gap:5px;margin-bottom:10px;
   padding:10px;border:3px dashed #c9cdec;border-radius:20px;background:#fff}
-.alvorima.alvo{border-color:#6d5ae6;background:#f2efff}
+.alvorima.alvo{border-color:#b23a48;background:#f6e7e9}
 .alvorima .figgrande{display:block;width:auto;height:clamp(80px,20vw,120px);max-width:100%;object-fit:contain}
 
 /* folha 8 — a parlenda e a lacuna que se preenche */
 .parlenda{font-size:clamp(16px,4.2vw,21px);font-weight:700;color:var(--texto2);line-height:1.5;
   text-align:center;margin:4px 6px 8px}
-.lacuna{display:inline-block;min-width:74px;padding:1px 10px;border-bottom:4px solid #6d5ae6;
-  color:#6d5ae6;font-weight:900;text-align:center}
+.lacuna{display:inline-block;min-width:74px;padding:1px 10px;border-bottom:4px solid #b23a48;
+  color:#b23a48;font-weight:900;text-align:center}
 .lacuna.cheia{border-bottom-color:#1f9d55;color:#1f9d55;background:#eafaf0;border-radius:8px 8px 0 0}
 
 /* folha 9 — a caixa de escrever é LARGA (palavra inteira, não sílaba) */
@@ -176,7 +176,7 @@ button{font-family:inherit;cursor:pointer}
   padding:8px 10px;margin:8px 0;font-size:12.5px;line-height:1.45;color:#6a4b00}
 #relatorio table th:nth-child(4),#relatorio table td:nth-child(4){background:#f3fbf5}
 
-.bt.terminar{background:#eef0f8;color:#5a6080;border:2px solid #d9ddf2;
+.bt.terminar{background:#eef0f8;color:#5a6080;border:2px solid #e9c8cc;
   font-size:12px;padding:8px 10px;min-height:44px;font-weight:800;flex:0 0 auto}
 .bt.terminar:active{background:#e2e6f3}
 .barra.naoabriu{opacity:.5}
@@ -185,11 +185,11 @@ button{font-family:inherit;cursor:pointer}
 /* folha 10 — o mural que a criança monta, e que vai para o relatório */
 .mural{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 10px}
 .cartaorima{display:flex;align-items:center;gap:4px;min-height:96px;padding:10px 12px;
-  border:3px solid #d9ddf2;border-radius:20px;background:#fff;cursor:pointer;
+  border:3px solid #e9c8cc;border-radius:20px;background:#fff;cursor:pointer;
   -webkit-transition:transform .18s,border-color .18s,background .18s;
   transition:transform .18s,border-color .18s,background .18s}
 .cartaorima .figop{display:block;width:auto;height:clamp(48px,12vw,66px);max-width:100%;object-fit:contain}
-.cartaorima .mais{font-weight:900;color:#6d5ae6;font-size:18px;padding:0 2px}
+.cartaorima .mais{font-weight:900;color:#b23a48;font-size:18px;padding:0 2px}
 .cartaorima.escolhido{border-color:#1f9d55;background:#eafaf0;-webkit-transform:scale(1.03);transform:scale(1.03)}
 .cartaorima:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
 
@@ -199,17 +199,17 @@ button{font-family:inherit;cursor:pointer}
    folha de origem, e vale mais aqui do que em qualquer outro caderno: a criança
    está aprendendo a FORMA da letra. Letra pequena vira mancha. */
 .ltbox{display:flex;flex-direction:column;align-items:center;gap:4px}
-.ltg{font-size:clamp(38px,11vw,62px);font-weight:900;color:#6d5ae6;line-height:1;
+.ltg{font-size:clamp(38px,11vw,62px);font-weight:900;color:#b23a48;line-height:1;
   letter-spacing:1px;font-family:Arial,Helvetica,sans-serif}
 .ltbox.grandona .ltg{font-size:clamp(46px,13vw,76px)}
 .ltop{font-size:clamp(26px,7vw,40px);font-weight:900;color:var(--texto2);line-height:1.05;
   letter-spacing:1px;font-family:Arial,Helvetica,sans-serif}
-.ltop.grande{font-size:clamp(30px,8vw,46px);color:#6d5ae6}
+.ltop.grande{font-size:clamp(30px,8vw,46px);color:#b23a48}
 .op.figbt .ltop{margin:2px 0}
 
 /* folha 1 — o desfile: a fila que se percorre com o dedo */
 .desfile{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 4px}
-.ltdesf{min-width:62px;min-height:64px;border:3px solid #d9ddf2;border-radius:16px;background:#fff;
+.ltdesf{min-width:62px;min-height:64px;border:3px solid #e9c8cc;border-radius:16px;background:#fff;
   cursor:pointer;-webkit-transition:background .2s,border-color .2s,transform .15s;
   transition:background .2s,border-color .2s,transform .15s}
 .ltdesf.aceso{border-color:#1f9d55;background:#eafaf0}
@@ -255,7 +255,7 @@ button{font-family:inherit;cursor:pointer}
 .cartaorima.cartalt{flex-direction:column;gap:2px;min-height:132px;min-width:104px}
 
 /* a capa: as letras desfilando */
-.capa .ltcapa{display:inline-block;font-size:clamp(30px,8vw,52px);font-weight:900;color:#6d5ae6;
+.capa .ltcapa{display:inline-block;font-size:clamp(30px,8vw,52px);font-weight:900;color:#b23a48;
   letter-spacing:2px;font-family:Arial,Helvetica,sans-serif;
   text-shadow:0 3px 0 #e6e2fb,0 5px 10px rgba(80,60,180,.18);
   -webkit-animation:entraDupla .55s cubic-bezier(.3,1.4,.5,1) both;
@@ -264,7 +264,7 @@ button{font-family:inherit;cursor:pointer}
   .capa .ltcapa{-webkit-animation:none!important;animation:none!important;opacity:1!important}
 }
 
-.item{margin:12px 14px;padding:14px;border:2px solid #eceefa;border-radius:20px;background:#fbfbff}
+.item{margin:12px 14px;padding:14px;border:2px solid #f6e7e9;border-radius:20px;background:#fbfbff}
 .item.feito{border-color:#bfe6ce;background:#f3fcf6}
 .item .n{font-weight:900;color:#9aa0bd;font-size:15px;margin-right:8px}
 /* ⚠️ A FIGURA TEM ALTURA FIXA, E ISSO NÃO É ENFEITE (set/2026). Antes era
@@ -279,8 +279,8 @@ button{font-family:inherit;cursor:pointer}
 /* ⚠️ O ALTO-FALANTE É DESENHADO EM CSS — caixinha + triângulo + duas ondas de
    borda arredondada. Nada de emoji (vira quadradinho nos PCs da escola) e nada
    de SVG (ordem do Marcos, set/2026). */
-.som{position:relative;width:46px;height:46px;min-width:46px;border:3px solid #6d5ae6;
-  border-radius:50%;background:#f2efff;padding:0;cursor:pointer;flex:none}
+.som{position:relative;width:46px;height:46px;min-width:46px;border:3px solid #b23a48;
+  border-radius:50%;background:#f6e7e9;padding:0;cursor:pointer;flex:none}
 .som:active{-webkit-transform:scale(.93);transform:scale(.93)}
 .som .cone{position:absolute;left:12px;top:17px;width:7px;height:10px;background:#4b3fb0;
   border-radius:2px 0 0 2px}
@@ -298,7 +298,7 @@ button{font-family:inherit;cursor:pointer}
 
 /* fileira genérica de opções */
 .ops{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
-.op{min-width:64px;min-height:56px;border:3px solid #d9ddf2;border-radius:16px;background:#fff;color:var(--texto);
+.op{min-width:64px;min-height:56px;border:3px solid #e9c8cc;border-radius:16px;background:#fff;color:var(--texto);
   font-weight:900;font-size:22px;padding:8px 14px;-webkit-transition:transform .1s;transition:transform .1s}
 .op:active{transform:scale(.94)}
 .op.certa{border-color:#15a34a;background:#e7f8ee;color:#0d7736}
@@ -307,7 +307,7 @@ button{font-family:inherit;cursor:pointer}
 @keyframes treme{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 /* o estojo de canetinhas da folha 5 */
 .estojo{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0 4px}
-.estojo .rot{font-weight:800;color:#5b4fc4;font-size:14px}
+.estojo .rot{font-weight:800;color:#802a34;font-size:14px}
 .lapis{width:44px;height:44px;border:4px solid #fff;border-radius:50%;padding:0;cursor:pointer;
   box-shadow:0 2px 8px rgba(35,25,80,.22);-webkit-transition:transform .12s;transition:transform .12s}
 .lapis.esc{-webkit-transform:scale(1.18);transform:scale(1.18);box-shadow:0 0 0 4px rgba(60,50,120,.28)}
@@ -319,14 +319,14 @@ button{font-family:inherit;cursor:pointer}
 /* 1 — a letra escondida */
 .escondida{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:10px 0}
 .escondida .lt{font-weight:900;font-size:clamp(26px,7vw,40px);letter-spacing:2px}
-.escondida .buraco{width:52px;height:56px;border-bottom:5px solid #6d5ae6;display:inline-flex;align-items:center;
-  justify-content:center;background:#f2efff;border-radius:10px 10px 0 0;font-weight:900;font-size:34px;color:#6d5ae6}
+.escondida .buraco{width:52px;height:56px;border-bottom:5px solid #b23a48;display:inline-flex;align-items:center;
+  justify-content:center;background:#f6e7e9;border-radius:10px 10px 0 0;font-weight:900;font-size:34px;color:#b23a48}
 /* a fila do alfabeto usa o mesmo visual da letra escondida */
 .filalfa{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0}
 .filalfa .lt{font-weight:900;font-size:clamp(26px,7vw,40px);letter-spacing:2px;color:var(--texto3)}
-.filalfa .buraco{width:52px;height:56px;border-bottom:5px solid #6d5ae6;display:inline-flex;
-  align-items:center;justify-content:center;background:#f2efff;border-radius:10px 10px 0 0;
-  font-weight:900;font-size:34px;color:#6d5ae6}
+.filalfa .buraco{width:52px;height:56px;border-bottom:5px solid #b23a48;display:inline-flex;
+  align-items:center;justify-content:center;background:#f6e7e9;border-radius:10px 10px 0 0;
+  font-weight:900;font-size:34px;color:#b23a48}
 .filalfa .buraco.ok{background:#e7f8ee;border-color:#15a34a;color:#0d7736}
 .filalfa .buraco.indo{color:transparent}
 .filalfa.completa .lt,.filalfa.completa .buraco{-webkit-animation:pulo .42s ease;animation:pulo .42s ease}
@@ -360,11 +360,11 @@ button{font-family:inherit;cursor:pointer}
 .palma{min-width:190px;min-height:96px;border:0;border-radius:24px;background:#ffd233;color:#4a3800;font-weight:900;
   font-size:20px;box-shadow:0 6px 0 #d5a800}
 .palma:active{transform:translateY(4px);box-shadow:0 2px 0 #d5a800}
-.contab{font-weight:900;font-size:20px;color:#5b4fc4}
+.contab{font-weight:900;font-size:20px;color:#802a34}
 .contab b{font-size:30px}
 /* a trilha de sílabas: acende uma a cada palma e a voz diz aquela sílaba */
 .trilhasil{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:2px}
-.silbox{min-width:56px;padding:8px 12px;border:3px dashed #d9ddf2;border-radius:14px;background:#fff;
+.silbox{min-width:56px;padding:8px 12px;border:3px dashed #e9c8cc;border-radius:14px;background:#fff;
   color:#c3c7dd;font-weight:900;font-size:22px;letter-spacing:1px;
   -webkit-transition:all .18s;transition:all .18s}
 .silbox.acesa{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736;
@@ -376,7 +376,7 @@ button{font-family:inherit;cursor:pointer}
 .fila .q{width:78px;height:78px;border:3px solid #e2e5f5;border-radius:16px;background:#fff;display:flex;
   align-items:center;justify-content:center}
 .fila .q img{width:66px;height:66px;object-fit:contain}
-.fila .q.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;font-size:34px;color:#6d5ae6;font-weight:900}
+.fila .q.vaga{border-style:dashed;border-color:#b23a48;background:#f6e7e9;font-size:34px;color:#b23a48;font-weight:900}
 /* o quadro vazio acende quando a figura puxada chega perto */
 .fila .q.vaga.perto{border-color:#15a34a;background:#e7f8ee;color:#0d7736;
   -webkit-transform:scale(1.08);transform:scale(1.08)}
@@ -402,13 +402,13 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
 .circ.marcada:after{border-color:#e0562f}
 .circ.certa:after{border-color:#15a34a}
 .circ.errada:after{border-color:#e0562f;border-style:dotted}
-.chip{display:inline-flex;align-items:center;justify-content:center;background:#6d5ae6;color:#fff;font-weight:900;
+.chip{display:inline-flex;align-items:center;justify-content:center;background:#b23a48;color:#fff;font-weight:900;
   font-size:24px;border-radius:14px;padding:6px 16px;letter-spacing:2px}
 
 /* 5 — pintar a sílaba · 7 — marcar X */
 .op.pinta.certa{background:#ffd233;border-color:#d5a800;color:#4a3800}
 .marcax{display:flex;flex-direction:column;gap:8px;align-items:flex-start;margin-top:10px}
-.lx{display:flex;align-items:center;gap:12px;min-height:56px;border:3px solid #d9ddf2;border-radius:16px;
+.lx{display:flex;align-items:center;gap:12px;min-height:56px;border:3px solid #e9c8cc;border-radius:16px;
   background:#fff;padding:6px 16px;font-weight:900;font-size:22px;color:var(--texto);width:100%;max-width:320px}
 .lx .cx{width:34px;height:34px;border:3px solid #9aa0bd;border-radius:8px;display:inline-flex;align-items:center;
   justify-content:center;font-size:24px;color:#e0562f;flex:none}
@@ -427,38 +427,38 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
 .ligar{position:relative;display:flex;gap:clamp(30px,10vw,96px);justify-content:space-between;margin:14px 6px}
 .ligar .col{display:flex;flex-direction:column;gap:14px;flex:1 1 0;min-width:0}
 .linhas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ponta{border:3px solid #d9ddf2;border-radius:16px;background:#fff;height:86px;display:flex;align-items:center;
+.ponta{border:3px solid #e9c8cc;border-radius:16px;background:#fff;height:86px;display:flex;align-items:center;
   justify-content:center;font-weight:900;font-size:24px;letter-spacing:1px;padding:6px;
   -ms-touch-action:none;touch-action:none;-webkit-transition:border-color .15s,box-shadow .15s;
   transition:border-color .15s,box-shadow .15s}
 .ponta img{width:68px;height:68px;object-fit:contain}
 @media (max-width:420px){ .ponta{height:74px;font-size:21px} .ponta img{width:58px;height:58px} }
-.ponta.marcada{border-color:#6d5ae6;box-shadow:0 0 0 4px rgba(109,90,230,.22)}
+.ponta.marcada{border-color:#b23a48;box-shadow:0 0 0 4px rgba(109,90,230,.22)}
 .ponta.feita{border-color:#15a34a;background:#e7f8ee}
 .ponta.mostra{border-color:#ffd233;box-shadow:0 0 0 4px rgba(255,210,51,.4)}
 .ponta.treme{-webkit-animation:treme .4s;animation:treme .4s}
 
 /* 8 — escrever a sílaba que falta */
 .silbox{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;margin:10px 0}
-.sq{min-width:70px;min-height:64px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;display:flex;
+.sq{min-width:70px;min-height:64px;border:3px solid #e9c8cc;border-radius:14px;background:#fff;display:flex;
   align-items:center;justify-content:center;font-weight:900;font-size:26px;letter-spacing:2px;color:var(--texto)}
-.sq.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;color:#6d5ae6}
+.sq.vaga{border-style:dashed;border-color:#b23a48;background:#f6e7e9;color:#b23a48}
 .sq.vaga.ativa{background:#fff;box-shadow:0 0 0 4px rgba(109,90,230,.25)}
 .sq.ok{border-color:#15a34a;background:#e7f8ee;color:#0d7736}
-.cursor{display:inline-block;width:3px;height:28px;background:#6d5ae6;margin-left:2px;
+.cursor{display:inline-block;width:3px;height:28px;background:#b23a48;margin-left:2px;
   -webkit-animation:pisca .9s steps(2) infinite;animation:pisca .9s steps(2) infinite}
 @-webkit-keyframes pisca{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes pisca{0%,49%{opacity:1}50%,100%{opacity:0}}
 
 /* 9 — ordenar as sílabas */
 .tira{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}
-.sil{min-width:74px;min-height:58px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;font-weight:900;
+.sil{min-width:74px;min-height:58px;border:3px solid #e9c8cc;border-radius:14px;background:#fff;font-weight:900;
   font-size:24px;letter-spacing:2px;color:var(--texto);-ms-touch-action:none;touch-action:none}
 .sil.usada{opacity:.28;pointer-events:none}
 .sil.arrastando{opacity:.5}
 .vagas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
-.vaga{min-width:74px;min-height:58px;border:3px dashed #6d5ae6;border-radius:14px;background:#f4f2ff;display:flex;
-  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#6d5ae6}
+.vaga{min-width:74px;min-height:58px;border:3px dashed #b23a48;border-radius:14px;background:#f6e7e9;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#b23a48}
 .vaga.cheia{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
 .vaga.perto{border-color:#15a34a;background:#e7f8ee;color:#0d7736;
   -webkit-transform:scale(1.08);transform:scale(1.08)}
@@ -468,8 +468,8 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
 .colar{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:10px 0}
 .cel{width:118px;display:flex;flex-direction:column;align-items:center;gap:6px}
 .cel img{width:96px;height:96px;object-fit:contain}
-.cel .alvo{width:84px;min-height:58px;border:3px dashed #6d5ae6;border-radius:14px;background:#f4f2ff;display:flex;
-  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#6d5ae6}
+.cel .alvo{width:84px;min-height:58px;border:3px dashed #b23a48;border-radius:14px;background:#f6e7e9;display:flex;
+  align-items:center;justify-content:center;font-weight:900;font-size:24px;letter-spacing:2px;color:#b23a48}
 .cel .alvo.cheia{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
 .cel .alvo.perto{box-shadow:0 0 0 5px rgba(109,90,230,.28)}
 
@@ -478,94 +478,68 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
   border:5px solid #15a34a;border-radius:14px;padding:6px 14px;font-weight:900;font-size:20px;text-align:center;
   line-height:1.05;pointer-events:none;-webkit-transition:all .45s;transition:all .45s}
 .pagina.pronta .carimbo{opacity:.92;transform:rotate(-14deg) scale(1)}
-#nav{position:fixed;left:0;right:0;bottom:0;z-index:18;background:#fff;border-top:3px solid #6d5ae6;padding:8px 10px;
+#nav{position:fixed;left:0;right:0;bottom:0;z-index:18;background:#fff;border-top:3px solid #b23a48;padding:8px 10px;
   display:none;align-items:center;gap:10px;box-shadow:0 -3px 14px rgba(40,30,90,.14)}
-#nav .txt{flex:1;text-align:center;font-weight:800;color:#5b4fc4;font-size:14px;min-width:0}
-#barraCapa{position:fixed;left:0;right:0;bottom:0;z-index:19;background:#fff;border-top:3px solid #6d5ae6;padding:10px;display:none}
+#nav .txt{flex:1;text-align:center;font-weight:800;color:#802a34;font-size:14px;min-width:0}
+#barraCapa{position:fixed;left:0;right:0;bottom:0;z-index:19;background:#fff;border-top:3px solid #b23a48;padding:10px;display:none}
 #barraCapa.aberta{display:block}
 #barraCapa .lin{display:flex;gap:10px;align-items:center;max-width:640px;margin:0 auto}
-#barraCapa label{font-weight:800;color:#5b4fc4;font-size:15px;white-space:nowrap}
-#nomeIn{flex:1;min-width:0;min-height:50px;border:3px solid #6d5ae6;border-radius:14px;padding:0 12px;
+#barraCapa label{font-weight:800;color:#802a34;font-size:15px;white-space:nowrap}
+#nomeIn{flex:1;min-width:0;min-height:50px;border:3px solid #b23a48;border-radius:14px;padding:0 12px;
   font-family:"Comic Sans MS","Chalkboard SE","Segoe Print",cursive;font-weight:700;font-size:22px;color:#1d4ed8;background:#fff}
 #nomeIn:focus{outline:none;border-color:#b0308f;box-shadow:0 0 0 4px rgba(176,48,143,.25)}
 /* ================= A CAPA =================
-   Pedido do Marcos (set/2026): *"essas atividades deveriam ter uma capa bem
-   legal e bonita"*. O tema sai do próprio nome — uma FÁBRICA de palavras:
-   telhado de fábrica, letras que entram uma a uma como se saíssem da linha de
-   montagem, e a esteira embaixo carregando as figuras das folhas.
-   Feita só com CSS e PNG: nada de SVG, nada de emoji (regra dele). */
+   IDENTIDADE PRÓPRIA deste caderno (Marcos, 18/set/2026: "cada caderno precisa ter
+   capa diferente, cor diferente, animações"). Cena: o armazém: prateleira com grupos do mesmo tanto e o foco de luz varrendo.
+   Gerado por _padrao/identidade_capa.py — editar LÁ, não aqui. Só CSS e PNG das
+   folhas: nada de SVG, nada de emoji. @keyframes com sufixo Mult3 (nome é global).
+   Medido pelo portão 0b11 (_qa/identidade.py). */
 .capa{position:relative;text-align:center;padding:18px 16px 24px;overflow:hidden;
-  background:-webkit-linear-gradient(top,#efe9ff 0%,#fdf6ff 58%,#fff 100%);
-  background:linear-gradient(180deg,#efe9ff 0%,#fdf6ff 58%,#fff 100%)}
+  background:-webkit-linear-gradient(top,#f6dfe2 0%,#fdf6f7 60%,#fff 100%);
+  background:linear-gradient(180deg,#f6dfe2 0%,#fdf6f7 60%,#fff 100%)}
 .capa .ceu{position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;overflow:hidden}
-/* bolhas de luz ao fundo — dão profundidade sem competir com o título.
-   ⚠️ Antes eram três retângulos brancos arredondados que, na tela, pareciam
-   FALHA de desenho. Círculo suave da própria cor da capa lê como fundo. */
-.capa .nv{position:absolute;display:block;border-radius:50%;
-  background:-webkit-radial-gradient(circle,rgba(124,102,255,.20),rgba(124,102,255,0) 70%);
-  background:radial-gradient(circle,rgba(124,102,255,.20),rgba(124,102,255,0) 70%)}
-.capa .n1{width:240px;height:240px;left:-60px;top:-40px}
-.capa .n2{width:300px;height:300px;right:-90px;top:10px}
-.capa .n3{width:180px;height:180px;left:44%;bottom:-70px}
-/* o telhadinho da fábrica com a inicial */
-.capa .chapeu{position:relative;width:66px;height:66px;margin:14px auto 2px;border-radius:16px;
-  background:-webkit-linear-gradient(top left,#7c66ff,#5b4fc4);
-  background:linear-gradient(135deg,#7c66ff,#5b4fc4);color:#fff;font-weight:900;font-size:34px;
-  line-height:66px;box-shadow:0 8px 18px rgba(91,79,196,.36)}
-.capa .chapeu:before{content:"";position:absolute;left:-9px;right:-9px;top:-13px;height:0;
-  border-left:42px solid transparent;border-right:42px solid transparent;border-bottom:16px solid #b0308f}
-.capa h1.titu{margin:10px 0 4px;line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
-.capa .titu .lt{display:inline-block;font-size:clamp(24px,6.4vw,42px);font-weight:900;letter-spacing:0;
-  color:#4b3fb0;text-shadow:0 3px 0 #d9d2ff,0 5px 10px rgba(60,40,140,.18);
-  -webkit-animation:caiLetra .5s both;animation:caiLetra .5s both}
-.capa .titu .esp{display:inline-block;width:14px}
-/* ⚠️ `caiLetra` e não `cai`: o confete JÁ tinha um `keyframes cai` que
-   termina em `opacity:0`, declarado mais abaixo — e ele vencia. As letras
-   do título animavam para invisível e a capa aparecia sem título nenhum.
-   Nome de keyframe é global: conferir antes de criar um. */
-@-webkit-keyframes caiLetra{from{opacity:0;-webkit-transform:translateY(-26px) rotate(-8deg)}to{opacity:1;-webkit-transform:none}}
-@keyframes caiLetra{from{opacity:0;transform:translateY(-26px) rotate(-8deg)}to{opacity:1;transform:none}}
-.capa .sub{font-weight:700;color:#5b4fc4;font-size:clamp(13px,3.6vw,18px);margin:6px 0 4px}
-/* a esteira: as figuras em cima, a cinta rodando embaixo */
-.capa .esteira{max-width:660px;margin:16px auto 4px;position:relative}
-/* ---- as duplas da capa: rima é coisa de DOIS, então os pares entram juntos ----
-   ⚠️ sem `white-space:nowrap` no par, o navegador quebra entre a figura e o
-   sinal de igual e a dupla deixa de se ler como dupla. */
-.capa .dupla{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;
-  -webkit-animation:entraDupla .6s cubic-bezier(.3,1.4,.5,1) both;
-  animation:entraDupla .6s cubic-bezier(.3,1.4,.5,1) both}
-.capa .dupla .fig{height:clamp(54px,13vw,86px)}
-.capa .igual{display:inline-block;width:16px;height:12px;flex:none;
-  border-top:3px solid #6d5ae6;border-bottom:3px solid #6d5ae6}
+.capa .titu,.capa .sub,.capa .chamada,.capa .cena{position:relative;z-index:1}
+.capa h1.titu{margin:12px 0 4px;line-height:1;display:flex;flex-wrap:wrap;justify-content:center;gap:2px;
+  -webkit-perspective:600px;perspective:600px}
+.capa .titu .cptpal{display:inline-flex;white-space:nowrap;gap:2px}
+.capa .titu .lt{display:inline-block;font-size:clamp(22px,5.8vw,42px);font-weight:900;letter-spacing:0;
+  color:#802a34;text-shadow:0 3px 0 #f6e7e9,0 5px 10px rgba(0,0,0,.16);
+  -webkit-animation:letraMult3 .7s both;animation:letraMult3 .7s both}
+.capa .titu .cpesp{display:inline-block;width:14px}
+@-webkit-keyframes letraMult3{from{opacity:0;-webkit-transform:translateY(-26px) rotate(-8deg)}to{opacity:1;-webkit-transform:none}}
+@keyframes letraMult3{from{opacity:0;transform:translateY(-26px) rotate(-8deg)}to{opacity:1;transform:none}}
+.capa .sub{font-weight:700;color:#2c3745;font-size:clamp(13px,3.6vw,18px);margin:6px 0 4px}
+.capa .chamada{margin-top:14px;font-weight:700;color:#3a4658;font-size:clamp(13px,3.4vw,16px)}
+.capa .cena{margin:14px auto 4px;max-width:620px}
+.capa .capfig{width:auto;height:clamp(74px,19vw,124px);max-width:100%;object-fit:contain;display:block}
+.capa .pl{display:block;font-weight:900;font-size:clamp(16px,4.6vw,26px);color:#fff;background:#b23a48;border-radius:12px;
+  padding:8px 14px;box-shadow:0 5px 0 #802a34;letter-spacing:.02em;white-space:nowrap}
+.capa .rt{display:block;font-weight:900;font-size:clamp(12px,3.4vw,17px);color:#fff;background:#b23a48;
+  border-radius:9px;padding:2px 8px;margin-top:4px;letter-spacing:.03em;white-space:nowrap}
+.capa .cena{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,2.5vw,18px);flex-wrap:nowrap;padding:8px 0 0}
+.capa .it{display:flex;flex-direction:column;align-items:center}
+.capa .prat{max-width:620px;margin:-4px auto 0;height:14px;border-radius:4px;background:#b23a48;box-shadow:0 8px 0 #802a34,0 12px 16px rgba(0,0,0,.2)}
+.capa .foco{position:absolute;top:-10px;bottom:-4px;width:clamp(64px,18vw,110px);border-radius:50%;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(255,240,150,.7),rgba(255,240,150,0) 72%);left:0;
+  -webkit-animation:varreMult3 3.6s ease-in-out infinite;animation:varreMult3 3.6s ease-in-out infinite}
+@-webkit-keyframes varreMult3{0%,100%{left:0}50%{left:calc(100% - clamp(64px,18vw,110px))}}
+@keyframes varreMult3{0%,100%{left:0}50%{left:calc(100% - clamp(64px,18vw,110px))}}
 @-webkit-keyframes entraDupla{from{opacity:0;-webkit-transform:translateY(-18px) scale(.85)}to{opacity:1;-webkit-transform:none}}
 @keyframes entraDupla{from{opacity:0;transform:translateY(-18px) scale(.85)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.capa .dupla{-webkit-animation:none!important;animation:none!important;opacity:1!important;-webkit-transform:none!important;transform:none!important}}
-.capa .cena{display:flex;justify-content:center;align-items:flex-end;gap:8px;flex-wrap:nowrap}
-.capa .cena img{width:clamp(54px,14vw,110px);height:clamp(54px,14vw,110px);object-fit:contain;
-  -webkit-animation:sobe 2.6s ease-in-out infinite;animation:sobe 2.6s ease-in-out infinite}
-.capa .cena img:nth-child(2){-webkit-animation-delay:.35s;animation-delay:.35s}
-.capa .cena img:nth-child(3){-webkit-animation-delay:.7s;animation-delay:.7s}
-.capa .cena img:nth-child(4){-webkit-animation-delay:1.05s;animation-delay:1.05s}
-.capa .cena img:nth-child(5){-webkit-animation-delay:1.4s;animation-delay:1.4s}
-@-webkit-keyframes sobe{0%,100%{-webkit-transform:translateY(0)}50%{-webkit-transform:translateY(-7px)}}
-@keyframes sobe{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.capa .cinta{display:flex;gap:6px;justify-content:center;background:#3b3560;border-radius:9px;
-  padding:6px 8px;margin-top:6px;box-shadow:0 6px 14px rgba(35,25,80,.22)}
-.capa .cinta i{display:block;width:26px;height:9px;background:#6d5ae6;border-radius:5px}
-.capa .chamada{margin-top:14px;font-weight:700;color:#4b4f70;font-size:clamp(13px,3.4vw,16px)}
 @media (prefers-reduced-motion: reduce){
-  .capa .titu .lt,.capa .cena img{-webkit-animation:none;animation:none}
+  .capa *,.capa *:before,.capa *:after{-webkit-animation:none!important;animation:none!important}
 }
+
 #fim,#retomar{display:none;max-width:880px;margin:12px auto;background:#fff;border-radius:22px;padding:20px 16px;
   box-shadow:0 10px 34px rgba(35,25,80,.16);text-align:center}
-#fim h2{margin:0 0 6px;color:#6d5ae6;font-size:clamp(21px,5.5vw,30px)}
+#fim h2{margin:0 0 6px;color:#b23a48;font-size:clamp(21px,5.5vw,30px)}
 .estrelas{font-size:44px;letter-spacing:8px;margin:6px 0}
 .barras{max-width:520px;margin:10px auto;text-align:left}
 .barra{display:flex;align-items:center;gap:8px;margin:6px 0;font-weight:700;font-size:14px}
 .barra span{flex:0 0 42%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .barra .tr{flex:1;height:14px;background:#e6e6f4;border-radius:8px;overflow:hidden}
 .barra .tr i{display:block;height:100%;width:0;background:#15a34a;-webkit-transition:width .8s;transition:width .8s}
-.barra b{flex:none;color:#5b4fc4}
+.barra b{flex:none;color:#802a34}
 /* ⚠️ SEM EMOJI E SEM SVG (ordem do Marcos, set/2026: *"evite usar svg e
    emojis pois não aparecem em alguns navegadores"*). Nos PCs da escola o
    emoji vira quadradinho vazio e a criança de seis anos não sabe o que é um
@@ -587,12 +561,12 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
 /* ---- o parecer descritivo e a nota (relatório do PROFESSOR) ----
    ⚠️ A NOTA GRANDE fica aqui e SÓ aqui. Na tela da criança nunca aparece
    número: ela vê estrelas e barras. Ver o comentário em `folhas.js`. */
-#relatorio .parecer{margin:10px 0 4px;padding:10px 12px;border-left:5px solid #6d5ae6;
+#relatorio .parecer{margin:10px 0 4px;padding:10px 12px;border-left:5px solid #b23a48;
   background:#fff;border-radius:0 12px 12px 0;font-size:13.5px;line-height:1.55;color:var(--texto2)}
 #relatorio .comonota{margin:8px 0 0;font-size:11.5px;color:#6a7090;line-height:1.45}
 .notao{display:flex;align-items:center;gap:14px;margin:10px 0 2px;padding:10px 14px;
-  border:3px solid #6d5ae6;border-radius:18px;background:#fff}
-.notao .nn{font-size:clamp(30px,9vw,44px);font-weight:900;color:#6d5ae6;line-height:1;
+  border:3px solid #b23a48;border-radius:18px;background:#fff}
+.notao .nn{font-size:clamp(30px,9vw,44px);font-weight:900;color:#b23a48;line-height:1;
   font-variant-numeric:tabular-nums}
 .notao .nl{font-size:12.5px;color:#2c3350;line-height:1.45}
 
@@ -660,29 +634,29 @@ img{-webkit-user-drag:none;-khtml-user-drag:none;-moz-user-drag:none;user-drag:n
   .op.certa::after{display:none}
 }
 
-#relatorio{display:none;text-align:left;background:#f6f7fd;border:2px solid #d9ddf2;border-radius:16px;padding:12px;margin-top:12px;font-size:13px}
+#relatorio{display:none;text-align:left;background:#f6f7fd;border:2px solid #e9c8cc;border-radius:16px;padding:12px;margin-top:12px;font-size:13px}
 #relatorio table{border-collapse:collapse;width:100%;margin-top:8px}
-#relatorio th,#relatorio td{border:1px solid #d9ddf2;padding:5px 7px;text-align:left}
-#relatorio th{background:#eceefa}
+#relatorio th,#relatorio td{border:1px solid #e9c8cc;padding:5px 7px;text-align:left}
+#relatorio th{background:#f6e7e9}
 /* a nota grande do professor: porcentagem + conceito em palavras */
-.notao{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid #d9ddf2;
+.notao{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid #e9c8cc;
   border-radius:14px;padding:10px 14px;margin-top:10px}
 .notao .nn{font-size:38px;font-weight:900;color:#15a34a;line-height:1}
 .notao .nl{font-size:13px;color:#3b4064;line-height:1.35}
 #menuProf{display:none;position:fixed;inset:0;z-index:60;background:rgba(20,16,45,.62);align-items:center;justify-content:center;padding:14px}
 #menuProf.aberto{display:flex}
-#menuProf .cx{background:#fff;border:4px solid #6d5ae6;border-radius:20px;padding:16px;max-width:520px;width:100%;
+#menuProf .cx{background:#fff;border:4px solid #b23a48;border-radius:20px;padding:16px;max-width:520px;width:100%;
   max-height:92vh;overflow:auto;box-shadow:0 14px 44px rgba(0,0,0,.4)}
-#menuProf h3{margin:0 0 4px;color:#6d5ae6;font-size:20px}
+#menuProf h3{margin:0 0 4px;color:#b23a48;font-size:20px}
 #menuProf p{margin:0 0 12px;font-size:13px;color:#4a4f66;line-height:1.4}
 #menuProf .folhas{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-#menuProf .folhas button{min-height:46px;border:0;border-radius:12px;background:#eceefa;color:#4a4f66;font-weight:800;
+#menuProf .folhas button{min-height:46px;border:0;border-radius:12px;background:#f6e7e9;color:#4a4f66;font-weight:800;
   font-size:14px;padding:8px 12px;box-shadow:0 3px 0 #d3d7ea;flex:1 1 150px;text-align:left}
-#teclado{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:3px solid #6d5ae6;padding:8px;display:none}
+#teclado{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:3px solid #b23a48;padding:8px;display:none}
 #teclado.aberto{display:block}
-#teclado .dica{text-align:center;font-weight:800;color:#5b4fc4;font-size:13px;margin-bottom:6px}
+#teclado .dica{text-align:center;font-weight:800;color:#802a34;font-size:13px;margin-bottom:6px}
 #tk{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:560px;margin:0 auto}
-#tk button{min-height:48px;border:0;border-radius:12px;background:#eceefa;color:var(--texto);font-weight:900;font-size:19px;box-shadow:0 3px 0 #d3d7ea}
+#tk button{min-height:48px;border:0;border-radius:12px;background:#f6e7e9;color:var(--texto);font-weight:900;font-size:19px;box-shadow:0 3px 0 #d3d7ea}
 #tk button:active{transform:translateY(2px);box-shadow:0 1px 0 #d3d7ea}
 #tk button.ap{background:#fde2da;grid-column:span 3}
 #tk button.ok{background:#d9f2e3;grid-column:span 4}
@@ -752,20 +726,20 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 .perguntas{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
   gap:8px;justify-content:center;margin:8px 0}
 .chipq{display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;
-  gap:6px;min-height:48px;padding:4px 10px;border:3px solid #d9ddf2;border-radius:16px;background:#fff}
+  gap:6px;min-height:48px;padding:4px 10px;border:3px solid #e9c8cc;border-radius:16px;background:#fff}
 .chipq .nq{font-weight:800;color:#3b4064;font-size:14px}
 .chipq .vq{font-weight:900;font-size:24px;color:#9aa0c4;min-width:26px;text-align:center}
 /* ⚠️ a pergunta da vez NÃO se distingue só pela cor (regra 4 da pesquisa: nada
    de resposta só por cor) — ela ganha borda grossa, sombra e a palavra "agora" */
-.chipq.agora{border-color:#6d5ae6;box-shadow:0 0 0 4px rgba(109,90,230,.18)}
-.chipq.agora:before{content:"agora";font-size:11px;font-weight:900;color:#6d5ae6;
+.chipq.agora{border-color:#b23a48;box-shadow:0 0 0 4px rgba(109,90,230,.18)}
+.chipq.agora:before{content:"agora";font-size:11px;font-weight:900;color:#b23a48;
   letter-spacing:.6px;text-transform:uppercase}
 .chipq.feito{border-color:#15a34a;background:#e7f8ee}
 .chipq.feito .vq{color:#0d7736}
 .tiralfa{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
   gap:6px;justify-content:center;background:#fff;border:3px solid #e2ddfb;
   border-radius:18px;padding:10px;margin:6px 0}
-.ltira{min-width:44px;min-height:48px;border:2px solid #d9ddf2;border-radius:12px;
+.ltira{min-width:44px;min-height:48px;border:2px solid #e9c8cc;border-radius:12px;
   background:#fff;display:-webkit-box;display:-ms-flexbox;display:flex;
   align-items:center;justify-content:center;cursor:pointer}
 .ltira .ltop{font-size:clamp(20px,5vw,26px)}
@@ -788,10 +762,10 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 /* folha 12 — a grade do alfabeto (o quadro, não a fila) */
 .gradealfa{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0 10px}
 @media (min-width:520px){ .gradealfa{grid-template-columns:repeat(6,1fr)} }
-.celalfa{min-height:56px;border:3px solid #d9ddf2;border-radius:14px;background:#fff;
+.celalfa{min-height:56px;border:3px solid #e9c8cc;border-radius:14px;background:#fff;
   display:-webkit-box;display:-ms-flexbox;display:flex;align-items:center;justify-content:center;
   font-weight:900;font-size:clamp(22px,6vw,32px);color:#2c3350}
-.celalfa.vaga{border-style:dashed;border-color:#6d5ae6;background:#f4f2ff;color:#6d5ae6}
+.celalfa.vaga{border-style:dashed;border-color:#b23a48;background:#f6e7e9;color:#b23a48}
 .celalfa.vaga.ok{border-style:solid;border-color:#15a34a;background:#e7f8ee;color:#0d7736}
 .celalfa.vaga.erro{border-color:#e05b5b;background:#fdeaea}
 
@@ -810,7 +784,7 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 /* folha 19 — as duas palavras do dicionário, lado a lado */
 .dicpar{display:-webkit-box;display:-ms-flexbox;display:flex;flex-wrap:wrap;
   gap:10px;justify-content:center;margin:6px 0 4px}
-.dicbt{border:3px solid #d9ddf2;border-radius:16px;background:#fff;color:#1e2334;
+.dicbt{border:3px solid #e9c8cc;border-radius:16px;background:#fff;color:#1e2334;
   min-width:42%;cursor:pointer}
 .dicbt.pintada{border-width:4px;font-weight:900}
 .dicbt.pintada:after{content:"1º";display:block;font-size:11px;letter-spacing:.6px;
@@ -824,7 +798,7 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
   padding:6px;display:-webkit-box;display:-ms-flexbox;display:flex;
   -webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;
   flex-direction:column;align-items:center;gap:4px}
-.gaveta .gl{font-weight:900;font-size:clamp(20px,5vw,26px);color:#6d5ae6}
+.gaveta .gl{font-weight:900;font-size:clamp(20px,5vw,26px);color:#b23a48}
 .gaveta .gdentro{display:-webkit-box;display:-ms-flexbox;display:flex;
   flex-wrap:wrap;gap:4px;justify-content:center}
 .gaveta .gpeca{font-size:12px;font-weight:800;color:#0d7736;background:#e7f8ee;
@@ -852,13 +826,13 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 .figop2.usada{opacity:.35;pointer-events:none}
 
 /* folha 23 — os nomes da chamada, em cor de nome próprio */
-.nomebt{color:#6d5ae6}
+.nomebt{color:#b23a48}
 
 /* folha 24 — o quadro de traçar a letra com o dedo */
 .traclin{display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;margin-bottom:4px}
 .tracacx{display:-webkit-box;display:-ms-flexbox;display:flex;justify-content:center;margin:2px 0 8px}
 .tracacv{width:min(220px,72vw);max-width:100%;height:auto;background:#fff;
-  border:3px solid #d9ddf2;border-radius:18px;cursor:crosshair;touch-action:none}
+  border:3px solid #e9c8cc;border-radius:18px;cursor:crosshair;touch-action:none}
 
 
 /* ============================================================
@@ -895,13 +869,13 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 .op.pecafig .figop{display:block;width:auto;height:34px;max-width:100%;object-fit:contain}
 .op.pecafig.usada{opacity:.28;pointer-events:none}
 .pedido{font-weight:800;font-size:16px;color:var(--texto,#3b4059);margin:4px 0 6px;text-align:center}
-.numop{font-weight:900;font-size:26px;color:#5b4fc4;font-variant-numeric:tabular-nums}
-.contaop,.somaop{font-weight:900;font-size:20px;color:#5b4fc4;white-space:nowrap;
+.numop{font-weight:900;font-size:26px;color:#802a34;font-variant-numeric:tabular-nums}
+.contaop,.somaop{font-weight:900;font-size:20px;color:#802a34;white-space:nowrap;
   font-variant-numeric:tabular-nums}
 .op.contabt{min-height:52px;padding:9px 16px}
 .contalin{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:8px 0 4px}
 .conta{font-weight:900;font-size:20px;color:var(--texto,#3b4059);font-variant-numeric:tabular-nums}
-.conta.gr{font-size:24px;color:#5b4fc4}
+.conta.gr{font-size:24px;color:#802a34}
 .ouvirlin{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 10px}
 .ouvirlin .pedido{margin:0;font-size:15px;color:#6b7190}
 /* a tabela da folha 10 */
@@ -920,7 +894,7 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 .msai{background:#fff8e8;border-style:dashed;border-color:#e0a63a;color:#b07a13}
 .msai.ok{background:#eafaf0;border-style:solid;border-color:#1f9d55;color:#1f9d55}
 .mcorpo{min-width:86px;min-height:58px;display:flex;align-items:center;justify-content:center;
-  border-radius:16px;background:#5b4fc4;color:#fff;font-weight:900;font-size:24px;
+  border-radius:16px;background:#802a34;color:#fff;font-weight:900;font-size:24px;
   -webkit-box-shadow:0 3px 0 #443a9c;box-shadow:0 3px 0 #443a9c}
 .op.seqbt{min-width:60px;min-height:56px}
 /* o tapete e a malha */
@@ -975,24 +949,24 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 }
 
 #cartazFim{margin:10px auto 4px;max-width:420px}
-#cartazFim h3{margin:0 0 6px;font-size:15px;color:#5b4fc4;letter-spacing:.5px;text-transform:uppercase}
+#cartazFim h3{margin:0 0 6px;font-size:15px;color:#802a34;letter-spacing:.5px;text-transform:uppercase}
 #cartazFim .quadro{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;
   border-radius:16px;background:#fff8e8;border:3px solid #e0a63a}
-#cartazFim .cc{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #d9ddf2;
-  border-radius:12px;padding:6px 10px;font-weight:900;color:#5b4fc4;font-variant-numeric:tabular-nums}
+#cartazFim .cc{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid #e9c8cc;
+  border-radius:12px;padding:6px 10px;font-weight:900;color:#802a34;font-variant-numeric:tabular-nums}
 #cartazFim .cc img{display:block;width:auto;height:24px;object-fit:contain}
 #cartazFim .vazio{font-weight:700;color:#6b7190;padding:8px}
 /*<dossie-css>*/
 #dossie{display:none;position:fixed;inset:0;z-index:70;background:rgba(20,16,45,.72);
   align-items:center;justify-content:center;padding:12px}
 #dossie.aberto{display:-webkit-box;display:-ms-flexbox;display:flex}
-#dossie .cx{background:#fff;border:4px solid #6d5ae6;border-radius:20px;padding:14px;
+#dossie .cx{background:#fff;border:4px solid #b23a48;border-radius:20px;padding:14px;
   max-width:720px;width:100%;max-height:88vh;display:flex;flex-direction:column}
-#dossie h3{margin:0 0 6px;color:#6d5ae6;font-size:20px}
+#dossie h3{margin:0 0 6px;color:#b23a48;font-size:20px}
 #dsCorpo{overflow:auto;text-align:left;font-size:13px;line-height:1.5;color:var(--texto,#1e2334)}
 #dsCorpo table{border-collapse:collapse;width:100%;margin:8px 0}
-#dsCorpo th,#dsCorpo td{border:1px solid #d9ddf2;padding:6px 8px;text-align:left;vertical-align:top}
-#dsCorpo th{background:#eceefa;color:var(--texto2,#2c3350)}
+#dsCorpo th,#dsCorpo td{border:1px solid #e9c8cc;padding:6px 8px;text-align:left;vertical-align:top}
+#dsCorpo th{background:#f6e7e9;color:var(--texto2,#2c3350)}
 #dsCorpo .dobj{display:block;margin-top:4px;font-size:11.5px;color:var(--texto3,#3b4064)}
 #dsCorpo .dfonte{margin:0 0 6px}
 #dsCorpo .dsub{margin:12px 0 4px}
@@ -1032,7 +1006,7 @@ body.comtec{padding-bottom:460px;padding-bottom:var(--tech,460px)}
 </div>
 
 <div id="retomar">
-  <h2 style="color:#6d5ae6;margin:0 0 6px">Você estava aqui!</h2>
+  <h2 style="color:#b23a48;margin:0 0 6px">Você estava aqui!</h2>
   <p id="retTxt" style="font-weight:700"></p>
   <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
     <button class="bt verde" id="bContinuar">Continuar de onde parei</button>
@@ -5361,7 +5335,7 @@ function rnd(n){ return Math.floor(Math.random() * n); }
 function baralha(a){ var b = a.slice(), i, j, t; for(i = b.length - 1; i > 0; i--){ j = rnd(i + 1); t = b[i]; b[i] = b[j]; b[j] = t; } return b; }
 function pega(pool, qtd){ return baralha(pool).slice(0, Math.min(qtd, pool.length)); }
 function confete(n){
-  var c = document.getElementById("confete"), cores = ["#6d5ae6", "#ffd233", "#15a34a", "#e0562f", "#1179bf"], i;
+  var c = document.getElementById("confete"), cores = ["#b23a48", "#ffd233", "#15a34a", "#e0562f", "#1179bf"], i;
   for(i = 0; i < n; i++){
     (function(i){
       var d = el("div", "cf");
@@ -5428,5 +5402,5 @@ function novaFolha(){
   </div>
 </div>
 <!--</dossie-html>-->
-<script src="folhas.js?v=30ef9208d9"></script>
+<script src="folhas.js?v=83ae0ba1e9"></script>
 </body></html>

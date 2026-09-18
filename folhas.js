@@ -1327,36 +1327,23 @@ function opsSoma(lista){           /* lista de [n, q] — n repetido q vezes */
       esteira do armazém, uma depois da outra — que é exatamente o que a criança
       vai aprender a ver. */
 function f0(d){
-  var c = el("div", "capa"), nome = "O ARMAZÉM DO MESMO TANTO", k = 0, letras = "";
-  /* ⚠️ CADA PALAVRA NUM `<span>` QUE NÃO QUEBRA. As letras entram uma a uma
-     (cada uma é um `<span>` seu), e sem isto o navegador quebra a linha DENTRO
-     da palavra: na tela de 430 px o título saía "O ARMAZÉM DO MESM / O TANTO".
-     Título de capa partido no meio da palavra é a primeira coisa que o Marcos
-     vê — e não há portão que meça isso, então é olhar mesmo. */
-  nome.split(" ").forEach(function(palavra, p){
-    if(p) letras += '<span class="esp"> </span>';
-    var dentro = "";
-    palavra.split("").forEach(function(ch){
-      dentro += '<span class="lt" style="animation-delay:' + (0.05 * (k++)).toFixed(2) + 's">' +
-                ch + "</span>";
-    });
-    letras += '<span class="palcapa">' + dentro + "</span>";
+  /* CAPA COM IDENTIDADE PRÓPRIA — gerada por _padrao/identidade_capa.py (editar lá).
+     Cena: o armazém: prateleira com grupos do mesmo tanto e o foco de luz varrendo. O título entra letra a letra (cai), palavra por palavra
+     (nowrap, para não quebrar no meio); as figuras são as do próprio caderno. */
+  var c = el("div", "capa"), nome = "O ARMAZÉM DO MESMO TANTO", k, letras = "", pos = 0;
+  var V = typeof VIMG !== "undefined" ? VIMG : 2;
+  nome.split(" ").forEach(function(pal, w){
+    var s = "";
+    for(k = 0; k < pal.length; k++, pos++){
+      s += '<span class="lt" style="animation-delay:' + (0.05 * pos).toFixed(2) + 's">' + pal.charAt(k) + '</span>';
+    }
+    pos++;
+    letras += (w ? '<span class="cpesp"></span>' : '') + '<span class="cptpal">' + s + '</span>';
   });
-  var cena = "";
-  for(k = 0; k < 4; k++){
-    var dentro = "";
-    for(var j = 0; j < 3; j++) dentro += img("maca", "figgr");
-    cena += '<span class="grupo capagr" style="animation-delay:' +
-            (0.45 + k * 0.16).toFixed(2) + 's">' + dentro + "</span>";
-  }
   c.innerHTML =
-    '<div class="ceu"><i class="nv n1"></i><i class="nv n2"></i><i class="nv n3"></i></div>' +
-    '<h1 class="titu">' + letras + "</h1>" +
+    '<div class="ceu"></div>' + '<h1 class="titu">' + letras + '</h1>' +
     '<div class="sub">Matemática &middot; 3º ano &middot; vinte e cinco folhas de multiplicação</div>' +
-    '<div class="esteira">' +
-      '<div class="cena">' + cena + "</div>" +
-      '<div class="cinta"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>' +
-    "</div>" +
+    '<div class="cena"><i class="foco"></i>' + '<div class="it" style="animation-delay:0.00s">' + '<img class="capfig" draggable="false" src="img/mu_maca.png?v=' + V + '" alt="">' + '<span class="rt">3</span>' + '</div>' + '<div class="it" style="animation-delay:0.35s">' + '<img class="capfig" draggable="false" src="img/mu_laranja.png?v=' + V + '" alt="">' + '<span class="rt">3</span>' + '</div>' + '<div class="it" style="animation-delay:0.70s">' + '<img class="capfig" draggable="false" src="img/mu_bolo.png?v=' + V + '" alt="">' + '<span class="rt">3</span>' + '</div>' + '<div class="it" style="animation-delay:1.05s">' + '<img class="capfig" draggable="false" src="img/mu_sorvete.png?v=' + V + '" alt="">' + '<span class="rt">3</span>' + '</div>' + '</div><div class="prat"></div>' +
     '<div class="chamada">Escreva o seu nome ali embaixo e toque em <b>Começar</b>.</div>';
   d.appendChild(c);
 }
