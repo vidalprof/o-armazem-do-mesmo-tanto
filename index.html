@@ -291,7 +291,12 @@ button{font-family:inherit;cursor:pointer}
   border-top-color:transparent;border-bottom-color:transparent;border-radius:50%}
 .som .o1{left:26px;top:16px;width:8px;height:12px}
 .som .o2{left:29px;top:11px;width:13px;height:22px;opacity:.65}
-.enunlin{display:flex;align-items:center;gap:10px;margin:0 2px}
+/* ⚠️ A LINHA DO ENUNCIADO TEM DE QUEBRAR (19/set/2026, achado pela regra 5b).
+   Sem `flex-wrap`, quando o texto ao lado é comprido o ALTO-FALANTE é empurrado
+   para fora da tela — no `_nasal2`, folha 7, ele saía 47 px além da borda num
+   celular pequeno, e a criança que não sabe ler ficava sem o botão que existe
+   justamente para ela. Com wrap ele desce uma linha e continua ali. */
+.enunlin{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 2px}
 .enunlin .enun{flex:1;min-width:0}
 .palin{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:2px}
 .pal{font-weight:900;letter-spacing:2px;font-size:clamp(22px,6vw,34px);color:var(--texto)}
